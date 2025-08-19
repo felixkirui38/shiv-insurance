@@ -18,11 +18,7 @@ const Hero = () => {
       
       <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
         <div className="text-center">
-          <img 
-            src={logoImg} 
-            alt="Shiv Insurance Brokers Ltd" 
-            className="h-20 w-auto mx-auto mb-8"
-          />
+
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
             Professional Insurance Solutions for Kenya
           </h1>

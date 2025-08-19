@@ -140,13 +140,7 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="mt-8">
-                <img 
-                  src={logoImg} 
-                  alt="Shiv Insurance Brokers Ltd" 
-                  className="h-16 w-auto"
-                />
-              </div>
+
             </div>
 
             {/* Contact Form */}

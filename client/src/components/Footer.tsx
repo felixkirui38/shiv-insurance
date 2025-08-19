@@ -8,11 +8,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="md:col-span-2">
-            <img 
-              src={logoImg} 
-              alt="Shiv Insurance Brokers Ltd" 
-              className="h-12 w-auto mb-4"
-            />
+
             <p className="text-gray-300 mb-4">
               Professional insurance brokerage services in Kenya since 1997. Licensed by IRA and member of AIBK.
             </p>
