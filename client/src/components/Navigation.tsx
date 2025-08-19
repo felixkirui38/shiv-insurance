@@ -14,7 +14,7 @@ const Navigation = () => {
     { href: '/about', label: 'About Us' },
     { href: '/services', label: 'Services' },
     { href: '/team', label: 'Our Team' },
-    { href: '/gallery', label: 'Gallery' },
+
     { href: '/contact', label: 'Contact' },
   ];
 

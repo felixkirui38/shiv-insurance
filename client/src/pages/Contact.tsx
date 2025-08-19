@@ -106,7 +106,7 @@ const Contact = () => {
               
               <div className="space-y-6">
                 <div className="flex items-start">
-                  <MapPin className="text-kenya-gold h-6 w-6 mr-4 mt-1" />
+                  <MapPin className="text-shiv-accent h-6 w-6 mr-4 mt-1" />
                   <div>
                     <h4 className="font-bold text-lg mb-1 text-gray-900">Our Office</h4>
                     <p className="text-gray-600">Nairobi, Kenya</p>
@@ -115,7 +115,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <Phone className="text-kenya-gold h-6 w-6 mr-4 mt-1" />
+                  <Phone className="text-shiv-accent h-6 w-6 mr-4 mt-1" />
                   <div>
                     <h4 className="font-bold text-lg mb-1 text-gray-900">Phone</h4>
                     <p className="text-gray-600">Contact us for phone details</p>
@@ -123,7 +123,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <Mail className="text-kenya-gold h-6 w-6 mr-4 mt-1" />
+                  <Mail className="text-shiv-accent h-6 w-6 mr-4 mt-1" />
                   <div>
                     <h4 className="font-bold text-lg mb-1 text-gray-900">Email</h4>
                     <p className="text-gray-600">info@shivinsurance.co.ke</p>
@@ -131,7 +131,7 @@ const Contact = () => {
                 </div>
                 
                 <div className="flex items-start">
-                  <Clock className="text-kenya-gold h-6 w-6 mr-4 mt-1" />
+                  <Clock className="text-shiv-accent h-6 w-6 mr-4 mt-1" />
                   <div>
                     <h4 className="font-bold text-lg mb-1 text-gray-900">Business Hours</h4>
                     <p className="text-gray-600">Monday - Friday: 8:00 AM - 5:00 PM</p>

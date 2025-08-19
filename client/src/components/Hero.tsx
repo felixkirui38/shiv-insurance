@@ -32,7 +32,7 @@ const Hero = () => {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link href="/services">
               <Button 
-                className="bg-kenya-terracotta hover:bg-kenya-terracotta/90 px-8 py-3 text-lg font-semibold"
+                className="bg-shiv-accent hover:bg-shiv-accent/90 px-8 py-3 text-lg font-semibold"
                 size="lg"
               >
                 Our Services
@@ -41,7 +41,7 @@ const Hero = () => {
             <Link href="/contact">
               <Button 
                 variant="ghost" 
-                className="text-lg font-semibold text-white hover:text-kenya-gold hover:bg-white/10"
+                className="text-lg font-semibold text-white hover:text-shiv-accent hover:bg-white/10"
               >
                 Get Quote →
               </Button>

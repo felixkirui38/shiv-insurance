@@ -3,7 +3,9 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { companyData } from '@/lib/data';
-import { Shield, Eye, Handshake } from 'lucide-react';
+import shieldIcon from '@assets/shield.svg';
+import visionIcon from '@assets/vision.svg';
+import handshakeIcon from '@assets/handshake.svg';
 
 const Home = () => {
   return (
@@ -25,8 +27,8 @@ const Home = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
             <Card className="text-center p-8 bg-warm-gray">
               <CardContent className="pt-6">
-                <div className="w-16 h-16 bg-shiv-blue rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Shield className="text-white h-8 w-8" />
+                <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                  <img src={shieldIcon} alt="Mission" className="h-16 w-16" />
                 </div>
                 <h4 className="text-xl font-bold text-gray-900 mb-4">Our Mission</h4>
                 <p className="text-gray-600">{companyData.mission}</p>
@@ -35,8 +37,8 @@ const Home = () => {
             
             <Card className="text-center p-8 bg-warm-gray">
               <CardContent className="pt-6">
-                <div className="w-16 h-16 bg-kenya-terracotta rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Eye className="text-white h-8 w-8" />
+                <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                  <img src={visionIcon} alt="Vision" className="h-16 w-16" />
                 </div>
                 <h4 className="text-xl font-bold text-gray-900 mb-4">Our Vision</h4>
                 <p className="text-gray-600">{companyData.vision}</p>
@@ -45,8 +47,8 @@ const Home = () => {
             
             <Card className="text-center p-8 bg-warm-gray">
               <CardContent className="pt-6">
-                <div className="w-16 h-16 bg-kenya-gold rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Handshake className="text-white h-8 w-8" />
+                <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6">
+                  <img src={handshakeIcon} alt="Ethics" className="h-16 w-16" />
                 </div>
                 <h4 className="text-xl font-bold text-gray-900 mb-4">Our Ethics</h4>
                 <p className="text-gray-600">
@@ -118,7 +120,7 @@ const Home = () => {
             Contact us today for a personalized insurance quote tailored to your specific needs.
           </p>
           <Link href="/contact">
-            <Button className="bg-kenya-terracotta hover:bg-kenya-terracotta/90 px-8 py-3 text-lg font-semibold">
+            <Button className="bg-shiv-accent hover:bg-shiv-accent/90 px-8 py-3 text-lg font-semibold">
               Get Your Quote Today
             </Button>
           </Link>

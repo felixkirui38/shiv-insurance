@@ -59,7 +59,7 @@ const Team = () => {
       {/* Company Strengths */}
       <section className="py-24 bg-warm-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-kenya-terracotta to-kenya-gold rounded-2xl p-12 text-white">
+          <div className="bg-gradient-to-r from-shiv-accent to-shiv-accent-light rounded-2xl p-12 text-white">
             <h3 className="text-3xl font-bold text-center mb-12">Our Strengths</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
               {companyData.strengths.map((strength, index) => {

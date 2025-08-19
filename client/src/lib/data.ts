@@ -78,7 +78,7 @@ export const companyData = {
     {
       category: "Liability Coverage",
       icon: "balance-scale",
-      color: "kenya-terracotta",
+      color: "shiv-accent",
       products: [
         "Public Liability",
         "Employer's Liability",
@@ -90,7 +90,7 @@ export const companyData = {
     {
       category: "Transportation",
       icon: "truck",
-      color: "kenya-gold",
+      color: "shiv-accent-light",
       products: [
         "Motor Insurance",
         "Goods in Transit",
@@ -126,7 +126,7 @@ export const companyData = {
     {
       category: "Health & Life",
       icon: "heartbeat",
-      color: "green-600",
+      color: "shiv-blue",
       products: [
         "Medical Insurance",
         "Life Insurance",
