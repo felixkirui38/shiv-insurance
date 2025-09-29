@@ -134,6 +134,18 @@ export const companyData = {
         "Student Insurance",
         "Pet Insurance"
       ]
+    },
+    {
+      category: "Wealth Management",
+      icon: "trending-up",
+      color: "shiv-accent",
+      products: [
+        "Investment Advisory",
+        "Portfolio Management",
+        "Retirement Planning",
+        "Estate Planning",
+        "Financial Consulting"
+      ]
     }
   ],
   
