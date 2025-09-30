@@ -110,9 +110,8 @@ export function SliderHeader() {
                       </Link>
                       <Link href="/services">
                         <Button 
-                          variant="outline" 
                           size="lg" 
-                          className="border-2 border-white text-white hover:bg-white hover:text-shiv-blue px-8 py-3 text-base font-semibold uppercase tracking-wide"
+                          className="bg-white text-shiv-blue hover:bg-gray-100 px-8 py-3 text-base font-semibold uppercase tracking-wide"
                           data-testid="button-our-covers"
                         >
                           Our Covers

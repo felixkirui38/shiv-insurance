@@ -36,11 +36,6 @@ const Navigation = () => {
           {item.label}
         </Link>
       ))}
-      <Link href="/contact" onClick={onItemClick}>
-        <Button className="bg-shiv-blue text-white hover:bg-shiv-light-blue">
-          Get Quote
-        </Button>
-      </Link>
     </>
   );
 
