@@ -3,7 +3,7 @@ import Autoplay from 'embla-carousel-autoplay'
 import { useCallback, useEffect, useState } from 'react'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { companyData } from '@/lib/data'
+import { Link } from 'wouter'
 
 export function SliderHeader() {
   const [emblaRef, emblaApi] = useEmblaCarousel(
@@ -46,13 +46,32 @@ export function SliderHeader() {
     emblaApi.on('select', onSelect)
   }, [emblaApi, onInit, onSelect])
 
-  const slides = companyData.services.map((service, index) => ({
-    title: service.category,
-    description: `Comprehensive ${service.category.toLowerCase()} solutions for individuals and businesses. Protecting what matters most to you.`,
-    products: service.products,
-    bgImage: `https://images.unsplash.com/photo-${1560472354 + index * 1000}?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800`,
-    color: service.color
-  }))
+  const slides = [
+    {
+      title: "Insurance Solutions for Your Most Valuable Assets",
+      description: "At Shiv Insurance Brokers Ltd, we serve the insurance needs of our customers through detailed and thoughtful consultation. This leads to coverage at a cost that adds value to our relationship.",
+      bgImage: "https://images.unsplash.com/photo-1611348524140-53c9a25263d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800",
+      category: "Property Insurance"
+    },
+    {
+      title: "Protecting Your Business & Personal Assets",
+      description: "With nearly 3 decades of experience, we provide comprehensive insurance solutions across 34+ product categories tailored to your specific needs.",
+      bgImage: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800",
+      category: "Liability Coverage"
+    },
+    {
+      title: "Comprehensive Health & Life Coverage",
+      description: "Safeguard your family's future with our extensive health and life insurance products designed for peace of mind.",
+      bgImage: "https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800",
+      category: "Health & Life"
+    },
+    {
+      title: "Professional Wealth Management Services",
+      description: "Expert investment advisory and portfolio management to help you build and protect your financial future.",
+      bgImage: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800",
+      category: "Wealth Management"
+    }
+  ]
 
   return (
     <div className="relative">
@@ -61,63 +80,44 @@ export function SliderHeader() {
           {slides.map((slide, index) => (
             <div key={index} className="flex-[0_0_100%] min-w-0 relative">
               <div 
-                className="relative h-[600px] bg-cover bg-center bg-no-repeat"
+                className="relative h-[500px] bg-cover bg-center bg-no-repeat"
                 style={{
-                  backgroundImage: `linear-gradient(rgba(41, 44, 141, 0.8), rgba(212, 102, 107, 0.6)), url(${slide.bgImage})`
+                  backgroundImage: `url(${slide.bgImage})`
                 }}
                 data-testid={`slide-${index}`}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent" />
                 
                 <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-                  <div className="max-w-2xl text-white">
-                    <div className="mb-4">
-                      <span className="inline-block px-4 py-2 bg-shiv-accent text-white text-sm font-semibold rounded-full mb-4">
-                        Insurance Category
-                      </span>
-                    </div>
-                    
-                    <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                  <div className="max-w-3xl text-white">
+                    <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight">
                       {slide.title}
                     </h1>
                     
-                    <p className="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed">
+                    <p className="text-lg md:text-xl mb-8 text-gray-100 leading-relaxed max-w-2xl">
                       {slide.description}
                     </p>
                     
-                    <div className="mb-8">
-                      <h3 className="text-lg font-semibold mb-3 text-shiv-accent">Our Products Include:</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        {slide.products.slice(0, 4).map((product, idx) => (
-                          <div key={idx} className="flex items-center space-x-2">
-                            <div className="w-2 h-2 bg-shiv-accent rounded-full"></div>
-                            <span className="text-gray-200">{product}</span>
-                          </div>
-                        ))}
-                      </div>
-                      {slide.products.length > 4 && (
-                        <div className="mt-2 text-shiv-accent text-sm">
-                          +{slide.products.length - 4} more products
-                        </div>
-                      )}
-                    </div>
-                    
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <Button 
-                        size="lg" 
-                        className="bg-shiv-accent hover:bg-shiv-accent-light text-white px-8 py-3 text-lg"
-                        data-testid="button-get-quote"
-                      >
-                        Get a Quote
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="lg" 
-                        className="border-white text-white hover:bg-white hover:text-shiv-blue px-8 py-3 text-lg"
-                        data-testid="button-learn-more"
-                      >
-                        Learn More
-                      </Button>
+                      <Link href="/about">
+                        <Button 
+                          size="lg" 
+                          className="bg-shiv-blue hover:bg-shiv-light-blue text-white px-8 py-3 text-base font-semibold uppercase tracking-wide"
+                          data-testid="button-learn-more"
+                        >
+                          Learn More
+                        </Button>
+                      </Link>
+                      <Link href="/services">
+                        <Button 
+                          variant="outline" 
+                          size="lg" 
+                          className="border-2 border-white text-white hover:bg-white hover:text-shiv-blue px-8 py-3 text-base font-semibold uppercase tracking-wide"
+                          data-testid="button-our-covers"
+                        >
+                          Our Covers
+                        </Button>
+                      </Link>
                     </div>
                   </div>
                 </div>

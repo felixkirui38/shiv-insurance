@@ -234,35 +234,35 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-white relative overflow-hidden" data-testid="section-cta">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50 to-white"></div>
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-shiv-blue via-shiv-accent to-shiv-light-blue"></div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-shiv-blue to-shiv-light-blue rounded-3xl p-12 md:p-16 text-white text-center shadow-2xl transform hover:scale-105 transition-transform duration-500">
-            <div className="absolute inset-0 bg-black/10 rounded-3xl"></div>
-            <div className="relative z-10">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">
-                Ready to Protect What Matters Most?
-              </h2>
-              <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
-                Contact us today for a personalized insurance quote tailored to your specific needs.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link href="/contact">
-                  <Button className="bg-shiv-accent hover:bg-shiv-accent/90 px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group" data-testid="button-get-quote">
-                    <span className="flex items-center space-x-2">
-                      <span>Get Your Quote Today</span>
-                      <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                    </span>
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button variant="outline" className="border-white text-white hover:bg-white hover:text-shiv-blue px-8 py-4 text-lg font-semibold transform hover:scale-105 transition-all duration-300" data-testid="button-explore-services">
-                    Explore Our Services
-                  </Button>
-                </Link>
-              </div>
+      <section className="py-20 bg-white" data-testid="section-cta">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-gradient-to-r from-shiv-blue to-shiv-light-blue rounded-2xl p-12 md:p-16 text-white text-center shadow-xl">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+              Ready to Protect What Matters Most?
+            </h2>
+            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-95">
+              Contact us today for personalized insurance solutions tailored to your specific needs.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Link href="/contact">
+                <Button 
+                  size="lg"
+                  className="bg-white text-shiv-blue hover:bg-gray-100 px-10 py-3 text-base font-semibold uppercase tracking-wide transform hover:scale-105 transition-all duration-300" 
+                  data-testid="button-contact-us"
+                >
+                  Contact Us
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  className="border-2 border-white text-white hover:bg-white hover:text-shiv-blue px-10 py-3 text-base font-semibold uppercase tracking-wide transform hover:scale-105 transition-all duration-300" 
+                  data-testid="button-view-services"
+                >
+                  View Services
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
