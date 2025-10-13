@@ -3,7 +3,7 @@ export const companyData = {
   
   vision: "To be one of the market leader in providing world class insurance brokerage services in this region and beyond.",
   
-  background: "Incorporated on 27/03/1997. Before that we were doing business as an agency - Shiv Agencies Limited incorporated on 13/01/1996. Prior to that we were running as sole proprietor company started in 1993.",
+  background: "Before becoming Shiv Insurance Brokers Ltd, we operated as an agency under the name Shiv Agencies Limited, which initially started as a sole proprietorship.",
   
   strengths: [
     "Competent and educated directors and staff",

@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="md:col-span-2">
 
             <p className="text-gray-300 mb-4">
-              Professional insurance brokerage services in Kenya since 1997. Licensed by IRA and member of AIBK.
+              Professional insurance brokerage services in Kenya since 1993. Licensed by IRA and member of AIBK.
             </p>
             <p className="text-gray-400 text-sm">
               "As we operate in a world full of risk & uncertainty... We at Shiv undertake to professionally manage it for you."

@@ -85,10 +85,7 @@ const Services = () => {
           {/* Call to Action */}
           <div className="text-center mt-12">
             <Link href="/contact">
-              <Button className="bg-shiv-blue hover:bg-shiv-light-blue text-white px-8 py-3 text-lg font-medium">
-                <Phone className="mr-2 h-5 w-5" />
-                Get Custom Quote
-              </Button>
+          
             </Link>
           </div>
         </div>

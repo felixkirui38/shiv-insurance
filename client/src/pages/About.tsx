@@ -1,16 +1,16 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { companyData } from '@/lib/data';
-import { Target, Star, Lightbulb, Zap, CheckCircle } from 'lucide-react';
-import shieldIcon from '@assets/shield.svg';
-import visionIcon from '@assets/vision.svg';
-import handshakeIcon from '@assets/handshake.svg';
+import { Card, CardContent } from "@/components/ui/card";
+import { companyData } from "@/lib/data";
+import { Target, Star, Lightbulb, Zap, CheckCircle } from "lucide-react";
+import shieldIcon from "@assets/shield.svg";
+import visionIcon from "@assets/vision.svg";
+import handshakeIcon from "@assets/handshake.svg";
 
 const iconMap: Record<string, any> = {
-  'shield-alt': Target,
-  'target': Target,
-  'star': Star,
-  'lightbulb': Lightbulb,
-  'bolt': Zap,
+  "shield-alt": Target,
+  target: Target,
+  star: Star,
+  lightbulb: Lightbulb,
+  bolt: Zap,
 };
 
 const About = () => {
@@ -33,22 +33,30 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
-              <img 
-                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
-                alt="Professional business meeting" 
+              <img
+                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
+                alt="Professional business meeting"
                 className="rounded-lg shadow-lg w-full"
               />
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Our Background</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+                Our Background
+              </h3>
               <p className="text-gray-600 mb-4">{companyData.background}</p>
               <p className="text-gray-600 mb-6">
-                We are owned and managed by two directors, Mrs. Harsha Sudhir Trivedy and Mr. Sudhir J. Trivedy, both Kenyan citizens holding Masters Degrees. We are a licensed broker by the Insurance Regulatory Association (IRA) and a proud member of the Association of Insurance Brokers of Kenya (AIBK).
+                We are owned and managed by two directors, Mrs. Harsha Sudhir
+                Trivedy and Mr. Sudhir J. Trivedy, both Kenyan citizens holding
+                Masters Degrees. We are a licensed broker by the Insurance
+                Regulatory Association (IRA) and a proud member of the
+                Association of Insurance Brokers of Kenya (AIBK).
               </p>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center">
                   <CheckCircle className="text-shiv-blue mr-2 h-5 w-5" />
-                  <span className="text-sm text-gray-600">IRA Licensed Broker</span>
+                  <span className="text-sm text-gray-600">
+                    IRA Licensed Broker
+                  </span>
                 </div>
                 <div className="flex items-center">
                   <CheckCircle className="text-shiv-blue mr-2 h-5 w-5" />
@@ -75,29 +83,37 @@ const About = () => {
                 <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6">
                   <img src={shieldIcon} alt="Mission" className="h-16 w-16" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-4">Our Mission</h4>
+                <h4 className="text-xl font-bold text-gray-900 mb-4">
+                  Our Mission
+                </h4>
                 <p className="text-gray-600">{companyData.mission}</p>
               </CardContent>
             </Card>
-            
+
             <Card className="text-center p-8 bg-white">
               <CardContent className="pt-6">
                 <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6">
                   <img src={visionIcon} alt="Vision" className="h-16 w-16" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-4">Our Vision</h4>
+                <h4 className="text-xl font-bold text-gray-900 mb-4">
+                  Our Vision
+                </h4>
                 <p className="text-gray-600">{companyData.vision}</p>
               </CardContent>
             </Card>
-            
+
             <Card className="text-center p-8 bg-white">
               <CardContent className="pt-6">
                 <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6">
                   <img src={handshakeIcon} alt="Ethics" className="h-16 w-16" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-4">Our Ethics</h4>
+                <h4 className="text-xl font-bold text-gray-900 mb-4">
+                  Our Ethics
+                </h4>
                 <p className="text-gray-600">
-                  We pledge to maintain expertise, place clients' needs first, and compete with integrity while fulfilling our commitments to the greatest extent.
+                  We pledge to maintain expertise, place clients' needs first,
+                  and compete with integrity while fulfilling our commitments to
+                  the greatest extent.
                 </p>
               </CardContent>
             </Card>
