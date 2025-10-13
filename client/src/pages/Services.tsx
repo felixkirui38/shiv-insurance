@@ -1,10 +1,81 @@
+import { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link } from 'wouter';
 import { companyData } from '@/lib/data';
-import { Phone } from 'lucide-react';
+import { Phone, MapPin, Mail, Clock } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { apiRequest } from '@/lib/queryClient';
+import type { InsertContact } from '@shared/schema';
 
 const Services = () => {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  
+  const [formData, setFormData] = useState<InsertContact>({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    insuranceType: '',
+    message: ''
+  });
+
+  const contactMutation = useMutation({
+    mutationFn: async (data: InsertContact) => {
+      const response = await apiRequest('POST', '/api/contacts', data);
+      return response.json();
+    },
+    onSuccess: () => {
+      toast({
+        title: "Quote Request Sent!",
+        description: "Thank you for your interest! We will contact you soon with a personalized quote.",
+      });
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        insuranceType: '',
+        message: ''
+      });
+      queryClient.invalidateQueries({ queryKey: ['/api/contacts'] });
+    },
+    onError: () => {
+      toast({
+        title: "Error",
+        description: "Failed to send your request. Please try again.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    contactMutation.mutate(formData);
+  };
+
+  const handleInputChange = (field: keyof InsertContact) => (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: e.target.value
+    }));
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      insuranceType: value
+    }));
+  };
+
   return (
     <div>
       {/* Hero Section */}
@@ -146,7 +217,7 @@ const Services = () => {
                     alt={provider.name}
                     className="h-12 w-auto object-contain mx-auto mb-3"
                   />
-                  <p className="text-xs text-gray-600 mt-2">{provider.specialization}</p>
+                  {'specialization' in provider && <p className="text-xs text-gray-600 mt-2">{provider.specialization}</p>}
                 </CardContent>
               </Card>
             ))}
@@ -178,6 +249,162 @@ const Services = () => {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section - DNG Style */}
+      <section className="py-24 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-4">
+              Any Query? Inform us.
+            </h2>
+            <p className="text-lg text-gray-600">
+              We're glad to discuss your organisation's situation. Kindly contact us using the form below.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
+            {/* Contact Image */}
+            <div>
+              <img 
+                src="https://images.unsplash.com/photo-1423666639041-f56000c27a9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600" 
+                alt="Contact us" 
+                className="rounded-lg w-full h-full object-cover shadow-lg"
+              />
+            </div>
+
+            {/* Contact Form */}
+            <Card className="shadow-lg">
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="firstName">First Name</Label>
+                      <Input
+                        id="firstName"
+                        type="text"
+                        value={formData.firstName}
+                        onChange={handleInputChange('firstName')}
+                        required
+                        className="mt-2"
+                        data-testid="input-firstname"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="lastName">Last Name</Label>
+                      <Input
+                        id="lastName"
+                        type="text"
+                        value={formData.lastName}
+                        onChange={handleInputChange('lastName')}
+                        required
+                        className="mt-2"
+                        data-testid="input-lastname"
+                      />
+                    </div>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleInputChange('email')}
+                      required
+                      className="mt-2"
+                      data-testid="input-email"
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="phone">Phone Number</Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      value={formData.phone}
+                      onChange={handleInputChange('phone')}
+                      required
+                      className="mt-2"
+                      data-testid="input-phone"
+                    />
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="insuranceType">Type of Insurance</Label>
+                    <Select onValueChange={handleSelectChange} value={formData.insuranceType} required>
+                      <SelectTrigger className="mt-2" data-testid="select-insurance-type">
+                        <SelectValue placeholder="Select insurance type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="health">Health Insurance</SelectItem>
+                        <SelectItem value="cyber">Cyber Insurance</SelectItem>
+                        <SelectItem value="life">Life & Education</SelectItem>
+                        <SelectItem value="pension">Pension & Retirement</SelectItem>
+                        <SelectItem value="motor">Motor & Transport</SelectItem>
+                        <SelectItem value="property">Property & Assets</SelectItem>
+                        <SelectItem value="liability">Liability Insurance</SelectItem>
+                        <SelectItem value="engineering">Engineering & Technical</SelectItem>
+                        <SelectItem value="travel">Personal & Travel</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  
+                  <div>
+                    <Label htmlFor="message">Message</Label>
+                    <Textarea
+                      id="message"
+                      rows={4}
+                      value={formData.message}
+                      onChange={handleInputChange('message')}
+                      placeholder="Tell us about your insurance needs..."
+                      required
+                      className="mt-2"
+                      data-testid="textarea-message"
+                    />
+                  </div>
+                  
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-shiv-blue hover:bg-shiv-light-blue text-white py-3"
+                    disabled={contactMutation.isPending}
+                    data-testid="button-send-message"
+                  >
+                    {contactMutation.isPending ? 'Sending...' : 'Send message'}
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Contact Information */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="text-center p-6 bg-warm-gray">
+              <CardContent className="pt-6">
+                <MapPin className="h-8 w-8 text-shiv-accent mx-auto mb-3" />
+                <h4 className="font-bold text-lg mb-2">Our office address:</h4>
+                <p className="text-gray-600">Nairobi, Kenya</p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center p-6 bg-warm-gray">
+              <CardContent className="pt-6">
+                <Phone className="h-8 w-8 text-shiv-accent mx-auto mb-3" />
+                <h4 className="font-bold text-lg mb-2">Call for help:</h4>
+                <p className="text-gray-600">+254 XXX XXX XXX</p>
+              </CardContent>
+            </Card>
+
+            <Card className="text-center p-6 bg-warm-gray">
+              <CardContent className="pt-6">
+                <Mail className="h-8 w-8 text-shiv-accent mx-auto mb-3" />
+                <h4 className="font-bold text-lg mb-2">Mail us:</h4>
+                <p className="text-gray-600">info@shivinsurance.co.ke</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
