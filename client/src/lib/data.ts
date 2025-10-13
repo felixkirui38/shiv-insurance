@@ -155,9 +155,16 @@ export const companyData = {
     "Motor Industry",
     "Horticulture Industry",
     "Chemical Industry",
-    "Political Parties",
     "Packaging Industry",
-    "Real Estate (Contractors, Buildings, etc.)"
+    "Real Estate (Contractors, Buildings, etc.)",
+    "Financial Services",
+    "Healthcare & Pharmaceuticals",
+    "Technology & IT Services",
+    "Education Institutions",
+    "Agriculture & Agribusiness",
+    "Mining & Energy",
+    "Transportation & Logistics",
+    "Retail & Wholesale Trade"
   ],
   
   underwritingPartners: [
