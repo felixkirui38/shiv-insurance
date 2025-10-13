@@ -22,7 +22,7 @@ const Home = () => {
               About Shiv Insurance Brokers Ltd
             </h2>
             <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
-              Established in 1997, we are a leading insurance brokerage firm committed to excellence and integrity.
+              We are a leading insurance brokerage firm committed to excellence, integrity, and delivering personalized solutions that protect what matters most to our clients.
             </p>
           </div>
 
