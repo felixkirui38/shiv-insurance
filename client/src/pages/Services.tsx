@@ -26,17 +26,22 @@ const Services = () => {
             {companyData.services.map((service, index) => (
               <Card 
                 key={index} 
-                className="bg-white shadow-md hover:shadow-lg transition-shadow border-l-4"
-                style={{borderLeftColor: `var(--${service.color})`}}
+                className={`${service.featured ? 'bg-gradient-to-br from-shiv-accent to-shiv-accent-light text-white ring-4 ring-shiv-accent ring-opacity-50' : 'bg-white'} shadow-md hover:shadow-lg transition-all border-l-4`}
+                style={{borderLeftColor: service.featured ? 'transparent' : `var(--${service.color})`}}
               >
                 <CardContent className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className={`text-${service.color} text-2xl mr-3`}>
-                      <i className={`fas fa-${service.icon}`}></i>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center">
+                      <div className={`${service.featured ? 'text-white' : `text-${service.color}`} text-2xl mr-3`}>
+                        <i className={`fas fa-${service.icon}`}></i>
+                      </div>
+                      <h4 className={`font-bold text-lg ${service.featured ? 'text-white' : 'text-gray-900'}`}>{service.category}</h4>
                     </div>
-                    <h4 className="font-bold text-lg text-gray-900">{service.category}</h4>
+                    {service.featured && (
+                      <span className="bg-white text-shiv-accent text-xs font-bold px-2 py-1 rounded">FEATURED</span>
+                    )}
                   </div>
-                  <ul className="text-sm text-gray-600 space-y-1">
+                  <ul className={`text-sm ${service.featured ? 'text-white text-opacity-95' : 'text-gray-600'} space-y-1`}>
                     {service.products.map((product, idx) => (
                       <li key={idx}>• {product}</li>
                     ))}
@@ -85,7 +90,12 @@ const Services = () => {
           {/* Call to Action */}
           <div className="text-center mt-12">
             <Link href="/contact">
-          
+              <Button className="bg-shiv-blue hover:bg-shiv-light-blue text-white px-8 py-3" data-testid="button-contact-services">
+                <span className="flex items-center space-x-2">
+                  <Phone className="w-4 h-4" />
+                  <span>Contact Us for a Quote</span>
+                </span>
+              </Button>
             </Link>
           </div>
         </div>
