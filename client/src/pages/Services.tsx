@@ -115,6 +115,35 @@ const Services = () => {
         </div>
       </section>
 
+      {/* Medical Insurance Providers */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Medical Insurance Partners
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Leading medical insurance providers we work with
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {companyData.medicalInsuranceProviders.map((provider, index) => (
+              <Card key={index} className="bg-warm-gray p-6 flex flex-col items-center justify-center">
+                <CardContent className="pt-6 text-center">
+                  <img 
+                    src={provider.logo} 
+                    alt={provider.name}
+                    className="h-12 w-auto object-contain mx-auto mb-3"
+                  />
+                  <p className="text-xs text-gray-600 mt-2">{provider.specialization}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Underwriting Partners */}
       <section className="py-16 bg-warm-gray">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -129,9 +158,13 @@ const Services = () => {
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {companyData.underwritingPartners.map((partner, index) => (
-              <Card key={index} className="bg-white p-6 text-center">
+              <Card key={index} className="bg-white p-6 flex items-center justify-center">
                 <CardContent className="pt-6">
-                  <h4 className="font-medium text-gray-900 text-sm">{partner}</h4>
+                  <img 
+                    src={partner.logo} 
+                    alt={partner.name}
+                    className="h-12 w-auto object-contain mx-auto"
+                  />
                 </CardContent>
               </Card>
             ))}

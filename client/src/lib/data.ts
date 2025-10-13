@@ -201,18 +201,81 @@ export const companyData = {
   ],
   
   underwritingPartners: [
-    "GA Insurance Company Ltd",
-    "Kenindia Assurance Company Ltd",
-    "Occidental Insurance Company Ltd",
-    "Geminia Insurance Company Ltd",
-    "Jubilee Insurance Company Ltd",
-    "APA Insurance Company Ltd",
-    "Mayfair Insurance Company Ltd",
-    "Britam Insurance Company Ltd",
-    "Apollo Life Insurance Company Ltd",
-    "Allianz (Executive Healthcare Solutions)",
-    "Cigna Medical",
-    "Madison Insurance Company"
+    {
+      name: "Jubilee Insurance",
+      logo: "https://jubileeinsurance.com/ke/wp-content/uploads/2023/08/Jubilee-Logo.svg"
+    },
+    {
+      name: "Britam Insurance",
+      logo: "https://ke.britam.com/sites/default/files/britam-logo.svg"
+    },
+    {
+      name: "APA Insurance",
+      logo: "https://www.apa-insurance.org/ke/sites/all/themes/bootstrap_apa/logo.png"
+    },
+    {
+      name: "GA Insurance",
+      logo: "https://www.gainsurance.com/templates/gaic/images/logo.png"
+    },
+    {
+      name: "Madison Insurance",
+      logo: "https://madison.co.ke/wp-content/uploads/2023/05/madison-logo.png"
+    },
+    {
+      name: "CIC Insurance",
+      logo: "https://www.cic.co.ke/sites/default/files/cic-logo.png"
+    },
+    {
+      name: "Kenindia Assurance",
+      logo: "https://kenindia.com/wp-content/uploads/2023/kenindia-logo.png"
+    },
+    {
+      name: "Occidental Insurance",
+      logo: "https://www.occidental.co.ke/images/occidental-logo.png"
+    }
+  ],
+  
+  medicalInsuranceProviders: [
+    {
+      name: "AAR Insurance",
+      logo: "https://aar-insurance.com/wp-content/themes/aar/images/logo.svg",
+      specialization: "Medical Specialist"
+    },
+    {
+      name: "Jubilee Insurance",
+      logo: "https://jubileeinsurance.com/ke/wp-content/uploads/2023/08/Jubilee-Logo.svg",
+      specialization: "Comprehensive Health Plans"
+    },
+    {
+      name: "Britam Insurance",
+      logo: "https://ke.britam.com/sites/default/files/britam-logo.svg",
+      specialization: "Family & Corporate Health"
+    },
+    {
+      name: "Madison Insurance",
+      logo: "https://madison.co.ke/wp-content/uploads/2023/05/madison-logo.png",
+      specialization: "Family & Education Focus"
+    },
+    {
+      name: "CIC Insurance",
+      logo: "https://www.cic.co.ke/sites/default/files/cic-logo.png",
+      specialization: "Cooperative Medical Cover"
+    },
+    {
+      name: "Old Mutual",
+      logo: "https://www.oldmutual.co.ke/sites/default/files/oldmutual-logo.svg",
+      specialization: "Premium Medical Plans"
+    },
+    {
+      name: "APA Insurance",
+      logo: "https://www.apa-insurance.org/ke/sites/all/themes/bootstrap_apa/logo.png",
+      specialization: "Agricultural & Medical"
+    },
+    {
+      name: "Heritage Insurance",
+      logo: "https://heritageinsurance.co.ke/wp-content/uploads/heritage-logo.png",
+      specialization: "Affordable Medical Plans"
+    }
   ],
   
   galleryImages: [
