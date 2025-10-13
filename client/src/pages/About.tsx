@@ -45,7 +45,11 @@ const About = () => {
               </h3>
               <p className="text-gray-600 mb-4">{companyData.background}</p>
               <p className="text-gray-600 mb-6">
-                We are a licensed broker by the Insurance Regulatory Association (IRA) and a proud member of the Association of Insurance Brokers of Kenya (AIBK).
+                We are owned and managed by two directors, Mrs. Harsha Sudhir
+                Trivedy and Mr. Sudhir J. Trivedy, both Kenyan citizens holding
+                Masters Degrees. We are a licensed broker by the Insurance
+                Regulatory Association (IRA) and a proud member of the
+                Association of Insurance Brokers of Kenya (AIBK).
               </p>
               <div className="flex items-center space-x-4">
                 <div className="flex items-center">
