@@ -41,26 +41,7 @@ export const companyData = {
     }
   ],
   
-  team: [
-    {
-      name: "Mr. Sudhir J Trivedy",
-      position: "Managing Director",
-      qualification: "BSc and MBA from USA",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-    },
-    {
-      name: "Mrs. Harsha Trivedy",
-      position: "Director & Principal Officer",
-      qualification: "MA Economics, ACII",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-    },
-    {
-      name: "Mr. Swapnil S. Trivedy",
-      position: "Chief Executive Officer",
-      qualification: "BBM and MBA from UK",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-    }
-  ],
+  team: [],
   
   services: [
     {

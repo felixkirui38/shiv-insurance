@@ -19,36 +19,13 @@ const Team = () => {
         </div>
       </section>
 
-      {/* Team Members */}
+      {/* Professional Team */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-              Our Leadership
-            </h2>
-            <p className="mt-4 text-lg text-gray-600">
-              Meet the experienced professionals leading Shiv Insurance Brokers Ltd
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            {companyData.team.map((member, index) => (
-              <Card key={index} className="text-center p-8 bg-warm-gray">
-                <CardContent className="pt-6">
-                  <img 
-                    src={member.image} 
-                    alt={`${member.name} - ${member.position}`}
-                    className="w-48 h-48 rounded-full mx-auto mb-6 object-cover shadow-lg"
-                  />
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">{member.name}</h4>
-                  <p className="text-shiv-blue font-medium mb-2">{member.position}</p>
-                  <p className="text-gray-600 text-sm">{member.qualification}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
           <div className="text-center">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl mb-8">
+              Our Professional Team
+            </h2>
             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
               Everything depends on communication. With our professional staff and thorough understanding of your business, we strive to meet the goals we establish for ourselves and our clients. Built on a foundation of honesty, integrity and trust, we work as a team to develop exceptional programs our clients rely on to grow and succeed in today's ever-changing market.
             </p>
