@@ -1,3 +1,14 @@
+interface MedicalInsuranceProvider {
+  name: string;
+  logo: string;
+  specialization: string;
+}
+
+interface UnderwritingPartner {
+  name: string;
+  logo: string;
+}
+
 export const companyData = {
   mission: "To provide professional insurance brokerage services to all our clients and to advice and recommend suitable insurance products as well as continuously evaluate our client's needs with a view of improvement, thereby providing them not only with peace of mind but also optimum value for money, security & protection of assets.",
   
@@ -237,30 +248,50 @@ export const companyData = {
       name: "Occidental Insurance",
       logo: "https://www.occidental.co.ke/images/occidental-logo.png"
     }
-  ],
+  ] satisfies UnderwritingPartner[],
   
   medicalInsuranceProviders: [
     {
-      name: "Allianz",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-04.png",
+      name: "AAR Insurance",
+      logo: "https://aar-insurance.com/wp-content/themes/aar/images/logo.svg",
+      specialization: "Medical Specialist"
     },
     {
-      name: "April International",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/April-International.png",
+      name: "Jubilee Insurance",
+      logo: "https://jubileeinsurance.com/ke/wp-content/uploads/2023/08/Jubilee-Logo.svg",
+      specialization: "Comprehensive Health Plans"
     },
     {
-      name: "NOW Heath International",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-01.png",
+      name: "Britam Insurance",
+      logo: "https://ke.britam.com/sites/default/files/britam-logo.svg",
+      specialization: "Family & Corporate Health"
     },
     {
-      name: "Cigna Heath Care",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-02.png",
+      name: "Madison Insurance",
+      logo: "https://madison.co.ke/wp-content/uploads/2023/05/madison-logo.png",
+      specialization: "Family & Education Focus"
     },
     {
-      name: "Bupa",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-03.png",
+      name: "CIC Insurance",
+      logo: "https://www.cic.co.ke/sites/default/files/cic-logo.png",
+      specialization: "Cooperative Medical Cover"
     },
-  ],
+    {
+      name: "Old Mutual",
+      logo: "https://www.oldmutual.co.ke/sites/default/files/oldmutual-logo.svg",
+      specialization: "Premium Medical Plans"
+    },
+    {
+      name: "APA Insurance",
+      logo: "https://www.apa-insurance.org/ke/sites/all/themes/bootstrap_apa/logo.png",
+      specialization: "Agricultural & Medical"
+    },
+    {
+      name: "Heritage Insurance",
+      logo: "https://heritageinsurance.co.ke/wp-content/uploads/heritage-logo.png",
+      specialization: "Affordable Medical Plans"
+    }
+  ] satisfies MedicalInsuranceProvider[],
   
   galleryImages: [
     {

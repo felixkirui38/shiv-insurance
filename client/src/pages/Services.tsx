@@ -217,7 +217,7 @@ const Services = () => {
                     alt={provider.name}
                     className="h-12 w-auto object-contain mx-auto mb-3"
                   />
-                  {'specialization' in provider && <p className="text-xs text-gray-600 mt-2">{provider.specialization}</p>}
+                  <p className="text-xs text-gray-600 mt-2">{provider.specialization}</p>
                 </CardContent>
               </Card>
             ))}
