@@ -258,6 +258,37 @@ const Services = () => {
         </div>
       </section>
 
+      {/* Underwriting Partners */}
+      <section className="py-16 bg-warm-gray">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+              Our Underwriting Partners
+            </h2>
+            <p className="mt-4 text-lg text-gray-600">
+              Trusted partnerships with leading insurance companies
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {companyData.underwritingPartners.map((partner, index) => (
+              <Card
+                key={index}
+                className="bg-white p-6 flex items-center justify-center"
+              >
+                <CardContent className="pt-6">
+                  <img
+                    src={partner.logo}
+                    alt={partner.name}
+                    className="h-12 w-auto object-contain mx-auto"
+                  />
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section - DNG Style */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
