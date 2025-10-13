@@ -4,6 +4,7 @@ import { Target, Star, Lightbulb, Zap, CheckCircle } from "lucide-react";
 import shieldIcon from "@assets/shield.svg";
 import visionIcon from "@assets/vision.svg";
 import handshakeIcon from "@assets/handshake.svg";
+import aboutImage from "@assets/stock_images/professional_busines_0dbd9b6f.jpg";
 
 const iconMap: Record<string, any> = {
   "shield-alt": Target,
@@ -34,9 +35,10 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
               <img
-                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
-                alt="Shiv Insurance Brokers"
+                src={aboutImage}
+                alt="Shiv Insurance Brokers - Professional Team"
                 className="rounded-lg shadow-lg w-full"
+                data-testid="img-about-team"
               />
             </div>
             <div>

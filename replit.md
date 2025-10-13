@@ -6,6 +6,14 @@ This is a professional corporate website for Shiv Insurance Brokers Ltd, a Kenya
 
 The website serves as the company's digital presence, providing information about their 34+ insurance product categories, company history, team profiles, and a gallery celebrating Kenya. It includes a contact form system for lead generation and quote requests.
 
+## Recent Changes
+
+### October 13, 2025
+- **About Page Image Update**: Replaced generic image with professional business meeting stock photo showing team collaboration
+- **TypeScript Type Safety Enhancement**: Added proper interfaces (MedicalInsuranceProvider, UnderwritingPartner) with `satisfies` keyword for compile-time type checking
+- **Contact Form Addition**: Implemented DNG-style contact form on Services page with two-column layout (image left, form right)
+- **Full Form Functionality**: Backend integration, success toasts, auto-clear after submission, and proper validation
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
@@ -85,4 +93,5 @@ Preferred communication style: Simple, everyday language.
 
 ### Asset Management
 - **Static Assets**: Company logos and images served from attached_assets directory
-- **Unsplash Images**: External image URLs for gallery and decorative content
+- **Stock Images**: Professional business meeting images for About page
+- **Custom Images**: SIB.png analytics dashboard for authentic company data visualization
