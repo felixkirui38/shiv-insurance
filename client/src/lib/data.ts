@@ -213,44 +213,24 @@ export const companyData = {
   
   underwritingPartners: [
     {
-      name: "Allianz",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-04.png"
+      name: "ASUS",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/LCI-ASUS.png"
     },
     {
-      name: "Bupa",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-03.png"
+      name: "dentsu",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/LCI-dentsu.png"
     },
     {
-      name: "Cigna",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-02.png"
+      name: "DNO",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/LCI-DNO.png"
     },
     {
-      name: "AXA",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-01-01-2.png"
+      name: "Dubai Offshore Sailing Club",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/LCI-dubai.png"
     },
     {
-      name: "AIG",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/logo-6-AIG.png"
-    },
-    {
-      name: "Integra Global",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-7.png"
-    },
-    {
-      name: "GIG",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-8.png"
-    },
-    {
-      name: "NOW Health International",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-01.png"
-    },
-    {
-      name: "Expacare",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-10.png"
-    },
-    {
-      name: "Sukoon",
-      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-9.png"
+      name: "Hapag-Lloyd",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/LCI-Hapag-lloyd.png"
     }
   ] satisfies UnderwritingPartner[],
   

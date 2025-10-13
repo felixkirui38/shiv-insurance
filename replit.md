@@ -11,7 +11,9 @@ The website serves as the company's digital presence, providing information abou
 ### October 13, 2025
 - **About Page Image Update**: Replaced generic image with professional business meeting stock photo showing team collaboration
 - **About Page Content Update**: Removed year/date reference from hero tagline for cleaner messaging
-- **Partner Logos Update**: Replaced all Medical Insurance Partners and Underwriting Partners logos with authentic logos from Lifecare International website (10 partners: Allianz, Bupa, Cigna, AXA, AIG, Integra Global, GIG, NOW Health International, Expacare, Sukoon)
+- **Partner Logos Update**: 
+  - Medical Insurance Partners: 10 authentic insurance partner logos from Lifecare International (Allianz, Bupa, Cigna, AXA, AIG, Integra Global, GIG, NOW Health International, Expacare, Sukoon)
+  - Underwriting Partners: 5 client logos from Lifecare International slider (ASUS, dentsu, DNO, Dubai Offshore Sailing Club, Hapag-Lloyd)
 - **TypeScript Type Safety Enhancement**: Added proper interfaces (MedicalInsuranceProvider, UnderwritingPartner) with `satisfies` keyword for compile-time type checking
 - **Contact Form Addition**: Implemented DNG-style contact form on Services page with two-column layout (image left, form right)
 - **Full Form Functionality**: Backend integration, success toasts, auto-clear after submission, and proper validation
