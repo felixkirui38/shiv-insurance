@@ -206,6 +206,10 @@ export const companyData = {
       logo: "https://jubileeinsurance.com/ke/wp-content/uploads/2023/08/Jubilee-Logo.svg"
     },
     {
+      name: "Allianz Insurance",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-04.png"
+    },
+    {
       name: "Britam Insurance",
       logo: "https://ke.britam.com/sites/default/files/britam-logo.svg"
     },

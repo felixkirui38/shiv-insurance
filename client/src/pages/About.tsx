@@ -34,7 +34,7 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
             <div>
               <img
-                src="/attached_assets/SIB.png"
+                src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=600"
                 alt="Shiv Insurance Brokers"
                 className="rounded-lg shadow-lg w-full"
               />
