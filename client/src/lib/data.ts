@@ -64,87 +64,120 @@ export const companyData = {
   
   services: [
     {
-      category: "Property Insurance",
-      icon: "home",
+      category: "Health Insurance",
+      icon: "heartbeat",
+      color: "shiv-blue",
+      featured: true,
+      products: [
+        "Individual & Family Medical Cover",
+        "Group Medical Insurance",
+        "International Health Insurance",
+        "Inpatient & Outpatient Cover",
+        "Maternity & Dental Cover",
+        "Critical Illness Cover"
+      ]
+    },
+    {
+      category: "Cyber Insurance",
+      icon: "shield-check",
+      color: "shiv-accent",
+      featured: true,
+      products: [
+        "Data Breach Protection",
+        "Ransomware Coverage",
+        "Cyber Extortion Insurance",
+        "Network Security Liability",
+        "Crisis Management & PR",
+        "Business Interruption Coverage"
+      ]
+    },
+    {
+      category: "Life & Education",
+      icon: "users",
+      color: "shiv-light-blue",
+      products: [
+        "Term Life Assurance",
+        "Whole Life Insurance",
+        "Education Savings Plans",
+        "Group Life Assurance",
+        "Mortgage Protection",
+        "Credit Life Insurance"
+      ]
+    },
+    {
+      category: "Pension & Retirement",
+      icon: "trending-up",
+      color: "kenya-brown",
+      products: [
+        "Personal Pension Plans",
+        "Umbrella Pension Schemes",
+        "Retirement Annuities",
+        "Investment Funds",
+        "Provident Funds"
+      ]
+    },
+    {
+      category: "Motor & Transport",
+      icon: "truck",
       color: "shiv-blue",
       products: [
-        "Fire & Allied Perils",
-        "Fire Consequential Loss",
-        "Burglary/Theft/Hold Up",
-        "All Risks",
-        "Plate Glass"
+        "Comprehensive Motor Insurance",
+        "Third Party Cover",
+        "Goods in Transit",
+        "Marine Insurance",
+        "Aviation Insurance",
+        "Fleet Management"
       ]
     },
     {
-      category: "Liability Coverage",
-      icon: "balance-scale",
+      category: "Property & Assets",
+      icon: "home",
       color: "shiv-accent",
       products: [
-        "Public Liability",
-        "Employer's Liability",
-        "Professional Indemnity",
-        "WIBA",
-        "Fidelity Guarantee"
+        "Fire & Allied Perils",
+        "Domestic Package Policy",
+        "Burglary & Theft",
+        "All Risks Insurance",
+        "Business Interruption",
+        "Contractors All Risks"
       ]
     },
     {
-      category: "Transportation",
-      icon: "truck",
-      color: "shiv-accent-light",
+      category: "Liability Insurance",
+      icon: "balance-scale",
+      color: "shiv-light-blue",
       products: [
-        "Motor Insurance",
-        "Goods in Transit",
-        "Cash in Transit",
-        "Marine Insurance",
-        "Aviation Insurance"
+        "Public Liability",
+        "Professional Indemnity",
+        "Employer's Liability",
+        "WIBA",
+        "Product Liability",
+        "Directors & Officers Insurance"
       ]
     },
     {
-      category: "Engineering",
+      category: "Engineering & Technical",
       icon: "cogs",
       color: "kenya-brown",
       products: [
         "Machinery Breakdown",
         "Contractors Plant & Machinery",
         "Erection All Risks",
-        "General Engineering",
-        "Electronic Equipment"
+        "Electronic Equipment",
+        "Computer & Technology Insurance"
       ]
     },
     {
-      category: "Personal Lines",
+      category: "Personal & Travel",
       icon: "user-shield",
-      color: "shiv-light-blue",
+      color: "shiv-accent-light",
       products: [
         "Personal Accident",
-        "Group Personal Accident",
-        "Domestic Package",
         "Travel Insurance",
-        "Golfers Insurance"
-      ]
-    },
-    {
-      category: "Health & Life",
-      icon: "heartbeat",
-      color: "shiv-blue",
-      products: [
-        "Medical Insurance",
-        "Life Insurance",
-        "Pension Schemes",
+        "Domestic Package",
         "Student Insurance",
+        "Golfers Insurance",
         "Pet Insurance"
-      ]
-    },
-    {
-      category: "Wealth Management",
-      icon: "trending-up",
-      color: "shiv-accent",
-      products: [
-        "Investment Advisory",
-        "Portfolio Management",
-        "Retirement Planning",
-        "Estate Planning",
-        "Financial Consulting"
       ]
     }
   ],
