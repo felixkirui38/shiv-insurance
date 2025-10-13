@@ -24,7 +24,7 @@ const About = () => {
             About Shiv Insurance Brokers Ltd
           </h1>
           <p className="text-xl max-w-3xl mx-auto">
-            Over 25 years of professional insurance brokerage services in Kenya
+            Professional insurance brokerage services in Kenya
           </p>
         </div>
       </section>
