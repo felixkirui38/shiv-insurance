@@ -213,83 +213,97 @@ export const companyData = {
   
   underwritingPartners: [
     {
-      name: "Jubilee Insurance",
-      logo: "https://jubileeinsurance.com/ke/wp-content/uploads/2023/08/Jubilee-Logo.svg"
+      name: "Allianz",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-04.png"
     },
     {
-      name: "Jubilee Insurance",
-      logo: "https://jubileeinsurance.com/ke/wp-content/uploads/2023/08/Jubilee-Logo.svg"
+      name: "Bupa",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-03.png"
     },
     {
-      name: "Britam Insurance",
-      logo: "https://ke.britam.com/sites/default/files/britam-logo.svg"
+      name: "Cigna",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-02.png"
     },
     {
-      name: "APA Insurance",
-      logo: "https://www.apa-insurance.org/ke/sites/all/themes/bootstrap_apa/logo.png"
+      name: "AXA",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-01-01-2.png"
     },
     {
-      name: "GA Insurance",
-      logo: "https://www.gainsurance.com/templates/gaic/images/logo.png"
+      name: "AIG",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/logo-6-AIG.png"
     },
     {
-      name: "Madison Insurance",
-      logo: "https://madison.co.ke/wp-content/uploads/2023/05/madison-logo.png"
+      name: "Integra Global",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-7.png"
     },
     {
-      name: "CIC Insurance",
-      logo: "https://www.cic.co.ke/sites/default/files/cic-logo.png"
+      name: "GIG",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-8.png"
     },
     {
-      name: "Kenindia Assurance",
-      logo: "https://kenindia.com/wp-content/uploads/2023/kenindia-logo.png"
+      name: "NOW Health International",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-01.png"
     },
     {
-      name: "Occidental Insurance",
-      logo: "https://www.occidental.co.ke/images/occidental-logo.png"
+      name: "Expacare",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-10.png"
+    },
+    {
+      name: "Sukoon",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-9.png"
     }
   ] satisfies UnderwritingPartner[],
   
   medicalInsuranceProviders: [
     {
-      name: "AAR Insurance",
-      logo: "https://aar-insurance.com/wp-content/themes/aar/images/logo.svg",
-      specialization: "Medical Specialist"
+      name: "Allianz",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-04.png",
+      specialization: "Global Health Insurance"
     },
     {
-      name: "Jubilee Insurance",
-      logo: "https://jubileeinsurance.com/ke/wp-content/uploads/2023/08/Jubilee-Logo.svg",
-      specialization: "Comprehensive Health Plans"
+      name: "Bupa",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-03.png",
+      specialization: "International Health Plans"
     },
     {
-      name: "Britam Insurance",
-      logo: "https://ke.britam.com/sites/default/files/britam-logo.svg",
-      specialization: "Family & Corporate Health"
+      name: "Cigna",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-02.png",
+      specialization: "Comprehensive Medical Coverage"
     },
     {
-      name: "Madison Insurance",
-      logo: "https://madison.co.ke/wp-content/uploads/2023/05/madison-logo.png",
-      specialization: "Family & Education Focus"
+      name: "AXA",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-01-01-2.png",
+      specialization: "Premium Health Solutions"
     },
     {
-      name: "CIC Insurance",
-      logo: "https://www.cic.co.ke/sites/default/files/cic-logo.png",
-      specialization: "Cooperative Medical Cover"
+      name: "AIG",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/logo-6-AIG.png",
+      specialization: "Executive Medical Plans"
     },
     {
-      name: "Old Mutual",
-      logo: "https://www.oldmutual.co.ke/sites/default/files/oldmutual-logo.svg",
-      specialization: "Premium Medical Plans"
+      name: "Integra Global",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-7.png",
+      specialization: "International Medical Insurance"
     },
     {
-      name: "APA Insurance",
-      logo: "https://www.apa-insurance.org/ke/sites/all/themes/bootstrap_apa/logo.png",
-      specialization: "Agricultural & Medical"
+      name: "GIG",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-8.png",
+      specialization: "Gulf Medical Coverage"
     },
     {
-      name: "Heritage Insurance",
-      logo: "https://heritageinsurance.co.ke/wp-content/uploads/heritage-logo.png",
-      specialization: "Affordable Medical Plans"
+      name: "NOW Health International",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/03/Logos-01.png",
+      specialization: "Global Health Insurance"
+    },
+    {
+      name: "Expacare",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-10.png",
+      specialization: "Expatriate Health Plans"
+    },
+    {
+      name: "Sukoon",
+      logo: "https://www.lifecareinternational.com/wp-content/uploads/2025/04/Logos-9.png",
+      specialization: "Regional Medical Insurance"
     }
   ] satisfies MedicalInsuranceProvider[],
   
