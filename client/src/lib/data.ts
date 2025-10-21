@@ -17,7 +17,7 @@ export const companyData = {
   background: "Before becoming Shiv Insurance Brokers Ltd, we operated as an agency under the name Shiv Agencies Limited, which initially started as a sole proprietorship.",
   
   strengths: [
-    "Competent and educated directors and staff",
+    "Competent and educated staff",
     "Long service to our clients with total commitment",
     "Professional and personalized services with a dedicated team",
     "Customized products to match client requirements",
@@ -53,18 +53,6 @@ export const companyData = {
   ],
   
   team: [
-    {
-      name: "Mr. Sudhir J Trivedy",
-      position: "Managing Director",
-      qualification: "BSc and MBA from USA",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-    },
-    {
-      name: "Mrs. Harsha Trivedy",
-      position: "Director & Principal Officer",
-      qualification: "MA Economics, ACII",
-      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-    },
     {
       name: "Mr. Swapnil S. Trivedy",
       position: "Chief Executive Officer",

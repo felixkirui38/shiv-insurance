@@ -8,6 +8,9 @@ The website serves as the company's digital presence, providing information abou
 
 ## Recent Changes
 
+### October 21, 2025
+- **Director References Removed**: Removed all director mentions from About page and team section, keeping only CEO in team
+
 ### October 13, 2025
 - **About Page Image Update**: Replaced generic image with professional business meeting stock photo showing team collaboration
 - **About Page Content Update**: Removed year/date reference from hero tagline for cleaner messaging
