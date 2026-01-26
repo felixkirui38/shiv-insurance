@@ -43,19 +43,20 @@ const Navigation = () => {
     <nav className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <div className="flex items-center">
+          {/* Logo */}
+          <div className="flex-shrink-0 flex items-center">
             <Link href="/">
               <img 
                 src={logoImg} 
                 alt="Shiv Insurance Brokers Ltd" 
-                className="h-12 w-auto hover:opacity-80 transition-opacity cursor-pointer"
+                className="h-14 w-auto hover:opacity-80 transition-opacity cursor-pointer"
               />
             </Link>
           </div>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+          <div className="hidden md:flex md:items-center">
+            <div className="flex items-center space-x-8">
               <NavLinks />
             </div>
           </div>
