@@ -258,7 +258,7 @@ const Home = () => {
             <div className="text-center group cursor-pointer" data-testid="stat-partners">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 group-hover:bg-white/20 transition-all duration-500 transform group-hover:scale-105">
                 <AnimatedCounter
-                  target={12}
+                  target={15}
                   suffix="+"
                   className="text-4xl md:text-5xl font-bold mb-2 text-shiv-accent group-hover:scale-110 transition-transform duration-300"
                 />
@@ -270,7 +270,7 @@ const Home = () => {
             <div className="text-center group cursor-pointer" data-testid="stat-industries">
               <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 group-hover:bg-white/20 transition-all duration-500 transform group-hover:scale-105">
                 <AnimatedCounter
-                  target={8}
+                  target={15}
                   suffix="+"
                   className="text-4xl md:text-5xl font-bold mb-2 text-shiv-accent group-hover:scale-110 transition-transform duration-300"
                 />
@@ -304,9 +304,8 @@ const Home = () => {
               </Link>
               <Link href="/services">
                 <Button 
-                  variant="outline" 
                   size="lg"
-                  className="border-2 border-white text-white hover:bg-white hover:text-shiv-blue px-10 py-3 text-base font-semibold uppercase tracking-wide transform hover:scale-105 transition-all duration-300" 
+                  className="bg-white text-shiv-blue hover:bg-gray-100 px-10 py-3 text-base font-semibold uppercase tracking-wide transform hover:scale-105 transition-all duration-300" 
                   data-testid="button-view-services"
                 >
                   View Services
