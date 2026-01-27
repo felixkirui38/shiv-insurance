@@ -74,12 +74,12 @@ const Home = () => {
       </section>
 
       {/* Cyber Insurance Highlight */}
-      <section className="py-16 bg-gradient-to-br from-shiv-accent to-shiv-accent-light" data-testid="section-cyber-highlight">
+      <section className="py-16 bg-gradient-to-br from-shiv-blue to-shiv-light-blue" data-testid="section-cyber-highlight">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 text-white">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="inline-block bg-white text-shiv-accent text-xs font-bold px-3 py-1 rounded-full mb-4" data-testid="badge-cyber-new">
+                <div className="inline-block bg-white text-shiv-blue text-xs font-bold px-3 py-1 rounded-full mb-4" data-testid="badge-cyber-new">
                   NEW & ESSENTIAL
                 </div>
                 <h2 className="text-3xl font-bold mb-4" data-testid="heading-cyber-insurance">
@@ -90,7 +90,7 @@ const Home = () => {
                   Our comprehensive cyber insurance covers network security, crisis management, and business interruption.
                 </p>
                 <Link href="/services">
-                  <Button className="bg-white text-shiv-accent hover:bg-gray-100 px-6 py-3" data-testid="button-cyber-learn-more">
+                  <Button className="bg-white text-shiv-blue hover:bg-gray-100 px-6 py-3" data-testid="button-cyber-learn-more">
                     Learn More About Cyber Insurance
                   </Button>
                 </Link>
@@ -98,23 +98,23 @@ const Home = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-breach">
                   <Shield className="w-8 h-8 mb-3" />
-                  <h4 className="font-bold mb-2">Data Breach Protection</h4>
-                  <p className="text-sm text-white/80">Comprehensive coverage for data theft and loss</p>
+                  <h4 className="text-base font-semibold mb-2">Data Breach Protection</h4>
+                  <p className="text-sm text-white/90 leading-relaxed">Comprehensive coverage for data theft and loss</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-ransomware">
                   <Target className="w-8 h-8 mb-3" />
-                  <h4 className="font-bold mb-2">Ransomware Coverage</h4>
-                  <p className="text-sm text-white/80">Protection against cyber extortion</p>
+                  <h4 className="text-base font-semibold mb-2">Ransomware Coverage</h4>
+                  <p className="text-sm text-white/90 leading-relaxed">Protection against cyber extortion</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-crisis">
                   <Zap className="w-8 h-8 mb-3" />
-                  <h4 className="font-bold mb-2">Crisis Management</h4>
-                  <p className="text-sm text-white/80">24/7 expert support and PR repair</p>
+                  <h4 className="text-base font-semibold mb-2">Crisis Management</h4>
+                  <p className="text-sm text-white/90 leading-relaxed">24/7 expert support and PR repair</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-continuity">
                   <Star className="w-8 h-8 mb-3" />
-                  <h4 className="font-bold mb-2">Business Continuity</h4>
-                  <p className="text-sm text-white/80">Coverage for business interruption</p>
+                  <h4 className="text-base font-semibold mb-2">Business Continuity</h4>
+                  <p className="text-sm text-white/90 leading-relaxed">Coverage for business interruption</p>
                 </div>
               </div>
             </div>
