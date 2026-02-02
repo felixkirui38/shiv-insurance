@@ -1,12 +1,53 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { insertContactSchema } from "@shared/schema";
+import { insertContactSchema, formSubmissionSchema } from "@shared/schema";
 import { z } from "zod";
+import { sendFormNotification } from "./emailService";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   
-  // Contact form submission
+  app.post("/api/submit-form", async (req, res) => {
+    try {
+      const validatedData = formSubmissionSchema.parse(req.body);
+      
+      const contactData = {
+        firstName: validatedData.firstName,
+        lastName: validatedData.lastName,
+        email: validatedData.email,
+        phone: validatedData.phone,
+        insuranceType: validatedData.insuranceType || "General Inquiry",
+        message: validatedData.message,
+        formName: validatedData.formName,
+      };
+      
+      const contact = await storage.createContact(contactData);
+      
+      const emailResult = await sendFormNotification(validatedData);
+      
+      res.json({ 
+        success: true, 
+        message: "Thank you! Your message has been received. We'll get back to you shortly.",
+        contact,
+        emailSent: emailResult.success
+      });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        res.status(400).json({ 
+          success: false, 
+          message: "Please check your form details and try again.", 
+          errors: error.errors.map(e => ({ field: e.path.join('.'), message: e.message }))
+        });
+      } else {
+        console.error('Form submission error:', error);
+        res.status(500).json({ 
+          success: false, 
+          message: "Something went wrong. Please try again later." 
+        });
+      }
+    }
+  });
+
   app.post("/api/contacts", async (req, res) => {
     try {
       const validatedData = insertContactSchema.parse(req.body);
@@ -28,7 +69,6 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get all contacts (for admin purposes)
   app.get("/api/contacts", async (req, res) => {
     try {
       const contacts = await storage.getContacts();
