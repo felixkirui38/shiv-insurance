@@ -40,37 +40,37 @@ const Navigation = () => {
   );
 
   return (
-    <nav className="bg-white shadow-lg sticky top-0 z-50">
+    <nav className="bg-white shadow-md sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo - Icon Only, Vertically Centered */}
+          <div className="flex-shrink-0 flex items-center h-full py-2">
+            <Link href="/" className="flex items-center h-full">
               <img 
                 src={logoImg} 
-                alt="Shiv Insurance Brokers Ltd" 
-                className="h-14 w-auto hover:opacity-80 transition-opacity cursor-pointer"
+                alt="Shiv Insurance Brokers" 
+                className="h-12 w-auto object-contain hover:opacity-80 transition-opacity cursor-pointer"
               />
             </Link>
           </div>
           
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center">
-            <div className="flex items-center space-x-8">
+          {/* Desktop Navigation - Aligned with Logo */}
+          <div className="hidden md:flex md:items-center h-full">
+            <div className="flex items-center h-full space-x-6">
               <NavLinks />
             </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon">
-                  <Menu className="h-6 w-6" />
+                <Button variant="ghost" size="icon" className="h-10 w-10">
+                  <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
-                <div className="flex flex-col space-y-4 mt-8">
+              <SheetContent side="right" className="w-[280px] sm:w-[350px]">
+                <div className="flex flex-col space-y-3 mt-6">
                   <NavLinks mobile onItemClick={() => setIsOpen(false)} />
                 </div>
               </SheetContent>
