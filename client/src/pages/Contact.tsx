@@ -10,13 +10,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
 import logoImg from '@assets/SHIV LOGO_1755505090610.png';
-import type { InsertContact } from '@shared/schema';
+import type { FormSubmission } from '@shared/schema';
+
+const FORM_NAME = "Quote Request";
 
 const Contact = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   
-  const [formData, setFormData] = useState<InsertContact>({
+  const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
@@ -26,14 +28,18 @@ const Contact = () => {
   });
 
   const contactMutation = useMutation({
-    mutationFn: async (data: InsertContact) => {
-      const response = await apiRequest('POST', '/api/contacts', data);
+    mutationFn: async (data: typeof formData) => {
+      const submission: FormSubmission = {
+        ...data,
+        formName: FORM_NAME,
+      };
+      const response = await apiRequest('POST', '/api/submit-form', submission);
       return response.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast({
         title: "Quote Request Sent!",
-        description: "Thank you for your interest! We will contact you soon with a personalized quote.",
+        description: data.message || "Thank you for your interest! We will contact you soon with a personalized quote.",
       });
       setFormData({
         firstName: '',
@@ -59,7 +65,7 @@ const Contact = () => {
     contactMutation.mutate(formData);
   };
 
-  const handleInputChange = (field: keyof InsertContact) => (
+  const handleInputChange = (field: keyof typeof formData) => (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData(prev => ({

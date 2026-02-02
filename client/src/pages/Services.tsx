@@ -17,13 +17,15 @@ import { Phone, MapPin, Mail, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
-import type { InsertContact } from "@shared/schema";
+import type { FormSubmission } from "@shared/schema";
+
+const FORM_NAME = "Services Inquiry";
 
 const Services = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
-  const [formData, setFormData] = useState<InsertContact>({
+  const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
     email: "",
@@ -33,15 +35,18 @@ const Services = () => {
   });
 
   const contactMutation = useMutation({
-    mutationFn: async (data: InsertContact) => {
-      const response = await apiRequest("POST", "/api/contacts", data);
+    mutationFn: async (data: typeof formData) => {
+      const submission: FormSubmission = {
+        ...data,
+        formName: FORM_NAME,
+      };
+      const response = await apiRequest("POST", "/api/submit-form", submission);
       return response.json();
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
       toast({
-        title: "Quote Request Sent!",
-        description:
-          "Thank you for your interest! We will contact you soon with a personalized quote.",
+        title: "Message Sent!",
+        description: data.message || "Thank you for your interest! We will contact you soon.",
       });
       setFormData({
         firstName: "",
@@ -68,7 +73,7 @@ const Services = () => {
   };
 
   const handleInputChange =
-    (field: keyof InsertContact) =>
+    (field: keyof typeof formData) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       setFormData((prev) => ({
         ...prev,
