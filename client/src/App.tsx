@@ -9,7 +9,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Services from "@/pages/Services";
-import Team from "@/pages/Team";
+import Downloads from "@/pages/Downloads";
 
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/not-found";
@@ -20,7 +20,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
-      <Route path="/team" component={Team} />
+      <Route path="/downloads" component={Downloads} />
 
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />
