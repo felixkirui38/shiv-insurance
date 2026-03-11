@@ -4,7 +4,7 @@ RUN corepack enable && corepack prepare yarn@4.13.0 --activate
 FROM base AS deps
 WORKDIR /app
 COPY package.json yarn.lock .yarnrc.yml ./
-RUN echo "nodeLinker: node-modules" >> .yarnrc.yml
+RUN sed -i '/^yarnPath:/d' .yarnrc.yml && echo "nodeLinker: node-modules" >> .yarnrc.yml
 RUN yarn install
 
 FROM base AS builder
@@ -13,7 +13,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/package.json ./
 COPY --from=deps /app/yarn.lock ./
 COPY . .
-RUN echo "nodeLinker: node-modules" >> .yarnrc.yml
+RUN sed -i '/^yarnPath:/d' .yarnrc.yml && echo "nodeLinker: node-modules" >> .yarnrc.yml
 RUN yarn build
 
 FROM node:20-alpine AS runner
