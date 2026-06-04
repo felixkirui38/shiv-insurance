@@ -15,45 +15,45 @@ const Home = () => {
       <SliderHeader />
       
       {/* Quick Overview */}
-      <section className="py-24 bg-white" data-testid="section-overview">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+      <section className="site-section bg-white" data-testid="section-overview">
+        <div className="site-container">
+          <div className="text-center mb-16 max-w-3xl mx-auto">
+            <h2 className="section-heading">
               About Shiv Insurance Brokers Ltd
             </h2>
-            <p className="mt-4 text-lg text-gray-600 max-w-3xl mx-auto">
+            <p className="mt-4 section-subheading">
               We are a leading insurance brokerage firm committed to excellence, integrity, and delivering personalized solutions that protect what matters most to our clients.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <Card className="text-center p-8 bg-warm-gray hover:bg-white hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group" data-testid="card-mission">
+            <Card className="text-center p-8 bg-shiv-cream-warm border-0 shadow-sm hover:shadow-lg transition-all duration-300 group rounded-[var(--radius-card)]" data-testid="card-mission">
               <CardContent className="pt-6">
-                <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6 bg-shiv-blue/10 rounded-full group-hover:bg-shiv-blue/20 transition-colors duration-300">
+                <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6 bg-shiv-accent/15 rounded-full group-hover:bg-shiv-accent/25 transition-colors duration-300">
                   <img src={shieldIcon} alt="Mission" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-shiv-blue transition-colors duration-300">Our Mission</h4>
-                <p className="text-gray-600 group-hover:text-gray-700">{companyData.mission}</p>
+                <h4 className="text-xl font-bold text-shiv-text mb-4 group-hover:text-shiv-accent transition-colors duration-300">Our Mission</h4>
+                <p className="text-shiv-text-muted">{companyData.mission}</p>
               </CardContent>
             </Card>
             
-            <Card className="text-center p-8 bg-warm-gray hover:bg-white hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group" data-testid="card-vision">
+            <Card className="text-center p-8 bg-shiv-cream-warm border-0 shadow-sm hover:shadow-lg transition-all duration-300 group rounded-[var(--radius-card)]" data-testid="card-vision">
               <CardContent className="pt-6">
                 <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6 bg-shiv-accent/10 rounded-full group-hover:bg-shiv-accent/20 transition-colors duration-300">
                   <img src={visionIcon} alt="Vision" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-shiv-accent transition-colors duration-300">Our Vision</h4>
-                <p className="text-gray-600 group-hover:text-gray-700">{companyData.vision}</p>
+                <h4 className="text-xl font-bold text-shiv-text mb-4 group-hover:text-shiv-accent transition-colors duration-300">Our Vision</h4>
+                <p className="text-shiv-text-muted">{companyData.vision}</p>
               </CardContent>
             </Card>
             
-            <Card className="text-center p-8 bg-warm-gray hover:bg-white hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group" data-testid="card-ethics">
+            <Card className="text-center p-8 bg-shiv-cream-warm border-0 shadow-sm hover:shadow-lg transition-all duration-300 group rounded-[var(--radius-card)]" data-testid="card-ethics">
               <CardContent className="pt-6">
-                <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6 bg-shiv-light-blue/10 rounded-full group-hover:bg-shiv-light-blue/20 transition-colors duration-300">
+                <div className="w-16 h-16 flex items-center justify-center mx-auto mb-6 bg-shiv-navy/10 rounded-full group-hover:bg-shiv-navy/15 transition-colors duration-300">
                   <img src={handshakeIcon} alt="Ethics" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300" />
                 </div>
-                <h4 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-shiv-light-blue transition-colors duration-300">Our Ethics</h4>
-                <p className="text-gray-600 group-hover:text-gray-700">
+                <h4 className="text-xl font-bold text-shiv-text mb-4 group-hover:text-shiv-navy transition-colors duration-300">Our Ethics</h4>
+                <p className="text-shiv-text-muted">
                   We pledge to maintain expertise, place clients' needs first, and compete with integrity while fulfilling our commitments.
                 </p>
               </CardContent>
@@ -61,9 +61,9 @@ const Home = () => {
           </div>
 
           <div className="text-center">
-            <Link href="/about">
-              <Button className="bg-shiv-blue hover:bg-shiv-light-blue text-white px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group" data-testid="button-learn-more">
-                <span className="flex items-center space-x-2">
+            <Link href="/about" data-testid="button-learn-more">
+              <Button className="btn-cta gap-2 group">
+                <span className="flex items-center space-x-2 normal-case tracking-normal font-semibold">
                   <span>Learn More About Us</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
@@ -74,12 +74,12 @@ const Home = () => {
       </section>
 
       {/* Cyber Insurance Highlight */}
-      <section className="py-16 bg-gradient-to-br from-shiv-blue to-shiv-light-blue" data-testid="section-cyber-highlight">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-12 text-white">
+      <section className="site-section site-section-navy" data-testid="section-cyber-highlight">
+        <div className="site-container">
+          <div className="rounded-[var(--radius-card)] border border-white/10 bg-white/5 p-8 md:p-12 text-white">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="inline-block bg-white text-shiv-blue text-xs font-bold px-3 py-1 rounded-full mb-4" data-testid="badge-cyber-new">
+                <div className="inline-block bg-shiv-blue text-white text-xs font-bold px-3 py-1 rounded-full mb-4" data-testid="badge-cyber-new">
                   NEW & ESSENTIAL
                 </div>
                 <h2 className="text-3xl font-bold mb-4" data-testid="heading-cyber-insurance">
@@ -89,8 +89,8 @@ const Home = () => {
                   Protect your business from the growing threat of cyberattacks, data breaches, and ransomware. 
                   Our comprehensive cyber insurance covers network security, crisis management, and business interruption.
                 </p>
-                <Link href="/services">
-                  <Button className="bg-white text-shiv-blue hover:bg-gray-100 px-6 py-3" data-testid="button-cyber-learn-more">
+                <Link href="/services" data-testid="button-cyber-learn-more">
+                  <Button className="btn-cta normal-case tracking-normal font-semibold">
                     Learn More About Cyber Insurance
                   </Button>
                 </Link>
@@ -123,13 +123,13 @@ const Home = () => {
       </section>
 
       {/* Services Preview */}
-      <section className="py-24 bg-warm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="site-section site-section-cream-warm">
+        <div className="site-container">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+            <h2 className="section-heading">
               Our Insurance Products
             </h2>
-            <p className="mt-4 text-lg text-gray-600">
+            <p className="mt-4 section-subheading">
               Comprehensive insurance solutions across 34+ product categories
             </p>
           </div>
@@ -146,7 +146,7 @@ const Home = () => {
               return (
                 <Card 
                   key={index} 
-                  className="bg-white shadow-md hover:shadow-2xl transition-all duration-500 border-l-4 transform hover:-translate-y-3 hover:scale-105 group cursor-pointer" 
+                  className="service-card border-l-4 group cursor-pointer" 
                   style={{borderLeftColor: `var(--${service.color})`}}
                   data-testid={`card-service-${index}`}
                 >
@@ -199,9 +199,9 @@ const Home = () => {
           </div>
 
           <div className="text-center">
-            <Link href="/services">
-              <Button className="bg-shiv-blue hover:bg-shiv-light-blue text-white px-8 py-3 transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl group" data-testid="button-view-services">
-                <span className="flex items-center space-x-2">
+            <Link href="/services" data-testid="button-view-services">
+              <Button className="btn-cta gap-2 group">
+                <span className="flex items-center space-x-2 normal-case tracking-normal font-semibold">
                   <span>View All Services</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </span>
@@ -212,17 +212,10 @@ const Home = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-gradient-to-br from-shiv-blue via-shiv-light-blue to-shiv-accent text-white relative overflow-hidden" data-testid="section-stats">
-        <div className="absolute inset-0 bg-black/20"></div>
-        <div className="absolute inset-0">
-          <div className="absolute top-10 left-10 w-32 h-32 bg-white/10 rounded-full animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-48 h-48 bg-white/10 rounded-full animate-pulse" style={{animationDelay: '1s'}}></div>
-          <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-white/10 rounded-full animate-pulse" style={{animationDelay: '2s'}}></div>
-        </div>
-        
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="site-section site-section-navy relative overflow-hidden" data-testid="section-stats">
+        <div className="site-container relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4 text-white">
               Trusted by Thousands Across Kenya
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
@@ -231,50 +224,50 @@ const Home = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="text-center group cursor-pointer" data-testid="stat-experience">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 group-hover:bg-white/20 transition-all duration-500 transform group-hover:scale-105">
+            <div className="text-center group" data-testid="stat-experience">
+              <div className="rounded-[var(--radius-card)] border border-white/10 bg-white/10 p-8 transition-colors group-hover:bg-white/15">
                 <AnimatedCounter
                   target={28}
                   suffix="+"
-                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-accent group-hover:scale-110 transition-transform duration-300"
+                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-light-blue"
                 />
-                <div className="text-lg font-semibold mb-1">Years</div>
+                <div className="text-lg font-semibold mb-1 text-white">Years</div>
                 <div className="text-sm text-white/80">of Excellence</div>
               </div>
             </div>
 
-            <div className="text-center group cursor-pointer" data-testid="stat-products">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 group-hover:bg-white/20 transition-all duration-500 transform group-hover:scale-105">
+            <div className="text-center group" data-testid="stat-products">
+              <div className="rounded-[var(--radius-card)] border border-white/10 bg-white/10 p-8 transition-colors group-hover:bg-white/15">
                 <AnimatedCounter
                   target={34}
                   suffix="+"
-                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-accent group-hover:scale-110 transition-transform duration-300"
+                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-light-blue"
                 />
-                <div className="text-lg font-semibold mb-1">Products</div>
+                <div className="text-lg font-semibold mb-1 text-white">Products</div>
                 <div className="text-sm text-white/80">Insurance Categories</div>
               </div>
             </div>
 
-            <div className="text-center group cursor-pointer" data-testid="stat-partners">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 group-hover:bg-white/20 transition-all duration-500 transform group-hover:scale-105">
+            <div className="text-center group" data-testid="stat-partners">
+              <div className="rounded-[var(--radius-card)] border border-white/10 bg-white/10 p-8 transition-colors group-hover:bg-white/15">
                 <AnimatedCounter
                   target={15}
                   suffix="+"
-                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-accent group-hover:scale-110 transition-transform duration-300"
+                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-light-blue"
                 />
-                <div className="text-lg font-semibold mb-1">Partners</div>
+                <div className="text-lg font-semibold mb-1 text-white">Partners</div>
                 <div className="text-sm text-white/80">Insurance Companies</div>
               </div>
             </div>
 
-            <div className="text-center group cursor-pointer" data-testid="stat-industries">
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 group-hover:bg-white/20 transition-all duration-500 transform group-hover:scale-105">
+            <div className="text-center group" data-testid="stat-industries">
+              <div className="rounded-[var(--radius-card)] border border-white/10 bg-white/10 p-8 transition-colors group-hover:bg-white/15">
                 <AnimatedCounter
                   target={15}
                   suffix="+"
-                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-accent group-hover:scale-110 transition-transform duration-300"
+                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-light-blue"
                 />
-                <div className="text-lg font-semibold mb-1">Industries</div>
+                <div className="text-lg font-semibold mb-1 text-white">Industries</div>
                 <div className="text-sm text-white/80">We Serve</div>
               </div>
             </div>
@@ -283,30 +276,28 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-white" data-testid="section-cta">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-to-r from-shiv-blue to-shiv-light-blue rounded-2xl p-12 md:p-16 text-white text-center shadow-xl">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4">
+      <section className="site-section bg-shiv-cream-warm" data-testid="section-cta">
+        <div className="site-container">
+          <div className="site-section-navy rounded-[var(--radius-card)] p-10 md:p-16 text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4 text-white">
               Ready to Protect What Matters Most?
             </h2>
-            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto opacity-95">
+            <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90">
               Contact us today for personalized insurance solutions tailored to your specific needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Link href="/contact">
-                <Button 
+              <Link href="/contact" data-testid="button-contact-us">
+                <Button
                   size="lg"
-                  className="bg-white text-shiv-blue hover:bg-gray-100 px-10 py-3 text-base font-semibold uppercase tracking-wide transform hover:scale-105 transition-all duration-300" 
-                  data-testid="button-contact-us"
+                  className="bg-white text-shiv-navy hover:bg-gray-100 px-10 py-3 text-base font-semibold uppercase tracking-wide"
                 >
                   Contact Us
                 </Button>
               </Link>
-              <Link href="/services">
-                <Button 
+              <Link href="/services" data-testid="button-view-services-cta">
+                <Button
                   size="lg"
-                  className="bg-white text-shiv-blue hover:bg-gray-100 px-10 py-3 text-base font-semibold uppercase tracking-wide transform hover:scale-105 transition-all duration-300" 
-                  data-testid="button-view-services"
+                  className="bg-white text-shiv-navy hover:bg-gray-100 px-10 py-3 text-base font-semibold uppercase tracking-wide"
                 >
                   View Services
                 </Button>
