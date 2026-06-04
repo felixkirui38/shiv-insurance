@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Search, Phone, Mail, MapPin } from 'lucide-react';
+import { SearchDialog } from '@/components/SearchDialog';
+import { Menu, Search, Mail, FileText } from 'lucide-react';
 import logoImg from '@assets/SHIV LOGO_1755505090610.png';
 
 const topBarItems = {
   left: [
-    { icon: Phone, label: '+254 XXX XXX XXX', href: 'tel:+254XXXXXXXXX' },
+    { icon: FileText, label: 'Get a quote', href: '/contact' },
     { icon: Mail, label: 'info@shivinsurance.co.ke', href: 'mailto:info@shivinsurance.co.ke' },
   ],
   right: [
@@ -19,6 +20,7 @@ const topBarItems = {
 const Navigation = () => {
   const [location] = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
 
   const navItems = [
     { href: '/', label: 'Home' },
@@ -59,14 +61,20 @@ const Navigation = () => {
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               {topBarItems.left.map((item) => {
                 const Icon = item.icon;
-                return (
-                  <a
-                    key={item.label}
-                    href={item.href}
-                    className="flex items-center gap-1.5 text-white/90 hover:text-white transition-colors"
-                  >
+                const className = "flex items-center gap-1.5 text-white/90 hover:text-white transition-colors";
+                const content = (
+                  <>
                     <Icon className="h-3.5 w-3.5 shrink-0" />
                     <span className="hidden sm:inline">{item.label}</span>
+                  </>
+                );
+                return item.href.startsWith('/') ? (
+                  <Link key={item.label} href={item.href} className={className}>
+                    {content}
+                  </Link>
+                ) : (
+                  <a key={item.label} href={item.href} className={className}>
+                    {content}
                   </a>
                 );
               })}
@@ -107,14 +115,14 @@ const Navigation = () => {
               <NavLinks />
             </div>
             <div className="ml-2 h-6 w-px bg-gray-200" aria-hidden />
-            <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-600 hover:text-shiv-blue hover:bg-shiv-blue/5 rounded-full" aria-label="Search">
+            <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-600 hover:text-shiv-blue hover:bg-shiv-blue/5 rounded-full" aria-label="Search" onClick={() => setSearchOpen(true)}>
               <Search className="h-5 w-5" />
             </Button>
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-1">
-            <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-600" aria-label="Search">
+            <Button variant="ghost" size="icon" className="h-9 w-9 text-gray-600" aria-label="Search" onClick={() => setSearchOpen(true)}>
               <Search className="h-5 w-5" />
             </Button>
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -126,7 +134,7 @@ const Navigation = () => {
               <SheetContent side="right" className="w-[280px] sm:w-[350px]">
                 <div className="flex flex-col space-y-1 mt-6">
                   <NavLinks mobile onItemClick={() => setIsOpen(false)} />
-                  <Button variant="ghost" size="icon" className="h-10 w-10 self-start text-gray-600 hover:text-shiv-blue mt-2" aria-label="Search">
+                  <Button variant="ghost" size="icon" className="h-10 w-10 self-start text-gray-600 hover:text-shiv-blue mt-2" aria-label="Search" onClick={() => { setSearchOpen(true); setIsOpen(false); }}>
                     <Search className="h-5 w-5" />
                   </Button>
                 </div>
@@ -136,6 +144,7 @@ const Navigation = () => {
         </div>
       </div>
     </nav>
+      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
     </header>
   );
 };
