@@ -86,23 +86,23 @@ export function SliderHeader() {
     <div className="relative" data-testid="slider-container">
       <div className="flex flex-col lg:flex-row min-h-[32rem] lg:min-h-[36rem]">
         <div className="hero-panel flex flex-col justify-center w-full lg:w-[42%] px-8 py-12 lg:px-14 lg:py-16 order-2 lg:order-1">
-          <span className="text-xs font-bold uppercase tracking-[0.2em] text-white/70 mb-4">
+          <span className="text-xs font-bold uppercase tracking-[0.2em] text-shiv-navy-deep/70 mb-4">
             {activeSlide.category}
           </span>
           <h1
-            className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold leading-[1.15] text-white mb-5 transition-opacity duration-300"
+            className="text-3xl md:text-4xl lg:text-[2.75rem] font-extrabold leading-[1.15] text-shiv-navy-deep mb-5 transition-opacity duration-300"
             data-testid="hero-heading"
           >
             {activeSlide.title}
           </h1>
-          <p className="text-base md:text-lg text-white/85 leading-relaxed mb-8 max-w-2xl">
+          <p className="text-base md:text-lg text-shiv-navy-deep/85 leading-relaxed mb-8 max-w-2xl">
             {activeSlide.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/about" className="btn-cta-navy" data-testid="button-learn-more">
               Learn More
             </Link>
-            <Link href="/services" className="btn-cta-outline-dark border-white/40 text-white hover:bg-white/10" data-testid="button-our-covers">
+            <Link href="/services" className="btn-cta-outline-dark" data-testid="button-our-covers">
               Our Covers
             </Link>
           </div>
@@ -152,7 +152,7 @@ export function SliderHeader() {
                 onClick={() => scrollTo(index)}
                 className={`h-2 rounded-full transition-all duration-300 ${
                   index === selectedIndex
-                    ? 'w-8 bg-white'
+                    ? 'w-8 bg-shiv-gold'
                     : 'w-2 bg-white/60 hover:bg-white'
                 }`}
                 data-testid={`dot-indicator-${index}`}

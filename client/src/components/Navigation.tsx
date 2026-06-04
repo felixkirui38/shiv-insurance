@@ -43,10 +43,10 @@ const Navigation = () => {
             mobile
               ? `block w-full px-4 py-3 text-sm font-medium rounded-btn transition-colors ${
                   location === item.href
-                    ? 'text-shiv-blue'
-                    : 'text-shiv-text hover:text-shiv-blue'
+                    ? 'text-shiv-gold'
+                    : 'text-white/90 hover:text-white hover:bg-white/[0.06]'
                 }`
-              : `nav-link-light ${location === item.href ? 'nav-link-light-active' : ''}`
+              : `nav-link ${location === item.href ? 'nav-link-active' : ''}`
           }
         >
           {item.label}
@@ -57,7 +57,7 @@ const Navigation = () => {
 
   return (
     <header className="sticky top-0 z-50">
-      {/* COVRIT-style utility top bar */}
+      {/* Utility top bar */}
       <div className="bg-shiv-navy-deep border-b border-white/8">
         <div className="site-container">
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 min-h-nav-compact py-2 text-xs font-medium">
@@ -65,7 +65,7 @@ const Navigation = () => {
               {topBarItems.left.map((item) => {
                 const Icon = item.icon;
                 const className =
-                  'flex items-center gap-1.5 text-white/75 hover:text-white transition-colors';
+                  'flex items-center gap-1.5 text-white/75 hover:text-shiv-gold transition-colors';
                 const content = (
                   <>
                     <Icon className="h-3.5 w-3.5 shrink-0" />
@@ -88,7 +88,7 @@ const Navigation = () => {
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-white/75 hover:text-white transition-colors"
+                  className="text-white/75 hover:text-shiv-gold transition-colors"
                 >
                   {item.label}
                 </a>
@@ -98,8 +98,8 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* COVRIT-style main navbar — white bar, logo | links | search + CTA */}
-      <nav className="bg-white border-b border-gray-200/90 shadow-sm">
+      {/* Main navbar — dark navy, logo | links | search + gold CTA */}
+      <nav className="bg-shiv-navy border-b border-white/8 shadow-md shadow-black/15">
         <div className="site-container">
           <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 min-h-nav lg:gap-8">
             <div className="flex shrink-0 items-center py-3">
@@ -107,7 +107,7 @@ const Navigation = () => {
                 <img
                   src="/logo.png"
                   alt="Shiv Insurance Brokers"
-                  className="h-9 w-auto max-w-[11rem] object-contain object-left cursor-pointer hover:opacity-90 transition-opacity md:h-10"
+                  className="logo-on-dark h-9 w-auto max-w-[11rem] object-contain object-left cursor-pointer hover:opacity-90 transition-opacity md:h-10"
                 />
               </Link>
             </div>
@@ -120,7 +120,7 @@ const Navigation = () => {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-9 w-9 text-shiv-text-muted hover:text-shiv-blue hover:bg-shiv-cream rounded-btn"
+                className="h-9 w-9 text-white/80 hover:text-white hover:bg-white/8 rounded-btn"
                 aria-label="Search"
                 onClick={() => setSearchOpen(true)}
               >
@@ -129,9 +129,9 @@ const Navigation = () => {
 
               <Link
                 href={quoteCta.href}
-                className="btn-cta hidden sm:inline-flex shrink-0"
+                className="btn-cta hidden sm:inline-flex shrink-0 !text-shiv-navy-deep"
               >
-                Get a quote
+                {quoteCta.label}
               </Link>
 
               <div className="md:hidden">
@@ -140,7 +140,7 @@ const Navigation = () => {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="h-9 w-9 text-shiv-text hover:bg-shiv-cream rounded-btn"
+                      className="h-9 w-9 text-white hover:bg-white/8 rounded-btn"
                       aria-label="Open menu"
                     >
                       <Menu className="h-5 w-5" />
@@ -148,21 +148,21 @@ const Navigation = () => {
                   </SheetTrigger>
                   <SheetContent
                     side="right"
-                    className="w-[min(100vw-2rem,20rem)] bg-white border-gray-200"
+                    className="w-[min(100vw-2rem,20rem)] bg-shiv-navy border-white/10 text-white"
                   >
                     <div className="flex flex-col gap-1 mt-8">
                       <NavLinks mobile onItemClick={() => setIsOpen(false)} />
                       <Link
                         href={quoteCta.href}
                         onClick={() => setIsOpen(false)}
-                        className="btn-cta mt-4 w-full"
+                        className="btn-cta mt-4 w-full !text-shiv-navy-deep"
                       >
-                        Get a quote
+                        {quoteCta.label}
                       </Link>
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-10 w-10 self-start text-shiv-text-muted hover:text-shiv-blue mt-2 rounded-btn"
+                        className="h-10 w-10 self-start text-white/80 hover:text-white hover:bg-white/8 mt-2 rounded-btn"
                         aria-label="Search"
                         onClick={() => {
                           setSearchOpen(true);

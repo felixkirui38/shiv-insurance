@@ -61,13 +61,9 @@ const Home = () => {
           </div>
 
           <div className="text-center">
-            <Link href="/about" data-testid="button-learn-more">
-              <Button className="btn-cta gap-2 group">
-                <span className="flex items-center space-x-2 normal-case tracking-normal font-semibold">
-                  <span>Learn More About Us</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </Button>
+            <Link href="/about" className="btn-cta gap-2 group normal-case tracking-normal" data-testid="button-learn-more">
+              <span>Learn More About Us</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
         </div>
@@ -79,7 +75,7 @@ const Home = () => {
           <div className="rounded-[var(--radius-card)] border border-white/10 bg-white/5 p-8 md:p-12 text-white">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="inline-block bg-shiv-blue text-white text-xs font-bold px-3 py-1 rounded-full mb-4" data-testid="badge-cyber-new">
+                <div className="inline-block bg-shiv-gold text-shiv-navy-deep text-xs font-bold px-3 py-1 rounded-full mb-4" data-testid="badge-cyber-new">
                   NEW & ESSENTIAL
                 </div>
                 <h2 className="text-3xl font-bold mb-4" data-testid="heading-cyber-insurance">
@@ -89,10 +85,8 @@ const Home = () => {
                   Protect your business from the growing threat of cyberattacks, data breaches, and ransomware. 
                   Our comprehensive cyber insurance covers network security, crisis management, and business interruption.
                 </p>
-                <Link href="/services" data-testid="button-cyber-learn-more">
-                  <Button className="btn-cta normal-case tracking-normal font-semibold">
-                    Learn More About Cyber Insurance
-                  </Button>
+                <Link href="/services" className="btn-cta normal-case tracking-normal font-semibold" data-testid="button-cyber-learn-more">
+                  Learn More About Cyber Insurance
                 </Link>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -199,13 +193,9 @@ const Home = () => {
           </div>
 
           <div className="text-center">
-            <Link href="/services" data-testid="button-view-services">
-              <Button className="btn-cta gap-2 group">
-                <span className="flex items-center space-x-2 normal-case tracking-normal font-semibold">
-                  <span>View All Services</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
-                </span>
-              </Button>
+            <Link href="/services" className="btn-cta gap-2 group normal-case tracking-normal" data-testid="button-view-services">
+              <span>View All Services</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
         </div>
@@ -229,7 +219,7 @@ const Home = () => {
                 <AnimatedCounter
                   target={28}
                   suffix="+"
-                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-light-blue"
+                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-gold"
                 />
                 <div className="text-lg font-semibold mb-1 text-white">Years</div>
                 <div className="text-sm text-white/80">of Excellence</div>
@@ -241,7 +231,7 @@ const Home = () => {
                 <AnimatedCounter
                   target={34}
                   suffix="+"
-                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-light-blue"
+                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-gold"
                 />
                 <div className="text-lg font-semibold mb-1 text-white">Products</div>
                 <div className="text-sm text-white/80">Insurance Categories</div>
@@ -253,7 +243,7 @@ const Home = () => {
                 <AnimatedCounter
                   target={15}
                   suffix="+"
-                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-light-blue"
+                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-gold"
                 />
                 <div className="text-lg font-semibold mb-1 text-white">Partners</div>
                 <div className="text-sm text-white/80">Insurance Companies</div>
@@ -265,7 +255,7 @@ const Home = () => {
                 <AnimatedCounter
                   target={15}
                   suffix="+"
-                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-light-blue"
+                  className="text-4xl md:text-5xl font-bold mb-2 text-shiv-gold"
                 />
                 <div className="text-lg font-semibold mb-1 text-white">Industries</div>
                 <div className="text-sm text-white/80">We Serve</div>

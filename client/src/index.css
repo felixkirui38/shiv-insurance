@@ -4,25 +4,43 @@
 @tailwind utilities;
 
 :root {
+  /* Brand tokens first (referenced below) */
+  --shiv-navy: #002b36;
+  --shiv-navy-deep: #001f28;
+  --shiv-navy-muted: #0a3540;
+  --shiv-blue: #292c8d;
+  --shiv-light-blue: #4951a3;
+  --shiv-cream: #ffffff;
+  --shiv-cream-warm: #f9f9f9;
+  --shiv-section-muted: #f4f6f7;
+  --shiv-gold: #d4af37;
+  --shiv-gold-hover: #b8962e;
+  --shiv-gold-light: #e8c547;
+  --shiv-accent: var(--shiv-gold);
+  --shiv-accent-hover: var(--shiv-gold-hover);
+  --shiv-accent-light: var(--shiv-gold-light);
+  --shiv-text: #1a2b32;
+  --shiv-text-muted: #5c6b73;
+
   --background: hsl(0 0% 100%);
   --foreground: hsl(210 25% 7.8431%);
   --card: hsl(180 6.6667% 97.0588%);
   --card-foreground: hsl(210 25% 7.8431%);
   --popover: hsl(0 0% 100%);
   --popover-foreground: hsl(210 25% 7.8431%);
-  --primary: var(--shiv-navy);
-  --primary-foreground: hsl(0 0% 100%);
+  --primary: var(--shiv-gold);
+  --primary-foreground: var(--shiv-navy-deep);
   --secondary: hsl(210 25% 7.8431%);
   --secondary-foreground: hsl(0 0% 100%);
   --muted: hsl(240 1.9608% 90%);
   --muted-foreground: hsl(210 25% 7.8431%);
   --accent: hsl(211.5789 51.3514% 92.7451%);
-  --accent-foreground: var(--shiv-blue);
+  --accent-foreground: var(--shiv-gold);
   --destructive: hsl(356.3033 90.5579% 54.3137%);
   --destructive-foreground: hsl(0 0% 100%);
   --border: hsl(201.4286 30.4348% 90.9804%);
   --input: hsl(200 23.0769% 97.4510%);
-  --ring: var(--shiv-blue);
+  --ring: var(--shiv-gold);
   --chart-1: hsl(230 73% 48%);
   --chart-2: hsl(159.7826 100% 36.0784%);
   --chart-3: hsl(42.0290 92.8251% 56.2745%);
@@ -61,20 +79,6 @@
   --nav-height-compact: 2.25rem;
   --radius-btn: 0.375rem;
 
-  /* Shiv Insurance Brand Colors */
-  --shiv-navy: #001f24;
-  --shiv-navy-deep: #001418;
-  --shiv-navy-muted: #0a2e35;
-  --shiv-blue: #292c8d;
-  --shiv-light-blue: #4951a3;
-  --shiv-cream: #f8f9fa;
-  --shiv-cream-warm: #f4f6f7;
-  --shiv-section-muted: #eef1f3;
-  --shiv-accent: #292c8d;
-  --shiv-accent-hover: #4951a3;
-  --shiv-accent-light: #6b72b8;
-  --shiv-text: #1a2b32;
-  --shiv-text-muted: #5c6b73;
   --kenya-brown: hsl(25 54% 31%);
   --warm-gray: hsl(0 0% 96%);
 }
@@ -93,12 +97,12 @@
   --muted: hsl(0 0% 9.4118%);
   --muted-foreground: hsl(210 3.3898% 46.2745%);
   --accent: hsl(205.7143 70% 7.8431%);
-  --accent-foreground: var(--shiv-blue);
+  --accent-foreground: var(--shiv-gold);
   --destructive: hsl(356.3033 90.5579% 54.3137%);
   --destructive-foreground: hsl(0 0% 100%);
   --border: hsl(210 5.2632% 14.9020%);
   --input: hsl(207.6923 27.6596% 18.4314%);
-  --ring: var(--shiv-blue);
+  --ring: var(--shiv-gold);
   --chart-1: hsl(230 73% 48%);
   --chart-2: hsl(159.7826 100% 36.0784%);
   --chart-3: hsl(42.0290 92.8251% 56.2745%);
@@ -196,13 +200,14 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     line-height: 1.25;
-    color: hsl(0 0% 100%);
-    background-color: var(--shiv-blue);
+    color: var(--shiv-navy-deep) !important;
+    background-color: var(--shiv-gold) !important;
+    border: none;
     transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
   }
 
   .btn-cta:hover {
-    background-color: var(--shiv-light-blue);
+    background-color: var(--shiv-gold-hover) !important;
   }
 
   .btn-cta-navy {
@@ -310,50 +315,36 @@
   }
 
   .nav-link-active {
-    color: var(--shiv-light-blue);
+    color: var(--shiv-gold);
     background-color: hsl(0 0% 100% / 0.06);
   }
 
-  .nav-link-light {
-    padding: 0.5rem 0.875rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    line-height: 1.4;
-    color: var(--shiv-text);
-    border-radius: var(--radius-btn);
-    transition: color 0.2s ease;
-  }
-
-  .nav-link-light:hover {
-    color: var(--shiv-blue);
-  }
-
-  .nav-link-light-active {
-    color: var(--shiv-blue);
-  }
-
   .hero-panel {
-    background-color: var(--shiv-navy-muted);
-    color: hsl(0 0% 100%);
+    background-color: var(--shiv-gold);
+    color: var(--shiv-navy-deep);
   }
 
   .hero-panel .btn-cta-navy {
-    background-color: hsl(0 0% 100%);
-    color: var(--shiv-navy);
+    background-color: var(--shiv-navy);
+    color: hsl(0 0% 100%);
   }
 
   .hero-panel .btn-cta-navy:hover {
-    background-color: var(--shiv-cream);
+    background-color: var(--shiv-navy-muted);
   }
 
   .hero-panel .btn-cta-outline-dark {
-    color: hsl(0 0% 100%);
-    border-color: hsl(0 0% 100% / 0.4);
+    color: var(--shiv-navy-deep);
+    border-color: color-mix(in srgb, var(--shiv-navy-deep) 40%, transparent);
   }
 
   .hero-panel .btn-cta-outline-dark:hover {
-    background-color: hsl(0 0% 100% / 0.1);
-    border-color: hsl(0 0% 100% / 0.6);
+    background-color: color-mix(in srgb, var(--shiv-navy-deep) 8%, transparent);
+    border-color: color-mix(in srgb, var(--shiv-navy-deep) 60%, transparent);
+  }
+
+  .logo-on-dark {
+    filter: brightness(0) invert(1);
   }
 
   .sub-hero-bar {
@@ -381,8 +372,8 @@
     justify-content: center;
     min-width: 3.5rem;
     padding: 0.5rem 0.625rem;
-    background-color: var(--shiv-blue);
-    color: hsl(0 0% 100%);
+    background-color: var(--shiv-gold);
+    color: var(--shiv-navy-deep);
     font-size: 0.6875rem;
     font-weight: 800;
     letter-spacing: 0.04em;
@@ -409,7 +400,27 @@
   }
 
   .footer-link:hover {
-    color: var(--shiv-light-blue);
+    color: var(--shiv-gold);
+  }
+
+  .footer-input {
+    flex: 1;
+    min-width: 0;
+    border-radius: var(--radius-btn);
+    border: 1px solid hsl(0 0% 100% / 0.2);
+    background-color: hsl(0 0% 100%);
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    color: var(--shiv-text);
+  }
+
+  .footer-input::placeholder {
+    color: var(--shiv-text-muted);
+  }
+
+  .footer-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px var(--shiv-gold);
   }
 }
 
@@ -428,6 +439,14 @@
   
   .text-shiv-accent-light {
     color: var(--shiv-accent-light);
+  }
+
+  .text-shiv-gold {
+    color: var(--shiv-gold);
+  }
+
+  .bg-shiv-gold {
+    background-color: var(--shiv-gold);
   }
   
   .text-kenya-brown {
