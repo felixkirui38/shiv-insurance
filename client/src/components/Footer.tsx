@@ -1,18 +1,42 @@
 import { Link } from 'wouter';
 import { Facebook, Instagram, Linkedin, Mail } from 'lucide-react';
+import { BRAND_LOGO_ALT, BRAND_LOGO_SRC } from '@/lib/brand';
+import { useCmsNavPages } from '@/lib/useCmsNavPages';
+
+const staticQuickLinks = [
+  { href: '/about', label: 'About Us' },
+  { href: '/services', label: 'Our Services' },
+  { href: '/downloads', label: 'Downloads' },
+  { href: '/contact', label: 'Contact' },
+];
+
+const staticServices = [
+  'Motor Insurance',
+  'Property Insurance',
+  'Medical Insurance',
+  'Life Insurance',
+  'Business Insurance',
+  'Marine Insurance',
+];
 
 const Footer = () => {
+  const { data: cmsPages = [] } = useCmsNavPages();
+  const footerLinkPages = cmsPages.filter((page) => page.appearance === 'footer_links');
+  const servicePages = cmsPages.filter((page) => page.appearance === 'services');
+
   return (
     <footer className="bg-shiv-navy text-white">
       <div className="site-container py-16 lg:py-20">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-3 lg:gap-10">
-          {/* About — existing company content */}
           <div>
-            <Link href="/" className="inline-block mb-6">
+            <Link href="/" className="inline-block mb-6" aria-label="Shiv Insurance Brokers home">
               <img
-                src="/logo.png"
-                alt="Shiv Insurance Brokers"
-                className="logo-on-dark h-9 w-auto max-w-[11rem] object-contain"
+                src={BRAND_LOGO_SRC}
+                alt={BRAND_LOGO_ALT}
+                className="site-logo"
+                width={120}
+                height={120}
+                decoding="async"
               />
             </Link>
             <p className="text-white/72 text-sm leading-relaxed mb-4">
@@ -46,30 +70,23 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links — existing routes */}
           <div>
             <h4 className="footer-heading">Quick Links</h4>
             <ul className="space-y-3">
-              <li>
-                <Link href="/about" className="footer-link">
-                  About Us
-                </Link>
-              </li>
-              <li>
-                <Link href="/services" className="footer-link">
-                  Our Services
-                </Link>
-              </li>
-              <li>
-                <Link href="/downloads" className="footer-link">
-                  Downloads
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="footer-link">
-                  Contact
-                </Link>
-              </li>
+              {staticQuickLinks.map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="footer-link">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+              {footerLinkPages.map((page) => (
+                <li key={page.id}>
+                  <Link href={`/p/${page.slug}`} className="footer-link">
+                    {page.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
             <div className="mt-8">
               <a
@@ -82,16 +99,21 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Services — existing list */}
           <div>
             <h4 className="footer-heading">Services</h4>
             <ul className="space-y-3 text-sm">
-              <li className="footer-link">Motor Insurance</li>
-              <li className="footer-link">Property Insurance</li>
-              <li className="footer-link">Medical Insurance</li>
-              <li className="footer-link">Life Insurance</li>
-              <li className="footer-link">Business Insurance</li>
-              <li className="footer-link">Marine Insurance</li>
+              {staticServices.map((service) => (
+                <li key={service} className="footer-link">
+                  {service}
+                </li>
+              ))}
+              {servicePages.map((page) => (
+                <li key={page.id}>
+                  <Link href={`/p/${page.slug}`} className="footer-link">
+                    {page.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
             <div className="mt-8">
               <Link href="/contact" className="btn-cta w-full sm:w-auto justify-center">
@@ -102,15 +124,17 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom bar — logo left, legal right */}
       <div className="border-t border-white/10 bg-shiv-navy-deep">
         <div className="site-container py-5">
           <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-            <Link href="/" className="inline-block shrink-0">
+            <Link href="/" className="inline-block shrink-0" aria-label="Shiv Insurance Brokers home">
               <img
-                src="/logo.png"
-                alt="Shiv Insurance Brokers"
-                className="logo-on-dark h-8 w-auto max-w-[9rem] object-contain opacity-90"
+                src={BRAND_LOGO_SRC}
+                alt={BRAND_LOGO_ALT}
+                className="site-logo-sm"
+                width={92}
+                height={92}
+                decoding="async"
               />
             </Link>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5 text-sm text-white/55">

@@ -47,36 +47,36 @@ export function SliderHeader() {
 
   const slides = [
     {
-      title: 'Insurance Solutions for Your Most Valuable Assets',
+      title: 'Reliable Coverage. Real Peace of Mind.',
       description:
-        'At Shiv Insurance Brokers Ltd, we serve the insurance needs of our customers through detailed and thoughtful consultation. This leads to coverage at a cost that adds value to our relationship.',
+        'Life is full of risk — we help you manage it. Shiv Insurance compares policies from top Kenyan insurers to find cover that fits your life, business, and budget.',
       bgImage:
         'https://images.unsplash.com/photo-1611348524140-53c9a25263d6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800',
-      category: 'Property Insurance',
+      category: 'Kenya\'s Trusted Broker',
     },
     {
-      title: 'Protecting Your Business & Personal Assets',
+      title: 'Protect What You\'ve Worked Hard to Build',
       description:
-        'With nearly 3 decades of experience, we provide comprehensive insurance solutions across 34+ product categories tailored to your specific needs.',
+        'From property and fleet to liability and WIBA — we structure commercial insurance that keeps your operations running when the unexpected strikes.',
       bgImage:
         'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800',
-      category: 'Liability Coverage',
+      category: 'Business Insurance',
     },
     {
-      title: 'Comprehensive Health & Life Coverage',
+      title: 'Health & Life Cover for the People Who Matter',
       description:
-        "Safeguard your family's future with our extensive health and life insurance products designed for peace of mind.",
+        'Medical, life, and pension plans for families and employers — because the best investment is knowing your loved ones and staff are protected.',
       bgImage:
         'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800',
       category: 'Health & Life',
     },
     {
-      title: 'Professional Wealth Management Services',
+      title: 'When Disaster Strikes, Your Policy Should Respond',
       description:
-        'Expert investment advisory and portfolio management to help you build and protect your financial future.',
+        'Motor comprehensive, fire & perils, all-risks, and personal accident — fast quotes, clear terms, and a broker on your side through every claim.',
       bgImage:
-        'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800',
-      category: 'Wealth Management',
+        'https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&h=800',
+      category: 'Personal Cover',
     },
   ]
 
@@ -99,11 +99,11 @@ export function SliderHeader() {
             {activeSlide.description}
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/about" className="btn-cta-navy" data-testid="button-learn-more">
-              Learn More
+            <Link href="/contact" className="btn-cta-navy" data-testid="button-learn-more">
+              Get a Free Quote
             </Link>
             <Link href="/services" className="btn-cta-outline-dark" data-testid="button-our-covers">
-              Our Covers
+              Explore Our Covers
             </Link>
           </div>
         </div>
@@ -171,6 +171,7 @@ export function SliderHeader() {
         <div className="site-container py-4">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 text-sm font-medium">
             <span>Licensed by IRA</span>
+            <span className="text-shiv-gold font-semibold">Independent brokers — we work for you, not the insurer</span>
             <span>Member of AIBK</span>
           </div>
         </div>

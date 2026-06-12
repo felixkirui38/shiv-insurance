@@ -5,6 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
 import { companyData } from '@/lib/data';
 import { ArrowRight, Shield, Target, Star, Lightbulb, Zap } from 'lucide-react';
+import { DedicatedSection } from '@/components/sections/DedicatedSection';
+import { CoveragePreviewSection } from '@/components/sections/CoveragePreviewSection';
+import { WhyChooseUsSection } from '@/components/sections/WhyChooseUsSection';
+import { MarqueeBanner } from '@/components/sections/MarqueeBanner';
+import { TeamSection, TestimonialsSection } from '@/components/sections/TeamTestimonialsSection';
+import { BlogPreviewSection } from '@/components/sections/BlogPreviewSection';
 import shieldIcon from '@assets/shield.svg';
 import visionIcon from '@assets/vision.svg';
 import handshakeIcon from '@assets/handshake.svg';
@@ -13,16 +19,20 @@ const Home = () => {
   return (
     <div>
       <SliderHeader />
+
+      <DedicatedSection />
+
+      <CoveragePreviewSection />
       
       {/* Quick Overview */}
-      <section className="site-section bg-white" data-testid="section-overview">
+      <section className="site-section bg-white site-section-tight-top" data-testid="section-overview">
         <div className="site-container">
           <div className="text-center mb-16 max-w-3xl mx-auto">
             <h2 className="section-heading">
-              About Shiv Insurance Brokers Ltd
+              Your Risk. Our Expertise. Your Peace of Mind.
             </h2>
             <p className="mt-4 section-subheading">
-              We are a leading insurance brokerage firm committed to excellence, integrity, and delivering personalized solutions that protect what matters most to our clients.
+              As independent brokers, we shop Kenya&apos;s leading insurers on your behalf — comparing policies so you get the right cover at a fair price, not just the cheapest quote on the table.
             </p>
           </div>
 
@@ -33,7 +43,9 @@ const Home = () => {
                   <img src={shieldIcon} alt="Mission" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <h4 className="text-xl font-bold text-shiv-text mb-4 group-hover:text-shiv-accent transition-colors duration-300">Our Mission</h4>
-                <p className="text-shiv-text-muted">{companyData.mission}</p>
+                <p className="text-shiv-text-muted">
+                  To place the right insurance in your hands — honest advice, competitive premiums, and cover that protects what you&apos;ve worked hard to build.
+                </p>
               </CardContent>
             </Card>
             
@@ -43,7 +55,9 @@ const Home = () => {
                   <img src={visionIcon} alt="Vision" className="h-8 w-8 group-hover:scale-110 transition-transform duration-300" />
                 </div>
                 <h4 className="text-xl font-bold text-shiv-text mb-4 group-hover:text-shiv-accent transition-colors duration-300">Our Vision</h4>
-                <p className="text-shiv-text-muted">{companyData.vision}</p>
+                <p className="text-shiv-text-muted">
+                  To be Kenya&apos;s go-to insurance broker — known for world-class service, trusted advice, and putting clients first in every policy we place.
+                </p>
               </CardContent>
             </Card>
             
@@ -54,7 +68,7 @@ const Home = () => {
                 </div>
                 <h4 className="text-xl font-bold text-shiv-text mb-4 group-hover:text-shiv-navy transition-colors duration-300">Our Ethics</h4>
                 <p className="text-shiv-text-muted">
-                  We pledge to maintain expertise, place clients' needs first, and compete with integrity while fulfilling our commitments.
+                  We work for you, not the insurer. Expert guidance, transparent recommendations, and integrity in every renewal, placement, and claim.
                 </p>
               </CardContent>
             </Card>
@@ -76,39 +90,38 @@ const Home = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
               <div>
                 <div className="inline-block bg-shiv-gold text-shiv-navy-deep text-xs font-bold px-3 py-1 rounded-full mb-4" data-testid="badge-cyber-new">
-                  NEW & ESSENTIAL
+                  ESSENTIAL COVER
                 </div>
                 <h2 className="text-3xl font-bold mb-4" data-testid="heading-cyber-insurance">
-                  Cyber Insurance Protection
+                  Cyber Insurance — Because Hackers Don&apos;t Send Warnings
                 </h2>
                 <p className="text-lg mb-6 text-white/90" data-testid="text-cyber-description">
-                  Protect your business from the growing threat of cyberattacks, data breaches, and ransomware. 
-                  Our comprehensive cyber insurance covers network security, crisis management, and business interruption.
+                  One breach can shut down operations overnight. Our cyber policies cover data loss, ransomware, crisis response, and business interruption — so a digital attack doesn&apos;t become a financial disaster.
                 </p>
                 <Link href="/services" className="btn-cta normal-case tracking-normal font-semibold" data-testid="button-cyber-learn-more">
-                  Learn More About Cyber Insurance
+                  Get Cyber Cover Today
                 </Link>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-breach">
                   <Shield className="w-8 h-8 mb-3" />
-                  <h4 className="text-base font-semibold mb-2">Data Breach Protection</h4>
-                  <p className="text-sm text-white/90 leading-relaxed">Comprehensive coverage for data theft and loss</p>
+                  <h4 className="text-base font-semibold mb-2">Data Breach Response</h4>
+                  <p className="text-sm text-white/90 leading-relaxed">Legal, notification, and recovery costs covered</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-ransomware">
                   <Target className="w-8 h-8 mb-3" />
-                  <h4 className="text-base font-semibold mb-2">Ransomware Coverage</h4>
-                  <p className="text-sm text-white/90 leading-relaxed">Protection against cyber extortion</p>
+                  <h4 className="text-base font-semibold mb-2">Ransomware & Extortion</h4>
+                  <p className="text-sm text-white/90 leading-relaxed">Protection when criminals hold your systems hostage</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-crisis">
                   <Zap className="w-8 h-8 mb-3" />
                   <h4 className="text-base font-semibold mb-2">Crisis Management</h4>
-                  <p className="text-sm text-white/90 leading-relaxed">24/7 expert support and PR repair</p>
+                  <p className="text-sm text-white/90 leading-relaxed">Expert incident response and reputation repair</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-continuity">
                   <Star className="w-8 h-8 mb-3" />
-                  <h4 className="text-base font-semibold mb-2">Business Continuity</h4>
-                  <p className="text-sm text-white/90 leading-relaxed">Coverage for business interruption</p>
+                  <h4 className="text-base font-semibold mb-2">Business Interruption</h4>
+                  <p className="text-sm text-white/90 leading-relaxed">Lost income while systems are down</p>
                 </div>
               </div>
             </div>
@@ -121,10 +134,10 @@ const Home = () => {
         <div className="site-container">
           <div className="text-center mb-16">
             <h2 className="section-heading">
-              Our Insurance Products
+              Cover for Every Risk You Face
             </h2>
             <p className="mt-4 section-subheading">
-              Comprehensive insurance solutions across 34+ product categories
+              Motor, medical, property, liability, cyber, and more — 34+ insurance products from one trusted broker.
             </p>
           </div>
 
@@ -156,12 +169,12 @@ const Home = () => {
                           style={{color: `var(--${service.color})`}} 
                         />
                       </div>
-                      <h4 className="font-bold text-lg text-gray-900 group-hover:scale-105 transition-transform duration-300">
+                      <h4 className="font-bold text-lg text-shiv-text group-hover:scale-105 transition-transform duration-300">
                         {service.category}
                       </h4>
                     </div>
                     
-                    <ul className="text-sm text-gray-600 space-y-2 relative z-10">
+                    <ul className="text-sm text-shiv-text-muted space-y-2 relative z-10">
                       {service.products.slice(0, 4).map((product, idx) => (
                         <li key={idx} className="flex items-center space-x-2 group-hover:translate-x-1 transition-transform duration-300" 
                             style={{transitionDelay: `${idx * 50}ms`}}>
@@ -201,15 +214,19 @@ const Home = () => {
         </div>
       </section>
 
+      <WhyChooseUsSection />
+
+      <MarqueeBanner />
+
       {/* Stats Section */}
       <section className="site-section site-section-navy relative overflow-hidden" data-testid="section-stats">
         <div className="site-container relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4 text-white">
-              Trusted by Thousands Across Kenya
+              A Track Record You Can Insure On
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Nearly three decades of excellence in insurance brokerage services
+              Decades of placing policies, handling claims, and earning trust across Kenya.
             </p>
           </div>
 
@@ -265,15 +282,21 @@ const Home = () => {
         </div>
       </section>
 
+      <TeamSection />
+
+      <TestimonialsSection />
+
+      <BlogPreviewSection />
+
       {/* CTA Section */}
       <section className="site-section bg-shiv-cream-warm" data-testid="section-cta">
         <div className="site-container">
           <div className="site-section-navy rounded-[var(--radius-card)] p-10 md:p-16 text-center">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-4 text-white">
-              Ready to Protect What Matters Most?
+              Don&apos;t Leave Your Future to Chance
             </h2>
             <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90">
-              Contact us today for personalized insurance solutions tailored to your specific needs.
+              Get a tailored quote within 24 hours. Whether it&apos;s your car, clinic, factory, or family — we&apos;ll find the cover that fits.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <Link href="/contact" data-testid="button-contact-us">
@@ -281,7 +304,7 @@ const Home = () => {
                   size="lg"
                   className="bg-white text-shiv-navy hover:bg-gray-100 px-10 py-3 text-base font-semibold uppercase tracking-wide"
                 >
-                  Contact Us
+                  Contact Us for a Quote
                 </Button>
               </Link>
               <Link href="/services" data-testid="button-view-services-cta">
@@ -289,7 +312,7 @@ const Home = () => {
                   size="lg"
                   className="bg-white text-shiv-navy hover:bg-gray-100 px-10 py-3 text-base font-semibold uppercase tracking-wide"
                 >
-                  View Services
+                  Browse All Covers
                 </Button>
               </Link>
             </div>

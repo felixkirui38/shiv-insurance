@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { SearchDialog } from '@/components/SearchDialog';
 import { Menu, Search, Mail, FileText } from 'lucide-react';
+import { BRAND_LOGO_ALT, BRAND_LOGO_SRC } from '@/lib/brand';
 
 const topBarItems = {
   left: [
@@ -25,8 +26,9 @@ const Navigation = () => {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About Us' },
     { href: '/services', label: 'Services' },
+    { href: '/buy-now', label: 'Buy Now' },
     { href: '/downloads', label: 'Downloads' },
-
+    { href: '/blog', label: 'Blog' },
     { href: '/contact', label: 'Contact' },
   ];
 
@@ -60,7 +62,7 @@ const Navigation = () => {
       {/* Utility top bar */}
       <div className="bg-shiv-navy-deep border-b border-white/8">
         <div className="site-container">
-          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 min-h-nav-compact py-2 text-xs font-medium">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1.5 min-h-nav-compact py-1.5 text-xs font-medium">
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               {topBarItems.left.map((item) => {
                 const Icon = item.icon;
@@ -99,15 +101,18 @@ const Navigation = () => {
       </div>
 
       {/* Main navbar — dark navy, logo | links | search + gold CTA */}
-      <nav className="bg-shiv-navy border-b border-white/8 shadow-md shadow-black/15">
+      <nav className="site-header-nav bg-shiv-navy border-b border-white/8 shadow-md shadow-black/15">
         <div className="site-container">
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 min-h-nav lg:gap-8">
-            <div className="flex shrink-0 items-center py-3">
-              <Link href="/" className="flex items-center">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-8">
+            <div className="flex shrink-0 items-center">
+              <Link href="/" className="shrink-0 block leading-none hover:opacity-95 transition-opacity" aria-label="Shiv Insurance Brokers home">
                 <img
-                  src="/logo.png"
-                  alt="Shiv Insurance Brokers"
-                  className="logo-on-dark h-9 w-auto max-w-[11rem] object-contain object-left cursor-pointer hover:opacity-90 transition-opacity md:h-10"
+                  src={BRAND_LOGO_SRC}
+                  alt={BRAND_LOGO_ALT}
+                  className="site-logo-header"
+                  width={128}
+                  height={128}
+                  decoding="async"
                 />
               </Link>
             </div>

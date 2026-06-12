@@ -7,36 +7,39 @@ export interface LogoItem {
 }
 
 const defaultLogos: LogoItem[] = [
-  { src: '/logos/aar.png', alt: 'Partner 1', href: '#' },
-  { src: '/logos/apa.png', alt: 'Partner 2', href: '#' },
-  { src: '/logos/axa.png', alt: 'Partner 3', href: '#' },
-  { src: '/logos/Britam.png', alt: 'Partner 4', href: '#' },
-  { src: '/logos/CIC.png', alt: 'Partner 5', href: '#' },
-  { src: '/logos/ga.png', alt: 'Partner 6', href: '#' },
-  { src: '/logos/heritage.png', alt: 'Partner 7', href: '#' },
-  { src: '/logos/icea lion.png', alt: 'Partner 6', href: '#' },
-  { src: '/logos/Jubilee.png', alt: 'Partner 6', href: '#' },
-  { src: '/logos/kenindia.png', alt: 'Partner 6', href: '#' },
-  { src: '/logos/Madison Group.png', alt: 'Partner 6', href: '#' },
-  { src: '/logos/mayfair.png', alt: 'Partner 6', href: '#' },
-  { src: '/logos/occidental.png', alt: 'Partner 6', href: '#' },
-  { src: '/logos/old mutual.png', alt: 'Partner 6', href: '#' },
-  { src: '/logos/sanlaam.png', alt: 'Partner 6', href: '#' },
+  { src: '/logos/aar.png', alt: 'AAR Insurance' },
+  { src: '/logos/apa.png', alt: 'APA Insurance' },
+  { src: '/logos/axa.png', alt: 'AXA' },
+  { src: '/logos/Britam.png', alt: 'Britam' },
+  { src: '/logos/CIC.png', alt: 'CIC Insurance' },
+  { src: '/logos/ga.png', alt: 'GA Insurance' },
+  { src: '/logos/heritage.png', alt: 'Heritage Insurance' },
+  { src: '/logos/icea%20lion.png', alt: 'ICEA LION' },
+  { src: '/logos/Jubilee.png', alt: 'Jubilee Insurance' },
+  { src: '/logos/kenindia.png', alt: 'KenIndia' },
+  { src: '/logos/Madison%20Group.png', alt: 'Madison Group' },
+  { src: '/logos/mayfair.png', alt: 'Mayfair Insurance' },
+  { src: '/logos/occidental.png', alt: 'Occidental Insurance' },
+  { src: '/logos/old%20mutual.png', alt: 'Old Mutual' },
+  { src: '/logos/sanlaam.png', alt: 'Sanlam' },
 ];
 
-const LogoCell = ({ logo, index }: { logo: LogoItem; index: number }) => {
+const LogoCell = ({ logo }: { logo: LogoItem }) => {
   const [imgError, setImgError] = useState(false);
   const content = (
-    <div className="flex items-center justify-center h-12 w-32 shrink-0">
+    <div className="partner-logo-cell group flex h-16 w-36 shrink-0 items-center justify-center px-3 sm:h-[4.5rem] sm:w-40">
       {!imgError ? (
         <img
           src={logo.src}
           alt={logo.alt}
-          className="max-h-10 max-w-full object-contain"
+          className="max-h-11 max-w-full object-contain opacity-80 brightness-110 contrast-110 transition-all duration-300 group-hover:scale-105 group-hover:opacity-100 sm:max-h-12"
+          loading="lazy"
           onError={() => setImgError(true)}
         />
       ) : (
-        <span className="text-sm font-semibold text-gray-400">{logo.alt}</span>
+        <span className="text-center text-xs font-medium leading-tight text-white/50">
+          {logo.alt}
+        </span>
       )}
     </div>
   );
@@ -47,27 +50,27 @@ const LogoCell = ({ logo, index }: { logo: LogoItem; index: number }) => {
         href={logo.href}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex shrink-0 px-4"
+        className="flex shrink-0"
       >
         {content}
       </a>
     );
   }
-  return <div className="shrink-0 px-4">{content}</div>;
+  return <div className="shrink-0">{content}</div>;
 };
 
 const LogoSlider = ({ logos = defaultLogos }: { logos?: LogoItem[] }) => {
   const row = (copyId: number) => (
-    <div key={copyId} className="flex items-center gap-4 shrink-0">
+    <div key={copyId} className="flex shrink-0 items-center gap-6 sm:gap-10">
       {logos.map((logo, i) => (
-        <LogoCell key={`${logo.alt}-${copyId}-${i}`} logo={logo} index={i} />
+        <LogoCell key={`${logo.alt}-${copyId}-${i}`} logo={logo} />
       ))}
     </div>
   );
 
   return (
-    <section className="bg-white border-y border-gray-200 py-8" aria-label="Partners & associates">
-      <div className="overflow-hidden">
+    <section className="partner-logo-bar" aria-label="Partners & associates">
+      <div className="overflow-hidden py-10 sm:py-12">
         <div className="flex w-max animate-logo-marquee">
           {row(0)}
           {row(1)}

@@ -1,3 +1,5 @@
+import swapnilTeamImage from "@/assets/team-swapnil.png";
+
 interface MedicalInsuranceProvider {
   name: string;
   logo: string;
@@ -52,15 +54,171 @@ export const companyData = {
     }
   ],
   
+  contactInfo: {
+    address: "Mezzanine 2, Real Towers, Upper Hill, Nairobi, Kenya",
+    phone: "+254 20 2724885",
+    email: "info@shivinsurance.co.ke",
+    hours: {
+      weekdays: "Monday – Friday: 8:00 AM – 5:00 PM",
+      saturday: "Saturday: 9:00 AM – 1:00 PM",
+    },
+    licenses: [
+      "Licensed by Insurance Regulatory Authority (IRA)",
+      "Member of Association of Insurance Brokers of Kenya (AIBK)",
+    ],
+  },
+
+  dedication: {
+    eyebrow: "Independent Insurance Brokers",
+    title: "Beyond cover — we secure futures",
+    description:
+      "For 28+ years, Shiv Insurance Brokers has matched individuals and businesses with the right policies from Kenya's leading insurers. No pushy sales — just honest advice, competitive premiums, and support when you need to claim.",
+    highlights: [
+      {
+        title: "28+ Years Placing Cover",
+        description: "Trusted brokerage experience across motor, medical, property, liability, and specialty lines.",
+      },
+      {
+        title: "We Work for You",
+        description: "Independent brokers who compare the market — not tied to any single insurance company.",
+      },
+      {
+        title: "Claims Support That Counts",
+        description: "When loss happens, we guide you through the process and advocate with underwriters on your behalf.",
+      },
+    ],
+  },
+
+  whyChooseUs: {
+    title: "Why insure through Shiv?",
+    description:
+      "Insurance shouldn't be confusing or overpriced. We translate policy jargon into plain language and fight for cover that actually protects you — at a premium that makes sense.",
+    points: [
+      {
+        title: "Independent Market Access",
+        description:
+          "One conversation, multiple quotes. We shop Britam, CIC, Jubilee, APA, and 15+ partner insurers to find your best fit.",
+      },
+      {
+        title: "Claims in Your Corner",
+        description:
+          "From first notice of loss to settlement — we stay involved so your claim doesn't get lost in the system.",
+      },
+      {
+        title: "34+ Insurance Products",
+        description:
+          "Motor, medical, fire, cyber, WIBA, pension, travel, and more — one broker for every risk you face.",
+      },
+      {
+        title: "Sector-Smart Advice",
+        description:
+          "Hospitality, manufacturing, real estate, healthcare — we know the risks in your industry and cover them properly.",
+      },
+    ],
+  },
+
+  processSteps: [
+    {
+      step: 1,
+      title: "Tell us your needs",
+      description: "Share your situation by phone, email, or our online quote form — no obligation.",
+    },
+    {
+      step: 2,
+      title: "We compare options",
+      description: "Our team reviews products from multiple insurers and shortlists the best matches.",
+    },
+    {
+      step: 3,
+      title: "Choose your cover",
+      description: "We explain terms clearly so you can decide with confidence and full transparency.",
+    },
+    {
+      step: 4,
+      title: "Ongoing support",
+      description: "We review your policies regularly and assist with renewals, endorsements, and claims.",
+    },
+  ],
+
+  testimonials: [
+    {
+      name: "Corporate Client",
+      company: "Manufacturing Sector, Nairobi",
+      content:
+        "When our factory claim went through, Shiv didn't disappear — they chased the insurer and kept us updated until settlement. That's the kind of broker you want on your policy.",
+      highlight: "chased the insurer",
+      rating: 5,
+    },
+    {
+      name: "SME Owner",
+      company: "Hospitality Industry",
+      content:
+        "They reviewed our existing policies and found gaps we didn't know we had. Better cover, fair premium, and zero pressure — exactly what a broker should do.",
+      highlight: "fair premium",
+      rating: 5,
+    },
+    {
+      name: "Individual Client",
+      company: "Motor & Medical Insurance",
+      content:
+        "One call for my car renewal, my family's medical cover, and a travel policy before a trip abroad. Shiv makes insurance simple — and that's rare in this market.",
+      highlight: "makes insurance simple",
+      rating: 5,
+    },
+  ],
+
+  faqs: [
+    {
+      question: "What is the difference between an insurer and a broker?",
+      answer:
+        "An insurer underwrites and pays claims. A broker like Shiv Insurance represents you — researching the market, recommending suitable products, and supporting you through placement and claims.",
+    },
+    {
+      question: "How quickly can I get a quote?",
+      answer:
+        "Most quote requests receive a response within one to two business days. Urgent enquiries can be handled by phone during office hours.",
+    },
+    {
+      question: "Which insurance companies do you work with?",
+      answer:
+        "We partner with leading Kenyan and international insurers including Britam, CIC, Jubilee, APA, GA Insurance, Old Mutual, and many others shown in our partners section.",
+    },
+    {
+      question: "Can you help with an existing claim?",
+      answer:
+        "Yes. Contact us with your policy details and we will liaise with the insurer to keep your claim moving and answer any questions along the way.",
+    },
+    {
+      question: "Do you offer international medical insurance?",
+      answer:
+        "Yes. We arrange individual, family, and group medical cover through global providers such as Allianz, Bupa, Cigna, AXA, and others listed on our Services page.",
+    },
+  ],
+
+  downloadCategories: [
+    {
+      title: "Proposal Forms",
+      description: "Complete and submit these forms to start your insurance application with our partner insurers.",
+    },
+    {
+      title: "Claim Forms",
+      description: "Download the correct claim form for your insurer and policy type when you need to report a loss.",
+    },
+    {
+      title: "Brochures & Guides",
+      description: "Product brochures and information sheets to help you understand coverage options before you buy.",
+    },
+  ],
+
   team: [
     {
       name: "Mr. Swapnil S. Trivedy",
       position: "Chief Executive Officer",
       qualification: "BBM and MBA from UK",
-      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&h=400"
-    }
+      image: swapnilTeamImage,
+    },
   ],
-  
+
   services: [
     {
       category: "Health Insurance",
