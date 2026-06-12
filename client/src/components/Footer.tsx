@@ -19,6 +19,12 @@ const staticServices = [
   'Marine Insurance',
 ];
 
+const footerCountries = [
+  { code: 'ke', name: 'Kenya' },
+  { code: 'ug', name: 'Uganda' },
+  { code: 'tz', name: 'Tanzania' },
+] as const;
+
 const Footer = () => {
   const { data: cmsPages = [] } = useCmsNavPages();
   const footerLinkPages = cmsPages.filter((page) => page.appearance === 'footer_links');
@@ -126,7 +132,7 @@ const Footer = () => {
 
       <div className="border-t border-white/10 bg-shiv-navy-deep">
         <div className="site-container py-5">
-          <div className="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
+          <div className="footer-bar">
             <Link href="/" className="inline-block shrink-0" aria-label="Shiv Insurance Brokers home">
               <img
                 src={BRAND_LOGO_SRC}
@@ -137,7 +143,29 @@ const Footer = () => {
                 decoding="async"
               />
             </Link>
-            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-5 text-sm text-white/55">
+            <div
+              className="footer-flags"
+              aria-label="Countries we serve"
+            >
+              {footerCountries.map((country) => (
+                <span
+                  key={country.code}
+                  className="footer-flag"
+                  title={country.name}
+                >
+                  <img
+                    src={`https://flagcdn.com/w40/${country.code}.png`}
+                    srcSet={`https://flagcdn.com/w80/${country.code}.png 2x`}
+                    alt={`${country.name} flag`}
+                    width={28}
+                    height={20}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </span>
+              ))}
+            </div>
+            <div className="footer-bar-meta text-sm text-white/55">
               <span>© 2025 Shiv Insurance Brokers Ltd. All rights reserved.</span>
               <span className="hidden sm:inline text-white/25" aria-hidden>
                 |

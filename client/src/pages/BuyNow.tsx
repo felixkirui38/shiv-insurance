@@ -138,7 +138,7 @@ const BuyNow = () => {
 
       <section className="site-section bg-shiv-cream-warm">
         <div className="site-container">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-[minmax(260px,320px)_1fr] lg:gap-10">
+          <div className="grid min-w-0 grid-cols-1 gap-8 lg:grid-cols-[minmax(220px,320px)_minmax(0,1fr)] lg:gap-10">
             <aside className="lg:sticky lg:top-28 lg:self-start">
               <p className="mb-4 text-sm font-semibold uppercase tracking-wide text-shiv-text-muted">
                 Insurance products

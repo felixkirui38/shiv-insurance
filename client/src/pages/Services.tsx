@@ -117,7 +117,7 @@ const Services = () => {
 
       <section className="site-section site-section-cream-warm">
         <div className="site-container">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {companyData.services.map((service, index) => (
               <Card
                 key={index}

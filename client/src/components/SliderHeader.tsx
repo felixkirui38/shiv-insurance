@@ -84,8 +84,8 @@ export function SliderHeader() {
 
   return (
     <div className="relative" data-testid="slider-container">
-      <div className="flex flex-col lg:flex-row min-h-[32rem] lg:min-h-[36rem]">
-        <div className="hero-panel flex flex-col justify-center w-full lg:w-[42%] px-8 py-12 lg:px-14 lg:py-16 order-2 lg:order-1">
+      <div className="flex flex-col lg:flex-row min-h-[22rem] sm:min-h-[28rem] lg:min-h-[36rem]">
+        <div className="hero-panel flex flex-col justify-center w-full lg:w-[42%] px-5 py-10 sm:px-8 sm:py-12 lg:px-14 lg:py-16 order-2 lg:order-1 min-w-0">
           <span className="text-xs font-bold uppercase tracking-[0.2em] text-shiv-navy-deep/70 mb-4">
             {activeSlide.category}
           </span>

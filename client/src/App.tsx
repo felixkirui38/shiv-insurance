@@ -40,10 +40,10 @@ function PublicRouter() {
 
 function PublicApp() {
   return (
-    <div className="min-h-screen flex flex-col bg-shiv-cream-warm">
+    <div className="site-page bg-shiv-cream-warm">
       <SiteScripts />
       <Navigation />
-      <main className="flex-1">
+      <main className="site-main">
         <PublicRouter />
       </main>
       <LogoSlider />

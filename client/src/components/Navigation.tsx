@@ -85,12 +85,12 @@ const Navigation = () => {
                 );
               })}
             </div>
-            <div className="flex items-center gap-3 sm:gap-5">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 sm:gap-5">
               {topBarItems.right.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
-                  className="text-white/75 hover:text-shiv-gold transition-colors"
+                  className="text-[0.6875rem] sm:text-xs text-white/75 hover:text-shiv-gold transition-colors"
                 >
                   {item.label}
                 </a>
@@ -103,7 +103,7 @@ const Navigation = () => {
       {/* Main navbar — dark navy, logo | links | search + gold CTA */}
       <nav className="site-header-nav bg-shiv-navy border-b border-white/8 shadow-md shadow-black/15">
         <div className="site-container">
-          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-4 lg:gap-8">
+          <div className="grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:gap-4 lg:gap-8 min-w-0">
             <div className="flex shrink-0 items-center">
               <Link href="/" className="shrink-0 block leading-none hover:opacity-95 transition-opacity" aria-label="Shiv Insurance Brokers home">
                 <img
@@ -117,7 +117,7 @@ const Navigation = () => {
               </Link>
             </div>
 
-            <div className="hidden md:flex items-center justify-center gap-0.5">
+            <div className="hidden lg:flex items-center justify-center gap-0.5 min-w-0">
               <NavLinks />
             </div>
 
@@ -139,7 +139,7 @@ const Navigation = () => {
                 {quoteCta.label}
               </Link>
 
-              <div className="md:hidden">
+              <div className="lg:hidden">
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                   <SheetTrigger asChild>
                     <Button
