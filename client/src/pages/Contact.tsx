@@ -9,7 +9,10 @@ import { useToast } from '@/hooks/use-toast';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { apiRequest } from '@/lib/queryClient';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
-import logoImg from '@assets/SHIV LOGO_1755505090610.png';
+import { companyData } from '@/lib/data';
+import { PageHero } from '@/components/PageHero';
+import { PageCta } from '@/components/PageCta';
+import { FaqSection, ContactInfoSection } from '@/components/sections/ProcessIndustriesFaq';
 import type { FormSubmission } from '@shared/schema';
 
 const FORM_NAME = "Quote Request";
@@ -83,25 +86,17 @@ const Contact = () => {
 
   return (
     <div>
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-shiv-blue to-shiv-light-blue text-white py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl mb-6">
-            Get in Touch
-          </h1>
-          <p className="text-xl max-w-3xl mx-auto">
-            Ready to protect what matters most? Contact us today for a personalized quote.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="Get in Touch"
+        subtitle="Ready to protect what matters most? Contact us today for a personalized quote."
+      />
 
-      {/* Contact Content */}
-      <section className="py-24 bg-warm-gray">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="site-section site-section-cream-warm">
+        <div className="site-container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             {/* Contact Information */}
             <div>
-              <h3 className="text-2xl font-bold mb-8 text-gray-900">Contact Information</h3>
+              <h3 className="text-2xl font-bold mb-8 text-shiv-text">Contact Information</h3>
               
               {/* Office Image */}
               <img 
@@ -114,34 +109,36 @@ const Contact = () => {
                 <div className="flex items-start">
                   <MapPin className="text-shiv-accent h-6 w-6 mr-4 mt-1" />
                   <div>
-                    <h4 className="font-bold text-lg mb-1 text-gray-900">Our Office</h4>
-                    <p className="text-gray-600">Nairobi, Kenya</p>
-                    <p className="text-sm text-gray-500">Licensed by Insurance Regulatory Authority (IRA)</p>
+                    <h4 className="font-bold text-lg mb-1 text-shiv-text">Our Office</h4>
+                    <p className="text-shiv-text-muted">{companyData.contactInfo.address}</p>
+                    <p className="text-sm text-shiv-text-muted mt-1">{companyData.contactInfo.licenses[0]}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
                   <Phone className="text-shiv-accent h-6 w-6 mr-4 mt-1" />
                   <div>
-                    <h4 className="font-bold text-lg mb-1 text-gray-900">Phone</h4>
-                    <p className="text-gray-600">Contact us for phone details</p>
+                    <h4 className="font-bold text-lg mb-1 text-shiv-text">Phone</h4>
+                    <a href={`tel:${companyData.contactInfo.phone.replace(/\s/g, '')}`} className="text-shiv-text-muted hover:text-shiv-gold">
+                      {companyData.contactInfo.phone}
+                    </a>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
                   <Mail className="text-shiv-accent h-6 w-6 mr-4 mt-1" />
                   <div>
-                    <h4 className="font-bold text-lg mb-1 text-gray-900">Email</h4>
-                    <p className="text-gray-600">info@shivinsurance.co.ke</p>
+                    <h4 className="font-bold text-lg mb-1 text-shiv-text">Email</h4>
+                    <p className="text-shiv-text-muted">{companyData.contactInfo.email}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
                   <Clock className="text-shiv-accent h-6 w-6 mr-4 mt-1" />
                   <div>
-                    <h4 className="font-bold text-lg mb-1 text-gray-900">Business Hours</h4>
-                    <p className="text-gray-600">Monday - Friday: 8:00 AM - 5:00 PM</p>
-                    <p className="text-gray-600">Saturday: 9:00 AM - 1:00 PM</p>
+                    <h4 className="font-bold text-lg mb-1 text-shiv-text">Business Hours</h4>
+                    <p className="text-shiv-text-muted">{companyData.contactInfo.hours.weekdays}</p>
+                    <p className="text-shiv-text-muted">{companyData.contactInfo.hours.saturday}</p>
                   </div>
                 </div>
               </div>
@@ -150,9 +147,9 @@ const Contact = () => {
             </div>
 
             {/* Contact Form */}
-            <Card className="p-8">
+            <Card className="theme-card p-8 border-0 shadow-sm">
               <CardContent className="pt-6">
-                <h3 className="text-2xl font-bold mb-6 text-gray-900">Request a Quote</h3>
+                <h3 className="text-2xl font-bold mb-6 text-shiv-text">Request a Quote</h3>
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
@@ -235,7 +232,7 @@ const Contact = () => {
                   
                   <Button 
                     type="submit" 
-                    className="w-full bg-shiv-blue hover:bg-shiv-light-blue text-white py-3"
+                    className="w-full btn-cta !normal-case !tracking-normal font-semibold"
                     disabled={contactMutation.isPending}
                   >
                     {contactMutation.isPending ? 'Sending...' : 'Send Quote Request'}
@@ -247,17 +244,16 @@ const Contact = () => {
         </div>
       </section>
 
-      {/* Call to Action */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Protecting Kenya's Future, One Policy at a Time
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Join thousands of satisfied clients who trust Shiv Insurance Brokers Ltd with their most valuable assets.
-          </p>
-        </div>
-      </section>
+      <FaqSection />
+
+      <ContactInfoSection />
+
+      <PageCta
+        title="Protecting Kenya's Future, One Policy at a Time"
+        description="Join thousands of satisfied clients who trust Shiv Insurance Brokers Ltd with their most valuable assets."
+        primaryLabel="Get a quote"
+        primaryHref="/contact"
+      />
     </div>
   );
 };

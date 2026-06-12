@@ -1,10 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Link } from 'wouter';
-import logoImg from '@assets/SHIV LOGO_1755505090610.png';
 
 const Hero = () => {
   return (
-    <section className="relative bg-gradient-to-r from-shiv-blue to-shiv-light-blue text-white">
+    <section className="relative site-section-navy text-white">
       {/* Background overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
       <div 
@@ -16,7 +15,7 @@ const Hero = () => {
         }}
       ></div>
       
-      <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+      <div className="relative site-container py-24 sm:py-32">
         <div className="text-center">
 
           <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
@@ -28,7 +27,7 @@ const Hero = () => {
           <div className="mt-10 flex items-center justify-center gap-x-6">
             <Link href="/services">
               <Button 
-                className="bg-shiv-accent hover:bg-shiv-accent/90 px-8 py-3 text-lg font-semibold"
+                className="bg-shiv-gold hover:bg-shiv-gold-hover px-8 py-3 text-lg font-semibold text-shiv-navy-deep"
                 size="lg"
               >
                 Our Services

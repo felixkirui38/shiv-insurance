@@ -1,7 +1,7 @@
 import nodemailer from 'nodemailer';
 import type { FormSubmission } from '@shared/schema';
+import { getLeadEmail } from './cmsStorage';
 
-const COMPANY_EMAIL = 'info@shivinsurance.co.ke';
 const COMPANY_NAME = 'Shiv Insurance Brokers Ltd';
 
 const createTransporter = () => {
@@ -41,10 +41,11 @@ Submitted: ${new Date().toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })}
 
 export const sendFormNotification = async (data: FormSubmission): Promise<{ success: boolean; message: string }> => {
   const transporter = createTransporter();
+  const companyEmail = await getLeadEmail();
   
   const adminEmailContent = {
     from: `"${COMPANY_NAME} Website" <${process.env.SMTP_USER || 'noreply@shivinsurance.co.ke'}>`,
-    to: COMPANY_EMAIL,
+    to: companyEmail,
     replyTo: data.email,
     subject: `[${data.formName}] New Inquiry from ${data.firstName} ${data.lastName}`,
     text: `
@@ -118,7 +119,7 @@ ${data.insuranceType ? `Insurance Type: ${data.insuranceType}` : ''}
 Message: ${data.message}
 -----------------------------------
 
-If you have any urgent questions, please call us at +254 20 2724885 or email us at ${COMPANY_EMAIL}.
+If you have any urgent questions, please call us at +254 20 2724885 or email us at ${companyEmail}.
 
 Best regards,
 ${COMPANY_NAME}
@@ -168,7 +169,7 @@ This is an automated confirmation email. Please do not reply directly to this me
     <div class="contact-info">
       <p><strong>Need immediate assistance?</strong></p>
       <p>Call: +254 20 2724885</p>
-      <p>Email: <a href="mailto:${COMPANY_EMAIL}">${COMPANY_EMAIL}</a></p>
+      <p>Email: <a href="mailto:${companyEmail}">${companyEmail}</a></p>
     </div>
     
     <div class="footer">
@@ -184,7 +185,7 @@ This is an automated confirmation email. Please do not reply directly to this me
 
   if (!transporter) {
     console.log('=== Form Submission (SMTP not configured) ===');
-    console.log('To:', COMPANY_EMAIL);
+    console.log('To:', companyEmail);
     console.log('Subject:', adminEmailContent.subject);
     console.log('Reply-To:', data.email);
     console.log('Content:', formatFormData(data));
@@ -194,7 +195,7 @@ This is an automated confirmation email. Please do not reply directly to this me
 
   try {
     await transporter.sendMail(adminEmailContent);
-    console.log(`Admin notification sent to ${COMPANY_EMAIL}`);
+    console.log(`Admin notification sent to ${companyEmail}`);
     
     await transporter.sendMail(customerEmailContent);
     console.log(`Confirmation email sent to ${data.email}`);

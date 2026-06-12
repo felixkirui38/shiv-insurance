@@ -83,10 +83,10 @@ export function SearchDialog({ open, onOpenChange }: SearchDialogProps) {
                     onClick={() => handleSelect(entry)}
                     className="w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-muted/60 focus:bg-muted/60 focus:outline-none transition-colors"
                   >
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-shiv-blue/10">
-                      <FileText className="h-4 w-4 text-shiv-blue" />
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-shiv-gold/15">
+                      <FileText className="h-4 w-4 text-shiv-gold" />
                     </div>
-                    <span className="flex-1 font-medium text-gray-900">
+                    <span className="flex-1 font-medium text-shiv-text">
                       {entry.title}
                     </span>
                     <ArrowRight className="h-4 w-4 text-muted-foreground shrink-0" />

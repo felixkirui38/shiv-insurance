@@ -1,5 +1,12 @@
 import { type User, type InsertUser, type Contact, type InsertContact } from "@shared/schema";
 import { randomUUID } from "crypto";
+import { readFile, writeFile, mkdir } from "fs/promises";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const DATA_DIR = join(__dirname, "data");
+const INQUIRIES_FILE = join(DATA_DIR, "inquiries.json");
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -9,13 +16,49 @@ export interface IStorage {
   getContacts(): Promise<Contact[]>;
 }
 
+type StoredContact = Omit<Contact, "createdAt"> & { createdAt: string | Date | null };
+
+async function ensureInquiriesFile(): Promise<void> {
+  await mkdir(DATA_DIR, { recursive: true });
+  try {
+    await readFile(INQUIRIES_FILE, "utf-8");
+  } catch {
+    await writeFile(INQUIRIES_FILE, "[]", "utf-8");
+  }
+}
+
+async function loadInquiries(): Promise<Contact[]> {
+  await ensureInquiriesFile();
+  const raw = await readFile(INQUIRIES_FILE, "utf-8");
+  const parsed = JSON.parse(raw) as StoredContact[];
+  return parsed.map((c) => ({
+    ...c,
+    createdAt: c.createdAt ? new Date(c.createdAt) : new Date(),
+  }));
+}
+
+async function saveInquiries(contacts: Contact[]): Promise<void> {
+  await ensureInquiriesFile();
+  const serializable = contacts.map((c) => ({
+    ...c,
+    createdAt: c.createdAt ? new Date(c.createdAt).toISOString() : new Date().toISOString(),
+  }));
+  await writeFile(INQUIRIES_FILE, JSON.stringify(serializable, null, 2), "utf-8");
+}
+
 export class MemStorage implements IStorage {
   private users: Map<string, User>;
-  private contacts: Map<string, Contact>;
+  private contactsCache: Contact[] | null = null;
 
   constructor() {
     this.users = new Map();
-    this.contacts = new Map();
+  }
+
+  private async getContactList(): Promise<Contact[]> {
+    if (!this.contactsCache) {
+      this.contactsCache = await loadInquiries();
+    }
+    return this.contactsCache;
   }
 
   async getUser(id: string): Promise<User | undefined> {
@@ -36,18 +79,26 @@ export class MemStorage implements IStorage {
   }
 
   async createContact(insertContact: InsertContact): Promise<Contact> {
-    const id = randomUUID();
-    const contact: Contact = { 
-      ...insertContact, 
-      id,
-      createdAt: new Date()
+    const contacts = await this.getContactList();
+    const contact: Contact = {
+      ...insertContact,
+      id: randomUUID(),
+      formName: insertContact.formName ?? "Contact Form",
+      createdAt: new Date(),
     };
-    this.contacts.set(id, contact);
+    contacts.unshift(contact);
+    this.contactsCache = contacts;
+    await saveInquiries(contacts);
     return contact;
   }
 
   async getContacts(): Promise<Contact[]> {
-    return Array.from(this.contacts.values());
+    const contacts = await this.getContactList();
+    return [...contacts].sort(
+      (a, b) =>
+        new Date(b.createdAt ?? 0).getTime() -
+        new Date(a.createdAt ?? 0).getTime(),
+    );
   }
 }
 

@@ -29,6 +29,12 @@ export const searchIndex: SearchEntry[] = [
     keywords: 'services insurance products motor property health life medical business marine cyber quote inquiry',
   },
   {
+    id: 'buy-now',
+    title: 'Buy Now',
+    url: '/buy-now',
+    keywords: 'buy now purchase quote request insurance COMESA yellow card motor health cyber life pension property liability travel cover',
+  },
+  {
     id: 'downloads',
     title: 'Downloads',
     url: '/downloads',

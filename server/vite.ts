@@ -40,9 +40,19 @@ export async function setupVite(app: Express, server: Server) {
     appType: "custom",
   });
 
-  app.use(vite.middlewares);
+  app.use((req, res, next) => {
+    if (req.path.startsWith("/api/") || req.path === "/robots.txt") {
+      return next();
+    }
+    vite.middlewares(req, res, next);
+  });
   app.use("*", async (req, res, next) => {
     const url = req.originalUrl;
+
+    // API routes and robots.txt are handled by Express — never serve SPA HTML
+    if (url.startsWith("/api/") || url === "/robots.txt") {
+      return next();
+    }
 
     try {
       const clientTemplate = path.resolve(
@@ -68,7 +78,7 @@ export async function setupVite(app: Express, server: Server) {
 }
 
 export function serveStatic(app: Express) {
-  const distPath = path.resolve(import.meta.dirname, "public");
+  const distPath = path.resolve(import.meta.dirname, "..", "dist", "public");
 
   if (!fs.existsSync(distPath)) {
     throw new Error(
@@ -77,6 +87,11 @@ export function serveStatic(app: Express) {
   }
 
   app.use(express.static(distPath));
+
+  // Unmatched API routes should return JSON 404, not SPA HTML
+  app.use("/api/*", (_req, res) => {
+    res.status(404).json({ success: false, message: "API route not found" });
+  });
 
   // fall through to index.html if the file doesn't exist
   app.use("*", (_req, res) => {

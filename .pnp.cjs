@@ -66,6 +66,7 @@ const RAW_RUNTIME_STATE =
           ["@types/connect-pg-simple", "npm:7.0.3"],\
           ["@types/express", "npm:4.17.21"],\
           ["@types/express-session", "npm:1.18.2"],\
+          ["@types/multer", "npm:2.1.0"],\
           ["@types/node", "npm:20.16.11"],\
           ["@types/nodemailer", "npm:7.0.11"],\
           ["@types/passport", "npm:1.0.17"],\
@@ -93,6 +94,7 @@ const RAW_RUNTIME_STATE =
           ["input-otp", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:1.4.2"],\
           ["lucide-react", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:0.453.0"],\
           ["memorystore", "npm:1.6.7"],\
+          ["multer", "npm:2.1.1"],\
           ["nanoid", "npm:5.1.6"],\
           ["next-themes", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:0.4.6"],\
           ["nodemailer", "npm:7.0.13"],\
@@ -3993,6 +3995,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["@types/multer", [\
+      ["npm:2.1.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@types-multer-npm-2.1.0-1eaf9e22a4-10c0.zip/node_modules/@types/multer/",\
+        "packageDependencies": [\
+          ["@types/express", "npm:5.0.6"],\
+          ["@types/multer", "npm:2.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["@types/node", [\
       ["npm:20.16.11", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/@types-node-npm-20.16.11-05af3fb874-10c0.zip/node_modules/@types/node/",\
@@ -4242,6 +4254,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["append-field", [\
+      ["npm:1.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/append-field-npm-1.0.0-bb98be199c-10c0.zip/node_modules/append-field/",\
+        "packageDependencies": [\
+          ["append-field", "npm:1.0.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["arg", [\
       ["npm:5.0.2", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/arg-npm-5.0.2-2f5805a547-10c0.zip/node_modules/arg/",\
@@ -4417,6 +4438,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["busboy", [\
+      ["npm:1.6.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/busboy-npm-1.6.0-ebb5cbb04b-10c0.zip/node_modules/busboy/",\
+        "packageDependencies": [\
+          ["busboy", "npm:1.6.0"],\
+          ["streamsearch", "npm:1.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["bytes", [\
       ["npm:3.1.2", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/bytes-npm-3.1.2-28b8643004-10c0.zip/node_modules/bytes/",\
@@ -4566,6 +4597,19 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/commander-npm-4.1.1-22a0fe921b-10c0.zip/node_modules/commander/",\
         "packageDependencies": [\
           ["commander", "npm:4.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["concat-stream", [\
+      ["npm:2.0.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/concat-stream-npm-2.0.0-8bb2ad5aa0-10c0.zip/node_modules/concat-stream/",\
+        "packageDependencies": [\
+          ["buffer-from", "npm:1.1.2"],\
+          ["concat-stream", "npm:2.0.0"],\
+          ["inherits", "npm:2.0.4"],\
+          ["readable-stream", "npm:3.6.2"],\
+          ["typedarray", "npm:0.0.6"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -6523,6 +6567,19 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["multer", [\
+      ["npm:2.1.1", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/multer-npm-2.1.1-f8d312dc4a-10c0.zip/node_modules/multer/",\
+        "packageDependencies": [\
+          ["append-field", "npm:1.0.0"],\
+          ["busboy", "npm:1.6.0"],\
+          ["concat-stream", "npm:2.0.0"],\
+          ["multer", "npm:2.1.1"],\
+          ["type-is", "npm:1.6.18"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["mz", [\
       ["npm:2.7.0", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/mz-npm-2.7.0-ec3cef4ec2-10c0.zip/node_modules/mz/",\
@@ -7588,6 +7645,18 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["readable-stream", [\
+      ["npm:3.6.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/readable-stream-npm-3.6.2-d2a6069158-10c0.zip/node_modules/readable-stream/",\
+        "packageDependencies": [\
+          ["inherits", "npm:2.0.4"],\
+          ["readable-stream", "npm:3.6.2"],\
+          ["string_decoder", "npm:1.3.0"],\
+          ["util-deprecate", "npm:1.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["readdirp", [\
       ["npm:3.6.0", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/readdirp-npm-3.6.0-f950cc74ab-10c0.zip/node_modules/readdirp/",\
@@ -7714,6 +7783,7 @@ const RAW_RUNTIME_STATE =
           ["@types/connect-pg-simple", "npm:7.0.3"],\
           ["@types/express", "npm:4.17.21"],\
           ["@types/express-session", "npm:1.18.2"],\
+          ["@types/multer", "npm:2.1.0"],\
           ["@types/node", "npm:20.16.11"],\
           ["@types/nodemailer", "npm:7.0.11"],\
           ["@types/passport", "npm:1.0.17"],\
@@ -7741,6 +7811,7 @@ const RAW_RUNTIME_STATE =
           ["input-otp", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:1.4.2"],\
           ["lucide-react", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:0.453.0"],\
           ["memorystore", "npm:1.6.7"],\
+          ["multer", "npm:2.1.1"],\
           ["nanoid", "npm:5.1.6"],\
           ["next-themes", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:0.4.6"],\
           ["nodemailer", "npm:7.0.13"],\
@@ -8073,6 +8144,25 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["streamsearch", [\
+      ["npm:1.1.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/streamsearch-npm-1.1.0-fc3ad6536d-10c0.zip/node_modules/streamsearch/",\
+        "packageDependencies": [\
+          ["streamsearch", "npm:1.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["string_decoder", [\
+      ["npm:1.3.0", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/string_decoder-npm-1.3.0-2422117fd0-10c0.zip/node_modules/string_decoder/",\
+        "packageDependencies": [\
+          ["safe-buffer", "npm:5.2.1"],\
+          ["string_decoder", "npm:1.3.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["sucrase", [\
       ["npm:3.35.1", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/sucrase-npm-3.35.1-9a5f68e2af-10c0.zip/node_modules/sucrase/",\
@@ -8295,6 +8385,15 @@ const RAW_RUNTIME_STATE =
           ["media-typer", "npm:0.3.0"],\
           ["mime-types", "npm:2.1.35"],\
           ["type-is", "npm:1.6.18"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["typedarray", [\
+      ["npm:0.0.6", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/typedarray-npm-0.0.6-37638b2241-10c0.zip/node_modules/typedarray/",\
+        "packageDependencies": [\
+          ["typedarray", "npm:0.0.6"]\
         ],\
         "linkType": "HARD"\
       }]\

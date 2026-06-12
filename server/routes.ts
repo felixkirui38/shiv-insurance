@@ -1,12 +1,40 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
+import session from "express-session";
+import createMemoryStore from "memorystore";
 import { storage } from "./storage";
 import { insertContactSchema, formSubmissionSchema } from "@shared/schema";
 import { z } from "zod";
 import { sendFormNotification } from "./emailService";
+import { registerCmsRoutes } from "./cmsRoutes";
+import { requireCmsAuth } from "./cmsAuth";
+
+const MemoryStore = createMemoryStore(session);
+
+function sessionCookieSecure(): boolean {
+  // Secure cookies only work over HTTPS. Default off so localhost/http production works.
+  return process.env.COOKIE_SECURE === "true";
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  
+  app.use(
+    session({
+      name: "shiv.cms.sid",
+      secret:
+        process.env.SESSION_SECRET || "shiv-cms-dev-secret-change-in-production",
+      resave: false,
+      saveUninitialized: false,
+      store: new MemoryStore({ checkPeriod: 86400000 }),
+      cookie: {
+        secure: sessionCookieSecure(),
+        httpOnly: true,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        sameSite: "lax",
+      },
+    }),
+  );
+
+  registerCmsRoutes(app);
   app.post("/api/submit-form", async (req, res) => {
     try {
       const validatedData = formSubmissionSchema.parse(req.body);
@@ -69,7 +97,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/contacts", async (req, res) => {
+  app.get("/api/contacts", requireCmsAuth, async (req, res) => {
     try {
       const contacts = await storage.getContacts();
       res.json({ success: true, contacts });

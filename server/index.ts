@@ -1,6 +1,14 @@
+import { fileURLToPath } from "url";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+
+const serverFile = fileURLToPath(import.meta.url).replace(/\\/g, "/");
+
+if (!process.env.NODE_ENV) {
+  // dist/index.js = production static build; server/index.ts = Vite dev (client/src)
+  process.env.NODE_ENV = serverFile.includes("/dist/") ? "production" : "development";
+}
 
 const app = express();
 app.use(express.json());
@@ -66,6 +74,7 @@ app.use((req, res, next) => {
     host: "0.0.0.0"
     //reusePort: true,
   }, () => {
-    log(`serving on port ${port}`);
+    const mode = app.get("env");
+    log(`serving on port ${port} (${mode}) — frontend: ${mode === "development" ? "client/src via Vite" : "dist/public build"}`);
   });
 })();
