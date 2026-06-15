@@ -3,7 +3,7 @@ import { Link, useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { SearchDialog } from '@/components/SearchDialog';
-import { Menu, Search, Mail, FileText } from 'lucide-react';
+import { Menu, Search, Mail, FileText, ShoppingBag } from 'lucide-react';
 import { BRAND_LOGO_ALT, BRAND_LOGO_SRC } from '@/lib/brand';
 
 const topBarItems = {
@@ -36,24 +36,52 @@ const Navigation = () => {
 
   const NavLinks = ({ mobile = false, onItemClick = () => {} }) => (
     <>
-      {navItems.map((item) => (
-        <Link
-          key={item.href}
-          href={item.href}
-          onClick={onItemClick}
-          className={
-            mobile
-              ? `block w-full px-4 py-3 text-sm font-medium rounded-btn transition-colors ${
-                  location === item.href
-                    ? 'text-shiv-gold'
-                    : 'text-white/90 hover:text-white hover:bg-white/[0.06]'
-                }`
-              : `nav-link ${location === item.href ? 'nav-link-active' : ''}`
-          }
-        >
-          {item.label}
-        </Link>
-      ))}
+      {navItems.map((item) => {
+        const isBuyNow = item.href === '/buy-now';
+        const isActive = location === item.href;
+
+        if (mobile) {
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={onItemClick}
+              className={
+                isBuyNow
+                  ? `flex w-full items-center gap-2 px-4 py-3 text-sm font-semibold rounded-btn border transition-colors ${
+                      isActive
+                        ? 'border-shiv-gold/50 bg-shiv-gold/15 text-shiv-gold'
+                        : 'border-shiv-gold/30 bg-shiv-gold/10 text-shiv-gold hover:bg-shiv-gold/15'
+                    }`
+                  : `block w-full px-4 py-3 text-sm font-medium rounded-btn transition-colors ${
+                      isActive
+                        ? 'text-shiv-gold'
+                        : 'text-white/90 hover:text-white hover:bg-white/[0.06]'
+                    }`
+              }
+            >
+              {isBuyNow ? <ShoppingBag className="h-4 w-4 shrink-0" aria-hidden /> : null}
+              {item.label}
+            </Link>
+          );
+        }
+
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={onItemClick}
+            className={
+              isBuyNow
+                ? `nav-link nav-link-buy-now${isActive ? ' nav-link-buy-now-active' : ''}`
+                : `nav-link ${isActive ? 'nav-link-active' : ''}`
+            }
+          >
+            {isBuyNow ? <ShoppingBag className="h-3.5 w-3.5 shrink-0" aria-hidden /> : null}
+            {item.label}
+          </Link>
+        );
+      })}
     </>
   );
 

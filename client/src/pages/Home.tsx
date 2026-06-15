@@ -92,7 +92,7 @@ const Home = () => {
                 <div className="inline-block bg-shiv-gold text-shiv-navy-deep text-xs font-bold px-3 py-1 rounded-full mb-4" data-testid="badge-cyber-new">
                   ESSENTIAL COVER
                 </div>
-                <h2 className="text-3xl font-bold mb-4" data-testid="heading-cyber-insurance">
+                <h2 className="text-3xl font-bold mb-4 text-shiv-gold" data-testid="heading-cyber-insurance">
                   Cyber Insurance — Because Hackers Don&apos;t Send Warnings
                 </h2>
                 <p className="text-lg mb-6 text-white/90" data-testid="text-cyber-description">
@@ -105,22 +105,22 @@ const Home = () => {
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-breach">
                   <Shield className="w-8 h-8 mb-3" />
-                  <h4 className="text-base font-semibold mb-2">Data Breach Response</h4>
+                  <h4 className="text-base font-semibold mb-2 text-white">Data Breach Response</h4>
                   <p className="text-sm text-white/90 leading-relaxed">Legal, notification, and recovery costs covered</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-ransomware">
                   <Target className="w-8 h-8 mb-3" />
-                  <h4 className="text-base font-semibold mb-2">Ransomware & Extortion</h4>
+                  <h4 className="text-base font-semibold mb-2 text-white">Ransomware & Extortion</h4>
                   <p className="text-sm text-white/90 leading-relaxed">Protection when criminals hold your systems hostage</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-crisis">
                   <Zap className="w-8 h-8 mb-3" />
-                  <h4 className="text-base font-semibold mb-2">Crisis Management</h4>
+                  <h4 className="text-base font-semibold mb-2 text-white">Crisis Management</h4>
                   <p className="text-sm text-white/90 leading-relaxed">Expert incident response and reputation repair</p>
                 </div>
                 <div className="bg-white/20 backdrop-blur-sm rounded-lg p-6" data-testid="tile-cyber-continuity">
                   <Star className="w-8 h-8 mb-3" />
-                  <h4 className="text-base font-semibold mb-2">Business Interruption</h4>
+                  <h4 className="text-base font-semibold mb-2 text-white">Business Interruption</h4>
                   <p className="text-sm text-white/90 leading-relaxed">Lost income while systems are down</p>
                 </div>
               </div>
