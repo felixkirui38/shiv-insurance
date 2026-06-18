@@ -119,7 +119,7 @@ ${data.insuranceType ? `Insurance Type: ${data.insuranceType}` : ''}
 Message: ${data.message}
 -----------------------------------
 
-If you have any urgent questions, please call us at +254 20 2724885 or email us at ${companyEmail}.
+If you have any urgent questions, please call us at 0700652040 or email us at ${companyEmail}.
 
 Best regards,
 ${COMPANY_NAME}
@@ -168,7 +168,7 @@ This is an automated confirmation email. Please do not reply directly to this me
     
     <div class="contact-info">
       <p><strong>Need immediate assistance?</strong></p>
-      <p>Call: +254 20 2724885</p>
+      <p>Call: 0700652040</p>
       <p>Email: <a href="mailto:${companyEmail}">${companyEmail}</a></p>
     </div>
     
