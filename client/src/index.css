@@ -1355,6 +1355,26 @@
     transform: translateY(-4px);
   }
 
+  .service-card-btn {
+    --card-accent: var(--shiv-blue);
+    border: 1px solid var(--card-accent) !important;
+    color: var(--card-accent) !important;
+    background-color: hsl(0 0% 100%) !important;
+    transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .service-card-btn:hover,
+  .service-card-btn:focus-visible {
+    background-color: var(--card-accent) !important;
+    border-color: var(--card-accent) !important;
+    color: hsl(0 0% 100%) !important;
+  }
+
+  .service-card-btn[data-accent="shiv-accent"]:hover,
+  .service-card-btn[data-accent="shiv-accent-light"]:hover {
+    color: var(--shiv-navy-deep) !important;
+  }
+
   .date-badge {
     display: inline-flex;
     flex-direction: column;

@@ -193,8 +193,9 @@ const Home = () => {
                       <Button 
                         size="sm" 
                         variant="outline" 
-                        className="w-full border-current hover:bg-current hover:text-white transition-colors duration-300"
-                        style={{borderColor: `var(--${service.color})`, color: `var(--${service.color})`}}
+                        className="service-card-btn w-full"
+                        style={{ ['--card-accent' as string]: `var(--${service.color})` }}
+                        data-accent={service.color}
                       >
                         Learn More
                       </Button>
