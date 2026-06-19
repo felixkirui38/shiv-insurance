@@ -56,7 +56,7 @@ export const companyData = {
   
   contactInfo: {
     address: "Mezzanine 2, Real Towers, Upper Hill, Nairobi, Kenya",
-    phone: "+254 00 652040",
+    phone: "+254 20 2724885",
     whatsapp: "0700652040",
     email: "info@shivinsurance.co.ke",
     hours: {
