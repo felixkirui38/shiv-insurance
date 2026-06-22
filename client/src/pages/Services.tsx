@@ -336,7 +336,7 @@ const Services = () => {
                         className="mt-2"
                         data-testid="select-insurance-type"
                       >
-                        <SelectValue placeholder="Select insurance type" />
+                        <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="health">Health Insurance</SelectItem>
@@ -370,7 +370,6 @@ const Services = () => {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange("message")}
-                      placeholder="Tell us about your insurance needs..."
                       required
                       className="mt-2"
                       data-testid="textarea-message"

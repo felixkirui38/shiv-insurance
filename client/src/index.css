@@ -754,7 +754,8 @@
 
   .buy-now-field-input {
     height: 2.75rem;
-    padding-left: 2.5rem;
+    padding-left: 2.625rem;
+    padding-right: 0.875rem;
     border-color: color-mix(in srgb, var(--shiv-navy) 12%, transparent);
     background: hsl(0 0% 100%);
   }
@@ -765,7 +766,8 @@
 
   .buy-now-field-icon-wrap-select .buy-now-select-trigger {
     width: 100%;
-    padding-left: 2.5rem;
+    padding-left: 2.625rem;
+    padding-right: 2rem;
     text-align: left;
   }
 

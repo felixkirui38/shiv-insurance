@@ -141,7 +141,6 @@ export function BusinessInsuranceQuoteForm() {
                 value={formData.industry}
                 onChange={(value) => setFormData((prev) => ({ ...prev, industry: value }))}
                 options={industryOptions}
-                placeholder="Select industry"
               />
             </div>
             <div>
@@ -174,7 +173,6 @@ export function BusinessInsuranceQuoteForm() {
                 onChange={(value) =>
                   setFormData((prev) => ({ ...prev, registrationNumber: value }))
                 }
-                placeholder="e.g. PVT-XXXXXX"
               />
             </div>
             <div>
@@ -210,7 +208,6 @@ export function BusinessInsuranceQuoteForm() {
                 onChange={(value) =>
                   setFormData((prev) => ({ ...prev, employeeCount: value }))
                 }
-                placeholder="e.g. 25"
               />
             </div>
           </div>
@@ -229,7 +226,6 @@ export function BusinessInsuranceQuoteForm() {
               onChange={(value) =>
                 setFormData((prev) => ({ ...prev, annualTurnover: value }))
               }
-              placeholder="e.g. 50000000"
             />
           </div>
           <div>
@@ -239,7 +235,6 @@ export function BusinessInsuranceQuoteForm() {
               value={formData.premisesType}
               onChange={(value) => setFormData((prev) => ({ ...prev, premisesType: value }))}
               options={premisesTypes}
-              placeholder="Select premises type"
             />
           </div>
         </div>

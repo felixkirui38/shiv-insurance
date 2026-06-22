@@ -210,7 +210,6 @@ export function MarineInsuranceQuoteForm() {
               onChange={(value) =>
                 setFormData((prev) => ({ ...prev, cargoDescription: value }))
               }
-              placeholder="Describe the goods being shipped"
               required
             />
           </div>
@@ -224,7 +223,6 @@ export function MarineInsuranceQuoteForm() {
                 id="marine-origin"
                 value={formData.origin}
                 onChange={(value) => setFormData((prev) => ({ ...prev, origin: value }))}
-                placeholder="e.g. Mombasa, Kenya"
                 required
               />
             </div>
@@ -238,7 +236,6 @@ export function MarineInsuranceQuoteForm() {
                 onChange={(value) =>
                   setFormData((prev) => ({ ...prev, destination: value }))
                 }
-                placeholder="e.g. Kampala, Uganda"
                 required
               />
             </div>
@@ -253,7 +250,6 @@ export function MarineInsuranceQuoteForm() {
                   setFormData((prev) => ({ ...prev, transportMode: value }))
                 }
                 options={transportModes}
-                placeholder="Select transport mode"
               />
             </div>
             <div>
@@ -266,7 +262,6 @@ export function MarineInsuranceQuoteForm() {
                 min="0"
                 value={formData.cargoValue}
                 onChange={(value) => setFormData((prev) => ({ ...prev, cargoValue: value }))}
-                placeholder="e.g. 5000000"
                 required
               />
             </div>
@@ -278,7 +273,6 @@ export function MarineInsuranceQuoteForm() {
                 onChange={(value) =>
                   setFormData((prev) => ({ ...prev, weightVolume: value }))
                 }
-                placeholder="e.g. 12 tonnes or 40ft container"
               />
             </div>
           </div>

@@ -204,7 +204,7 @@ const Contact = () => {
                     <Label htmlFor="insuranceType">Type of Insurance</Label>
                     <Select onValueChange={handleSelectChange} value={formData.insuranceType} required>
                       <SelectTrigger className="mt-2">
-                        <SelectValue placeholder="Select insurance type" />
+                        <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="motor">Motor Insurance</SelectItem>
@@ -224,7 +224,6 @@ const Contact = () => {
                       rows={4}
                       value={formData.message}
                       onChange={handleInputChange('message')}
-                      placeholder="Tell us about your insurance needs..."
                       required
                       className="mt-2"
                     />

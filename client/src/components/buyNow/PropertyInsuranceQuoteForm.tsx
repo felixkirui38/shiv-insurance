@@ -201,7 +201,6 @@ export function PropertyInsuranceQuoteForm() {
               onChange={(value) =>
                 setFormData((prev) => ({ ...prev, propertyLocation: value }))
               }
-              placeholder="Town, estate, or street address"
               required
             />
           </div>
@@ -213,7 +212,6 @@ export function PropertyInsuranceQuoteForm() {
               min="1900"
               value={formData.yearBuilt}
               onChange={(value) => setFormData((prev) => ({ ...prev, yearBuilt: value }))}
-              placeholder="e.g. 2015"
             />
           </div>
           <div>
@@ -226,7 +224,6 @@ export function PropertyInsuranceQuoteForm() {
               min="0"
               value={formData.buildingValue}
               onChange={(value) => setFormData((prev) => ({ ...prev, buildingValue: value }))}
-              placeholder="e.g. 12000000"
               required
             />
           </div>
@@ -238,7 +235,6 @@ export function PropertyInsuranceQuoteForm() {
               min="0"
               value={formData.contentsValue}
               onChange={(value) => setFormData((prev) => ({ ...prev, contentsValue: value }))}
-              placeholder="e.g. 2500000"
             />
           </div>
           <div className="md:col-span-2">
@@ -250,7 +246,6 @@ export function PropertyInsuranceQuoteForm() {
                 setFormData((prev) => ({ ...prev, constructionType: value }))
               }
               options={constructionTypes}
-              placeholder="Select construction type"
             />
           </div>
         </div>

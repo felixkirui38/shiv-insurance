@@ -191,7 +191,6 @@ export function MotorInsuranceQuoteForm() {
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, fullName: e.target.value }))
                 }
-                placeholder="e.g. John Kamau"
                 required
                 className="buy-now-field-input"
               />
@@ -209,7 +208,6 @@ export function MotorInsuranceQuoteForm() {
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, email: e.target.value }))
                 }
-                placeholder="e.g. john@email.com"
                 required
                 className="buy-now-field-input"
               />
@@ -227,7 +225,6 @@ export function MotorInsuranceQuoteForm() {
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, phone: e.target.value }))
                 }
-                placeholder="e.g. 0712 345 678"
                 required
                 className="buy-now-field-input"
               />
@@ -250,7 +247,6 @@ export function MotorInsuranceQuoteForm() {
                 onChange={(e) =>
                   setFormData((prev) => ({ ...prev, vehicleValue: e.target.value }))
                 }
-                placeholder="e.g. 1500000"
                 required
                 className="buy-now-field-input"
               />
@@ -269,7 +265,7 @@ export function MotorInsuranceQuoteForm() {
                 required
               >
                 <SelectTrigger id="motor-year" className="buy-now-field-input buy-now-select-trigger">
-                  <SelectValue placeholder="Select year" />
+                  <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   {manufactureYears.map((year) => (

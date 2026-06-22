@@ -310,7 +310,6 @@ const BuyNow = () => {
                           onChange={(e) =>
                             setFormData((prev) => ({ ...prev, message: e.target.value }))
                           }
-                          placeholder="Vehicle registration, sum insured, travel dates, number of employees, etc."
                           className="mt-2 min-h-[100px]"
                         />
                       </div>

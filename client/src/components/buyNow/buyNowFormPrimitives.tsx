@@ -73,14 +73,12 @@ export function TextField({
   onChange,
   required = false,
   type = "text",
-  placeholder,
 }: {
   id: string;
   value: string;
   onChange: (value: string) => void;
   required?: boolean;
   type?: string;
-  placeholder?: string;
 }) {
   return (
     <Input
@@ -89,7 +87,6 @@ export function TextField({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       required={required}
-      placeholder={placeholder}
       className="buy-now-standard-input mt-1.5"
     />
   );
@@ -100,14 +97,12 @@ export function TextAreaField({
   value,
   onChange,
   required = false,
-  placeholder,
   rows = 3,
 }: {
   id: string;
   value: string;
   onChange: (value: string) => void;
   required?: boolean;
-  placeholder?: string;
   rows?: number;
 }) {
   return (
@@ -116,7 +111,6 @@ export function TextAreaField({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       required={required}
-      placeholder={placeholder}
       rows={rows}
       className="buy-now-standard-input mt-1.5 min-h-[88px]"
     />
@@ -154,18 +148,16 @@ export function SelectField({
   value,
   onChange,
   options,
-  placeholder,
 }: {
   id: string;
   value: string;
   onChange: (value: string) => void;
   options: { value: string; label: string }[];
-  placeholder?: string;
 }) {
   return (
     <Select value={value} onValueChange={onChange}>
       <SelectTrigger id={id} className="buy-now-standard-input buy-now-select-trigger mt-1.5">
-        <SelectValue placeholder={placeholder} />
+        <SelectValue />
       </SelectTrigger>
       <SelectContent>
         {options.map((option) => (
