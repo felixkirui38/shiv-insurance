@@ -94,8 +94,8 @@ export default function InquiriesPage() {
           <p className="text-sm text-muted-foreground">
             All Contact and Services form submissions are saved here and emailed to this address (requires SMTP on the server).
           </p>
-          <div className="flex gap-3">
-            <div className="flex-1">
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <div className="flex-1 min-w-0">
               <Label htmlFor="leadEmail" className="sr-only">
                 Lead email
               </Label>
@@ -109,7 +109,7 @@ export default function InquiriesPage() {
             </div>
             <Button
               variant="brand"
-              className="gap-2"
+              className="gap-2 w-full sm:w-auto shrink-0"
               onClick={() => saveEmailMutation.mutate()}
               disabled={saveEmailMutation.isPending}
             >
@@ -185,7 +185,7 @@ export default function InquiriesPage() {
       </CmsLayout>
 
       <Dialog open={!!selected} onOpenChange={() => setSelected(null)}>
-        <DialogContent className="max-w-lg">
+        <DialogContent className="max-w-lg w-[calc(100vw-2rem)]">
           <DialogHeader>
             <DialogTitle>Inquiry Details</DialogTitle>
           </DialogHeader>

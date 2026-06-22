@@ -10,6 +10,7 @@ import ScriptsPage from "./ScriptsPage";
 import TestimonialsPage from "./TestimonialsPage";
 import DownloadsPage from "./DownloadsPage";
 import ConnectionsPage from "./ConnectionsPage";
+import { CmsShell } from "@/components/cms/CmsShell";
 
 function AdminGuard({ children }: { children: React.ReactNode }) {
   const { data, isLoading } = useQuery({
@@ -20,9 +21,11 @@ function AdminGuard({ children }: { children: React.ReactNode }) {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#eef1f5]">
-        <p className="text-muted-foreground">Loading…</p>
-      </div>
+      <CmsShell>
+        <div className="flex min-h-screen w-full items-center justify-center bg-white px-4 py-8 lg:border-x lg:border-gray-200 lg:shadow-lg">
+          <p className="text-muted-foreground">Loading…</p>
+        </div>
+      </CmsShell>
     );
   }
 

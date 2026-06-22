@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { CmsShell } from "@/components/cms/CmsShell";
 
 export default function AdminLogin() {
   const [, setLocation] = useLocation();
@@ -39,8 +40,9 @@ export default function AdminLogin() {
   });
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-[#eef1f5]">
-      <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-8 shadow-sm">
+    <CmsShell>
+      <div className="flex min-h-screen w-full items-center justify-center bg-white px-4 py-8 sm:px-6 lg:border-x lg:border-gray-200 lg:shadow-lg">
+        <div className="w-full max-w-md rounded-xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
         <h1 className="text-2xl font-bold text-gray-900">Shiv CMS</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Sign in to manage pages, blog, SEO, and inquiries.
@@ -81,7 +83,8 @@ export default function AdminLogin() {
             {loginMutation.isPending ? "Signing in…" : "Sign In"}
           </Button>
         </form>
+        </div>
       </div>
-    </div>
+    </CmsShell>
   );
 }
