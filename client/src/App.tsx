@@ -1,8 +1,9 @@
-import { Switch, Route, useLocation } from "wouter";
+import { Switch, Route, Redirect } from "wouter";
 import { queryClient } from "./lib/queryClient";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { CmsModalProvider } from "@/components/cms/CmsModalContext";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import LogoSlider from "@/components/LogoSlider";
@@ -19,11 +20,16 @@ import NotFound from "@/pages/not-found";
 import DynamicPage from "@/pages/DynamicPage";
 import BlogList from "@/pages/BlogList";
 import BlogPostPage from "@/pages/BlogPost";
-import AdminApp from "@/pages/admin/AdminApp";
 
 function PublicRouter() {
   return (
     <Switch>
+      <Route path="/admin">
+        <Redirect to="/" />
+      </Route>
+      <Route path="/admin/:rest*">
+        <Redirect to="/" />
+      </Route>
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/services" component={Services} />
@@ -54,15 +60,14 @@ function PublicApp() {
 }
 
 function App() {
-  const [location] = useLocation();
-  const isAdmin = location.startsWith("/admin");
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <ScrollToTop />
-        {isAdmin ? <AdminApp /> : <PublicApp />}
-        <Toaster />
+        <CmsModalProvider>
+          <ScrollToTop />
+          <PublicApp />
+          <Toaster />
+        </CmsModalProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );

@@ -1,14 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
 import {
-  Inbox,
-  FileText,
-  Newspaper,
-  Search,
-  Code2,
-  MessageSquareQuote,
-  Download,
-  Plug,
   LogOut,
   RotateCcw,
   Menu,
@@ -19,19 +10,10 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import { cmsLogout } from "@/lib/cms-api";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { CmsShell } from "@/components/cms/CmsShell";
-
-const navItems = [
-  { href: "/admin/inquiries", label: "Inquiries", icon: Inbox },
-  { href: "/admin/pages", label: "Pages", icon: FileText },
-  { href: "/admin/blog", label: "Blog", icon: Newspaper },
-  { href: "/admin/seo", label: "SEO", icon: Search },
-  { href: "/admin/scripts", label: "Scripts", icon: Code2 },
-  { href: "/admin/testimonials", label: "Testimonials", icon: MessageSquareQuote },
-  { href: "/admin/downloads", label: "Downloads", icon: Download },
-  { href: "/admin/connections", label: "Connections", icon: Plug },
-];
+import { useCmsModal } from "@/components/cms/CmsModalContext";
+import { CMS_NAV_ITEMS, type CmsSection } from "@/lib/cms-sections";
 
 interface CmsLayoutProps {
   title: string;
@@ -43,20 +25,24 @@ interface CmsLayoutProps {
 }
 
 interface CmsSidebarProps {
-  location: string;
+  activeSection: CmsSection;
+  onSectionChange: (section: CmsSection) => void;
   inquiryCount?: number;
   onReset?: () => void;
   onNavigate?: () => void;
   onLogout: () => void;
+  onClose: () => void;
   showApiBadge?: boolean;
 }
 
 function CmsSidebar({
-  location,
+  activeSection,
+  onSectionChange,
   inquiryCount,
   onReset,
   onNavigate,
   onLogout,
+  onClose,
   showApiBadge,
 }: CmsSidebarProps) {
   return (
@@ -71,15 +57,18 @@ function CmsSidebar({
       </div>
 
       <nav className="flex-1 space-y-1 overflow-y-auto p-3">
-        {navItems.map(({ href, label, icon: Icon }) => {
-          const active = location === href || location.startsWith(href + "/");
+        {CMS_NAV_ITEMS.map(({ id, label, icon: Icon }) => {
+          const active = activeSection === id;
           return (
-            <Link
-              key={href}
-              href={href}
-              onClick={onNavigate}
+            <button
+              key={id}
+              type="button"
+              onClick={() => {
+                onSectionChange(id);
+                onNavigate?.();
+              }}
               className={cn(
-                "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors",
+                "flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors text-left",
                 active
                   ? "bg-shiv-navy text-white"
                   : "text-gray-700 hover:bg-gray-200/70",
@@ -92,7 +81,7 @@ function CmsSidebar({
                   {inquiryCount}
                 </span>
               )}
-            </Link>
+            </button>
           );
         })}
       </nav>
@@ -101,12 +90,14 @@ function CmsSidebar({
         <Button
           variant="outline"
           className="w-full justify-start gap-2 lg:hidden"
-          asChild
+          type="button"
+          onClick={() => {
+            onClose();
+            onNavigate?.();
+          }}
         >
-          <Link href="/" onClick={onNavigate}>
-            <Home className="h-4 w-4" />
-            View website
-          </Link>
+          <Home className="h-4 w-4" />
+          View website
         </Button>
         {onReset && (
           <Button
@@ -124,6 +115,7 @@ function CmsSidebar({
         <Button
           variant="outline"
           className="w-full justify-start gap-2"
+          type="button"
           onClick={onLogout}
         >
           <LogOut className="h-4 w-4" />
@@ -142,8 +134,9 @@ export default function CmsLayout({
   inquiryCount,
   onReset,
 }: CmsLayoutProps) {
-  const [location, setLocation] = useLocation();
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+  const queryClient = useQueryClient();
+  const { section, setSection, closeCms } = useCmsModal();
 
   const { data: health } = useQuery({
     queryKey: ["/api/cms/health"],
@@ -152,23 +145,26 @@ export default function CmsLayout({
 
   const handleLogout = async () => {
     await cmsLogout();
-    setLocation("/admin/login");
+    queryClient.setQueryData(["/api/cms/me"], { success: true, authenticated: false });
+    queryClient.invalidateQueries({ queryKey: ["/api/cms/me"] });
   };
 
   const closeMobileNav = () => setMobileNavOpen(false);
 
   const sidebarProps: CmsSidebarProps = {
-    location,
+    activeSection: section,
+    onSectionChange: setSection,
     inquiryCount,
     onReset,
     onLogout: handleLogout,
+    onClose: closeCms,
     showApiBadge: health?.connected,
   };
 
   return (
     <CmsShell>
-      <div className="flex min-h-screen w-full flex-col bg-[#f4f6f8] shadow-lg lg:flex-row lg:border-x lg:border-gray-200">
-        <header className="flex items-center justify-between gap-3 border-b border-gray-200 bg-[#f4f6f8] px-4 py-3 lg:hidden">
+      <div className="flex h-full min-h-0 w-full flex-col bg-[#f4f6f8] lg:flex-row">
+        <header className="flex shrink-0 items-center justify-between gap-3 border-b border-gray-200 bg-[#f4f6f8] px-4 py-3 lg:hidden">
           <Sheet open={mobileNavOpen} onOpenChange={setMobileNavOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" aria-label="Open CMS menu">
@@ -185,10 +181,8 @@ export default function CmsLayout({
             <p className="truncate text-xs text-gray-500">{title}</p>
           </div>
 
-          <Button variant="outline" size="icon" asChild>
-            <Link href="/" aria-label="Return to website home">
-              <Home className="h-5 w-5" />
-            </Link>
+          <Button variant="outline" size="icon" type="button" onClick={closeCms} aria-label="Return to website">
+            <Home className="h-5 w-5" />
           </Button>
         </header>
 
@@ -196,7 +190,7 @@ export default function CmsLayout({
           <CmsSidebar {...sidebarProps} />
         </aside>
 
-        <main className="min-w-0 flex-1 overflow-auto p-3 sm:p-4 lg:p-6">
+        <main className="min-h-0 min-w-0 flex-1 overflow-auto p-3 sm:p-4 lg:p-6">
           <div className="mx-auto w-full max-w-5xl rounded-xl border border-gray-200 bg-white shadow-sm">
             <div className="flex flex-col gap-4 border-b border-gray-100 px-4 py-4 sm:flex-row sm:items-start sm:justify-between sm:px-6 sm:py-5">
               <div className="min-w-0">

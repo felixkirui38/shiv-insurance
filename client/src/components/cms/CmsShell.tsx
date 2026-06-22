@@ -1,25 +1,5 @@
-import { Link } from "wouter";
+import type { ReactNode } from "react";
 
-interface CmsShellProps {
-  children: React.ReactNode;
-}
-
-export function CmsShell({ children }: CmsShellProps) {
-  return (
-    <div className="cms-shell">
-      <Link
-        href="/"
-        className="cms-shell-gutter"
-        aria-label="Return to website home"
-        title="Back to website"
-      />
-      <div className="cms-shell-inner">{children}</div>
-      <Link
-        href="/"
-        className="cms-shell-gutter"
-        aria-label="Return to website home"
-        title="Back to website"
-      />
-    </div>
-  );
+export function CmsShell({ children }: { children: ReactNode }) {
+  return <div className="cms-shell-embedded h-full min-h-0">{children}</div>;
 }

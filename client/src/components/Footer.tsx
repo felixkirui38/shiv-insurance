@@ -2,6 +2,7 @@ import { Link } from 'wouter';
 import { Facebook, Instagram, Linkedin, Mail } from 'lucide-react';
 import { BRAND_LOGO_ALT, BRAND_LOGO_SRC } from '@/lib/brand';
 import { useCmsNavPages } from '@/lib/useCmsNavPages';
+import { useCmsModal } from '@/components/cms/CmsModalContext';
 
 const staticQuickLinks = [
   { href: '/about', label: 'About Us' },
@@ -27,6 +28,7 @@ const footerCountries = [
 
 const Footer = () => {
   const { data: cmsPages = [] } = useCmsNavPages();
+  const { openCms } = useCmsModal();
   const footerLinkPages = cmsPages.filter((page) => page.appearance === 'footer_links');
   const servicePages = cmsPages.filter((page) => page.appearance === 'services');
 
@@ -166,7 +168,12 @@ const Footer = () => {
               ))}
             </div>
             <div className="footer-bar-meta text-sm text-white/55">
-              <span>© 2025 Shiv Insurance Brokers Ltd. All rights reserved.</span>
+              <span
+                onDoubleClick={openCms}
+                className="select-none"
+              >
+                © 2025 Shiv Insurance Brokers Ltd. All rights reserved.
+              </span>
               <span className="hidden sm:inline text-white/25" aria-hidden>
                 |
               </span>
