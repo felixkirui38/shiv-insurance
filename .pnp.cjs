@@ -82,6 +82,7 @@ const RAW_RUNTIME_STATE =
           ["cmdk", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:1.1.1"],\
           ["connect-pg-simple", "npm:10.0.0"],\
           ["date-fns", "npm:3.6.0"],\
+          ["dotenv", "npm:17.4.2"],\
           ["drizzle-kit", "npm:0.30.6"],\
           ["drizzle-orm", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:0.39.3"],\
           ["drizzle-zod", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:0.7.1"],\
@@ -4924,6 +4925,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["dotenv", [\
+      ["npm:17.4.2", {\
+        "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/dotenv-npm-17.4.2-46ee0c966e-10c0.zip/node_modules/dotenv/",\
+        "packageDependencies": [\
+          ["dotenv", "npm:17.4.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["drizzle-kit", [\
       ["npm:0.30.6", {\
         "packageLocation": "../../../AppData/Local/Yarn/Berry/cache/drizzle-kit-npm-0.30.6-65e0f4461f-10c0.zip/node_modules/drizzle-kit/",\
@@ -7799,6 +7809,7 @@ const RAW_RUNTIME_STATE =
           ["cmdk", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:1.1.1"],\
           ["connect-pg-simple", "npm:10.0.0"],\
           ["date-fns", "npm:3.6.0"],\
+          ["dotenv", "npm:17.4.2"],\
           ["drizzle-kit", "npm:0.30.6"],\
           ["drizzle-orm", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:0.39.3"],\
           ["drizzle-zod", "virtual:4b468a72a559fa5f5d2d4d74dfb4714f24047e53e722d208febea6a8243349ebc587e3d0bee36084edf10263c3689d19a91a46ed5d2662f1dbdddd73d08141c5#npm:0.7.1"],\
