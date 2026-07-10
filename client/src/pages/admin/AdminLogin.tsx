@@ -11,7 +11,7 @@ export default function AdminLogin() {
   const { setSection } = useCmsModal();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const [username, setUsername] = useState("shiv.io");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const loginMutation = useMutation({

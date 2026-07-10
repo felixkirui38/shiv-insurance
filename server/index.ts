@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { fileURLToPath } from "url";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";

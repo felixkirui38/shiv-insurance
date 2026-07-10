@@ -17,11 +17,15 @@ function sessionCookieSecure(): boolean {
 }
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  const sessionSecret = process.env.SESSION_SECRET;
+  if (!sessionSecret) {
+    throw new Error("SESSION_SECRET environment variable is required");
+  }
+
   app.use(
     session({
       name: "shiv.cms.sid",
-      secret:
-        process.env.SESSION_SECRET || "shiv-cms-dev-secret-change-in-production",
+      secret: sessionSecret,
       resave: false,
       saveUninitialized: false,
       store: new MemoryStore({ checkPeriod: 86400000 }),

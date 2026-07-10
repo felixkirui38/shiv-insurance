@@ -79,8 +79,8 @@ export default function ConnectionsPage() {
         <div className="mt-8 rounded-lg bg-gray-50 p-4 text-sm text-muted-foreground">
           <p className="font-medium text-gray-700">Environment variables</p>
           <ul className="mt-2 list-inside list-disc space-y-1">
-            <li><code>CMS_USERNAME</code> — admin login username (default: shiv.io)</li>
-            <li><code>CMS_PASSWORD</code> — admin login password (default: 123)</li>
+            <li><code>CMS_USERNAME</code> — admin login username (required)</li>
+            <li><code>CMS_PASSWORD</code> — admin login password (required)</li>
             <li><code>SESSION_SECRET</code> — session encryption key</li>
             <li><code>SMTP_*</code> — email delivery settings</li>
           </ul>

@@ -9,11 +9,13 @@ declare module "express-session" {
   }
 }
 
-function getCmsCredentials() {
-  return {
-    username: process.env.CMS_USERNAME || "shiv.io",
-    password: process.env.CMS_PASSWORD || "123",
-  };
+function getCmsCredentials(): { username: string; password: string } | null {
+  const username = process.env.CMS_USERNAME?.trim();
+  const password = process.env.CMS_PASSWORD;
+  if (!username || !password) {
+    return null;
+  }
+  return { username, password };
 }
 
 function safeCompare(a: string, b: string): boolean {
@@ -34,6 +36,12 @@ export function cmsLoginHandler(req: Request, res: Response) {
   try {
     const { username, password } = cmsLoginSchema.parse(req.body);
     const expected = getCmsCredentials();
+    if (!expected) {
+      return res.status(503).json({
+        success: false,
+        message: "CMS login is not configured. Set CMS_USERNAME and CMS_PASSWORD on the server.",
+      });
+    }
     if (
       safeCompare(username.trim(), expected.username) &&
       safeCompare(password, expected.password)
