@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { fileURLToPath } from "url";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
@@ -12,6 +11,7 @@ if (!process.env.NODE_ENV) {
 }
 
 const app = express();
+app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -46,6 +46,17 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  if (process.env.NODE_ENV !== "production") {
+    await import("dotenv/config");
+  }
+
+  try {
+    validateRequiredEnv();
+  } catch (error) {
+    console.error("[startup] Configuration error:", error instanceof Error ? error.message : error);
+    process.exit(1);
+  }
+
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -78,4 +89,20 @@ app.use((req, res, next) => {
     const mode = app.get("env");
     log(`serving on port ${port} (${mode}) — frontend: ${mode === "development" ? "client/src via Vite" : "dist/public build"}`);
   });
-})();
+})().catch((error) => {
+  console.error("[startup] Failed to start server:", error instanceof Error ? error.message : error);
+  process.exit(1);
+});
+
+function validateRequiredEnv() {
+  const missing: string[] = [];
+  if (!process.env.SESSION_SECRET?.trim()) {
+    missing.push("SESSION_SECRET");
+  }
+  if (missing.length > 0) {
+    throw new Error(
+      `Missing required environment variable(s): ${missing.join(", ")}. ` +
+        "Set them in Coolify → your app → Environment Variables, then redeploy.",
+    );
+  }
+}

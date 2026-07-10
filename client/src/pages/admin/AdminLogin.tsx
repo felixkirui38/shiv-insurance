@@ -25,7 +25,8 @@ export default function AdminLogin() {
       }
       toast({
         title: "Login failed",
-        description: "Session could not be saved. Restart the server after rebuilding, or use yarn dev locally.",
+        description:
+          "Session could not be saved. Ensure COOKIE_SECURE=true on HTTPS hosting and redeploy the latest server build.",
         variant: "destructive",
       });
     },

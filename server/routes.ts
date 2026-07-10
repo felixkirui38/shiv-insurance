@@ -12,11 +12,18 @@ import { requireCmsAuth } from "./cmsAuth";
 const MemoryStore = createMemoryStore(session);
 
 function sessionCookieSecure(): boolean {
-  // Secure cookies only work over HTTPS. Default off so localhost/http production works.
   return process.env.COOKIE_SECURE === "true";
 }
 
+function sessionUsesSecureCookies(): boolean {
+  return sessionCookieSecure();
+}
+
 export async function registerRoutes(app: Express): Promise<Server> {
+  app.get("/api/health", (_req, res) => {
+    res.status(200).json({ status: "ok" });
+  });
+
   const sessionSecret = process.env.SESSION_SECRET;
   if (!sessionSecret) {
     throw new Error("SESSION_SECRET environment variable is required");
@@ -28,6 +35,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       secret: sessionSecret,
       resave: false,
       saveUninitialized: false,
+      proxy: sessionUsesSecureCookies(),
       store: new MemoryStore({ checkPeriod: 86400000 }),
       cookie: {
         secure: sessionCookieSecure(),
