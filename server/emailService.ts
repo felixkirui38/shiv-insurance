@@ -123,7 +123,7 @@ If you have any urgent questions, please call us at +254 00 652040 or email us a
 
 Best regards,
 ${COMPANY_NAME}
-One West Park, Westlands, Nairobi
+One West Park, Mpaka Road Westlands, Nairobi, Kenya.
 
 ---
 This is an automated confirmation email. Please do not reply directly to this message.
@@ -173,7 +173,7 @@ This is an automated confirmation email. Please do not reply directly to this me
     
     <div class="footer">
       <p>${COMPANY_NAME}</p>
-      <p>One West Park, Westlands, Nairobi</p>
+      <p>One West Park, Mpaka Road Westlands, Nairobi, Kenya.</p>
       <p style="color: #999;">This is an automated confirmation email.</p>
     </div>
   </div>

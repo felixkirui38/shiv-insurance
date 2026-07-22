@@ -55,7 +55,7 @@ export const companyData = {
   ],
   
   contactInfo: {
-    address: "One West Park, Westlands, Nairobi",
+    address: "One West Park, Mpaka Road Westlands, Nairobi, Kenya.",
     phone: "+254 00 652040",
     whatsapp: "0700652040",
     email: "info@shivinsurance.co.ke",
