@@ -56,7 +56,7 @@ export const companyData = {
   
   contactInfo: {
     address: "Westpark Towers, Mpesi Lane, Westlands, Nairobi",
-    phone: "+254 00 652040",
+    phone: "+254 700 652 040",
     whatsapp: "0700652040",
     email: "info@shivinsurance.co.ke",
     hours: {
