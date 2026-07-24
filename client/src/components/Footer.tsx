@@ -24,6 +24,11 @@ const footerCountries = [
   { code: 'ke', name: 'Kenya' },
   { code: 'ug', name: 'Uganda' },
   { code: 'tz', name: 'Tanzania' },
+  { code: 'rw', name: 'Rwanda' },
+  { code: 'bi', name: 'Burundi' },
+  { code: 'ss', name: 'South Sudan' },
+  { code: 'cd', name: 'DR Congo' },
+  { code: 'zm', name: 'Zambia' },
 ] as const;
 
 const Footer = () => {
