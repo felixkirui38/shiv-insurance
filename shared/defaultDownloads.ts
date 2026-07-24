@@ -5,7 +5,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "All in one claim form Occidental",
     description: "Occidental Insurance Company Ltd",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "163 KB",
     filePath: "/downloads/All in one claim form Occidental (1).pdf",
     icon: "building",
@@ -15,7 +15,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "All-Risks-Proposal",
     description: "Mayfair Insurance Company Limited",
-    category: "Insurance",
+    category: "Proposal Forms",
     fileSize: "273 KB",
     filePath: "/downloads/All-Risks-Proposal.pdf",
     icon: "car",
@@ -25,7 +25,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "BURGLARY-BUSINESS-PREMISES-PROPOSAL-FORM",
     description: "Burglary business premises proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "441 KB",
     filePath: "/downloads/BURGLARY-BUSINESS-PREMISES-PROPOSAL-FORM GApdf.pdf",
     icon: "shield",
@@ -35,7 +35,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Burglary-Edited-Fillable-Form",
     description: "Burglary edited fillable form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "151 KB",
     filePath: "/downloads/Burglary-Edited-Fillable-Form.pdf",
     icon: "shield",
@@ -45,7 +45,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "CIC Personal Accident Proposal Form",
     description: "CIC personal accident brochure and proposal",
-    category: "Brochure",
+    category: "Brochures & Guides",
     fileSize: "431 KB",
     filePath: "/downloads/CIC-Personal-Accident-Brochure-Proposal-Form_V.102022 (1).pdf",
     icon: "heart",
@@ -55,7 +55,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Claim Form English",
     description: "Standard English claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "1.5 MB",
     filePath: "/downloads/CLAIM FORM ENGLISH_V4.pdf",
     icon: "file-text",
@@ -65,7 +65,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Claim Form Property GA Damage or Loss",
     description: "Property damage or loss claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "50 KB",
     filePath: "/downloads/CLAIM FORM_PROPERTY  GA DAMAGE OR LOSS.pdf",
     icon: "briefcase",
@@ -75,7 +75,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Contractors-All-Risks",
     description: "Contractors all risks proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "303 KB",
     filePath: "/downloads/Contractors-All-Risks.pdf",
     icon: "building",
@@ -85,7 +85,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Domestic-Package",
     description: "Domestic package proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "333 KB",
     filePath: "/downloads/Domestic-Package.pdf",
     icon: "heart",
@@ -95,7 +95,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Domestic Package Proposal Form GA",
     description: "GA domestic package proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "428 KB",
     filePath: "/downloads/DOMESTIC-PACKAGE-PROPOSAL-FORM GA pdf.pdf",
     icon: "heart",
@@ -105,7 +105,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Erection-All-Risks",
     description: "Erection all risks proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "307 KB",
     filePath: "/downloads/Erection-All-Risks.pdf",
     icon: "building",
@@ -115,7 +115,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Fidelity-Guarantee",
     description: "Fidelity guarantee proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "279 KB",
     filePath: "/downloads/Fidelity-Guarantee.pdf",
     icon: "shield",
@@ -125,7 +125,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Fire",
     description: "Fire insurance proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "307 KB",
     filePath: "/downloads/Fire.pdf",
     icon: "shield",
@@ -135,7 +135,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Industrial All Risks Insurance Proposal Form",
     description: "Industrial all risks proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "228 KB",
     filePath: "/downloads/INDUSTRIAL ALL RISKS INSURANCE PROPOSAL FORM.pdf",
     icon: "building",
@@ -145,7 +145,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Marine Cargo Proposal Form Mayfair",
     description: "Mayfair marine cargo proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "25 KB",
     filePath: "/downloads/Marine Cargo - Proposal Form Mayfair.pdf",
     icon: "globe",
@@ -155,7 +155,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Mayfair Insurance New Motor Claim Form",
     description: "Mayfair motor claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "169 KB",
     filePath: "/downloads/Mayfair Insurance New Motor Claim Form.pdf",
     icon: "car",
@@ -165,7 +165,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Mayfair New Windscreen Claim Form",
     description: "Mayfair windscreen claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "625 KB",
     filePath: "/downloads/Mayfair -New Windscreen Claim Form.pdf",
     icon: "car",
@@ -175,7 +175,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Money Insurance Proposal Form",
     description: "Money insurance proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "284 KB",
     filePath: "/downloads/MONEY INSURANCE PROPOSAL FORM.pdf",
     icon: "briefcase",
@@ -185,7 +185,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Motor Accident Claim Form GA",
     description: "GA motor accident claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "132 KB",
     filePath: "/downloads/MOTOR ACCIDENT CLAIM FORM - NEW GA.pdf",
     icon: "car",
@@ -195,7 +195,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Motor Claim Form OCCIDENTAL",
     description: "Occidental motor claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "181 KB",
     filePath: "/downloads/Motor Claim Form OCCIDENTAL (3).pdf",
     icon: "car",
@@ -205,7 +205,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Motor-Commercial",
     description: "Commercial motor proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "181 KB",
     filePath: "/downloads/Motor-Commercial.pdf",
     icon: "car",
@@ -215,7 +215,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Motor-Private proposal form Mayfair",
     description: "Mayfair private motor proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "362 KB",
     filePath: "/downloads/Motor-Private proposal form Mayfair .pdf",
     icon: "car",
@@ -225,7 +225,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Motor-Private",
     description: "Private motor proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "362 KB",
     filePath: "/downloads/Motor-Private.pdf",
     icon: "car",
@@ -235,7 +235,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "New Motor Claim OCC Form",
     description: "Occidental new motor claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "162 KB",
     filePath: "/downloads/NEW MOTOR CLAIM OCC FORM (A4).pdf",
     icon: "car",
@@ -245,7 +245,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "PI Proposal Form",
     description: "Professional indemnity proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "60 KB",
     filePath: "/downloads/PI PROPOSAL FORM.pdf",
     icon: "briefcase",
@@ -255,7 +255,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Political Violence Insurance Proposal Form",
     description: "Political violence insurance proposal",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "60 KB",
     filePath: "/downloads/POLITICAL-VIOLENCE-INSURANCE-PROPOSAL-FORM..pdf",
     icon: "shield",
@@ -265,7 +265,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Public-Liability",
     description: "Public liability proposal form",
-    category: "Form",
+    category: "Proposal Forms",
     fileSize: "272 KB",
     filePath: "/downloads/Public-Liability.pdf",
     icon: "briefcase",
@@ -275,7 +275,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Tausi Motor Vehicle Claim Form",
     description: "Tausi motor vehicle claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "244 KB",
     filePath: "/downloads/TAUSI MOTOR VEHICLE CLAIM FORM.pdf",
     icon: "car",
@@ -285,7 +285,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Tausi Windscreen Window Claim Form",
     description: "Tausi windscreen claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "244 KB",
     filePath: "/downloads/TAUSI WINDSCREEN  WINDOW CLAIM FORM.pdf",
     icon: "car",
@@ -295,7 +295,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Travel Claim Form",
     description: "Travel insurance claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "244 KB",
     filePath: "/downloads/TRAVEL _CLAIM FORM.pdf",
     icon: "globe",
@@ -305,7 +305,7 @@ export const defaultDownloadDocuments: InsertCmsDownload[] = [
   {
     title: "Windscreen Claim Form GA",
     description: "GA windscreen claim form",
-    category: "Form",
+    category: "Claim Forms",
     fileSize: "244 KB",
     filePath: "/downloads/Windscreen Claim Form GA.pdf",
     icon: "car",
