@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,8 @@ import { getDownloadIcon } from '@/lib/downloadIcons';
 
 const ITEMS_PER_PAGE = 9;
 
+type CategoryFilter = (typeof companyData.downloadCategories)[number]['title'] | null;
+
 interface PublicDownload {
   id: string;
   title: string;
@@ -36,19 +38,62 @@ async function fetchPublicDownloads(): Promise<PublicDownload[]> {
   return data.downloads ?? [];
 }
 
+function matchesCategoryFilter(item: PublicDownload, filter: CategoryFilter): boolean {
+  if (!filter) return true;
+
+  const haystack = `${item.title} ${item.description} ${item.category}`.toLowerCase();
+  const category = item.category.toLowerCase();
+
+  switch (filter) {
+    case 'Proposal Forms':
+      return (
+        haystack.includes('proposal') ||
+        category === 'insurance' ||
+        (category === 'form' && !haystack.includes('claim'))
+      );
+    case 'Claim Forms':
+      return haystack.includes('claim');
+    case 'Brochures & Guides':
+      return (
+        category === 'brochure' ||
+        category === 'guide' ||
+        haystack.includes('brochure') ||
+        haystack.includes('guide')
+      );
+    default:
+      return true;
+  }
+}
+
 const Downloads = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [activeFilter, setActiveFilter] = useState<CategoryFilter>(null);
+  const resourcesRef = useRef<HTMLElement>(null);
 
   const { data: downloads = [], isLoading } = useQuery({
     queryKey: ['/api/content/downloads'],
     queryFn: fetchPublicDownloads,
   });
 
-  const totalPages = Math.ceil(downloads.length / ITEMS_PER_PAGE);
-  const paginatedDownloads = downloads.slice(
-    (currentPage - 1) * ITEMS_PER_PAGE,
-    currentPage * ITEMS_PER_PAGE
+  const filteredDownloads = useMemo(
+    () => downloads.filter((item) => matchesCategoryFilter(item, activeFilter)),
+    [downloads, activeFilter],
   );
+
+  const totalPages = Math.max(1, Math.ceil(filteredDownloads.length / ITEMS_PER_PAGE));
+  const safePage = Math.min(currentPage, totalPages);
+  const paginatedDownloads = filteredDownloads.slice(
+    (safePage - 1) * ITEMS_PER_PAGE,
+    safePage * ITEMS_PER_PAGE,
+  );
+
+  const selectCategory = (title: CategoryFilter) => {
+    setActiveFilter((prev) => (prev === title ? null : title));
+    setCurrentPage(1);
+    window.requestAnimationFrame(() => {
+      resourcesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  };
 
   return (
     <div>
@@ -59,34 +104,77 @@ const Downloads = () => {
 
       <section className="site-section bg-white">
         <div className="site-container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-            {companyData.downloadCategories.map((cat, index) => (
-              <div key={cat.title} className="theme-card p-6 text-center">
-                <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-shiv-gold/15 text-shiv-gold font-bold">
-                  {index + 1}
-                </div>
-                <h3 className="font-bold text-shiv-text mb-2">{cat.title}</h3>
-                <p className="text-sm text-shiv-text-muted">{cat.description}</p>
-              </div>
-            ))}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+            {companyData.downloadCategories.map((cat, index) => {
+              const isActive = activeFilter === cat.title;
+              return (
+                <button
+                  key={cat.title}
+                  type="button"
+                  onClick={() => selectCategory(cat.title)}
+                  aria-pressed={isActive}
+                  className={`theme-card p-6 text-center transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-shiv-gold focus-visible:ring-offset-2 ${
+                    isActive
+                      ? 'border-shiv-gold shadow-md ring-2 ring-shiv-gold/30'
+                      : 'hover:border-shiv-gold/40 hover:shadow-md hover:-translate-y-0.5'
+                  }`}
+                >
+                  <div
+                    className={`mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full font-bold ${
+                      isActive
+                        ? 'bg-shiv-gold text-shiv-navy-deep'
+                        : 'bg-shiv-gold/15 text-shiv-gold'
+                    }`}
+                  >
+                    {index + 1}
+                  </div>
+                  <h3 className="font-bold text-shiv-text mb-2">{cat.title}</h3>
+                  <p className="text-sm text-shiv-text-muted">{cat.description}</p>
+                  <p className="mt-3 text-xs font-semibold text-shiv-gold">
+                    {isActive ? 'Showing this category · Click to clear' : 'Click to filter downloads'}
+                  </p>
+                </button>
+              );
+            })}
           </div>
+          {activeFilter ? (
+            <div className="mb-8 flex justify-center">
+              <Button
+                type="button"
+                variant="outline"
+                className="border-shiv-navy/20 text-shiv-text"
+                onClick={() => {
+                  setActiveFilter(null);
+                  setCurrentPage(1);
+                }}
+              >
+                Show all downloads
+              </Button>
+            </div>
+          ) : null}
         </div>
       </section>
 
-      <section className="site-section site-section-cream-warm">
+      <section ref={resourcesRef} className="site-section site-section-cream-warm">
         <div className="site-container">
           <div className="text-center mb-16">
-            <h2 className="section-heading">Resources & Documents</h2>
+            <h2 className="section-heading">
+              {activeFilter ? activeFilter : 'Resources & Documents'}
+            </h2>
             <p className="mt-4 section-subheading">
-              Download our brochures and guides to explore our insurance products
+              {activeFilter
+                ? `Showing ${filteredDownloads.length} document${filteredDownloads.length === 1 ? '' : 's'} in this category`
+                : 'Download our brochures and guides to explore our insurance products'}
             </p>
           </div>
 
           {isLoading ? (
             <p className="text-center text-shiv-text-muted py-12">Loading documents…</p>
-          ) : downloads.length === 0 ? (
+          ) : filteredDownloads.length === 0 ? (
             <p className="text-center text-shiv-text-muted py-12">
-              No documents available at the moment. Please check back soon.
+              {activeFilter
+                ? `No documents found in “${activeFilter}”. Try another category or show all downloads.`
+                : 'No documents available at the moment. Please check back soon.'}
             </p>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -135,7 +223,7 @@ const Downloads = () => {
             </div>
           )}
 
-          {totalPages > 1 && (
+          {totalPages > 1 && filteredDownloads.length > 0 && (
             <div className="mt-12 flex justify-center">
               <Pagination>
                 <PaginationContent>
@@ -144,13 +232,13 @@ const Downloads = () => {
                       href="#"
                       onClick={(e) => {
                         e.preventDefault();
-                        if (currentPage > 1) {
+                        if (safePage > 1) {
                           setCurrentPage((p) => p - 1);
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          resourcesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }
                       }}
                       className={
-                        currentPage <= 1
+                        safePage <= 1
                           ? 'pointer-events-none opacity-50'
                           : 'cursor-pointer'
                       }
@@ -163,9 +251,9 @@ const Downloads = () => {
                         onClick={(e) => {
                           e.preventDefault();
                           setCurrentPage(page);
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
+                          resourcesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
                         }}
-                        isActive={currentPage === page}
+                        isActive={page === safePage}
                         className="cursor-pointer"
                       >
                         {page}
@@ -177,10 +265,13 @@ const Downloads = () => {
                       href="#"
                       onClick={(e) => {
                         e.preventDefault();
-                        if (currentPage < totalPages) setCurrentPage((p) => p + 1);
+                        if (safePage < totalPages) {
+                          setCurrentPage((p) => p + 1);
+                          resourcesRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
                       }}
                       className={
-                        currentPage >= totalPages
+                        safePage >= totalPages
                           ? 'pointer-events-none opacity-50'
                           : 'cursor-pointer'
                       }

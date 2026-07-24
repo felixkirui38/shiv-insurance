@@ -135,7 +135,7 @@ export function ServicesTrustSection() {
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div className="services-trust-stats">
             <div className="services-trust-stat-primary">
-              <p className="services-trust-stat-value">28+</p>
+              <p className="services-trust-stat-value">30+</p>
               <p className="services-trust-stat-label">
                 Years Protecting Families &amp; Businesses Across Kenya
               </p>

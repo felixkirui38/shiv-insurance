@@ -4,7 +4,6 @@ import { Target, Star, Lightbulb, Zap, CheckCircle } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { PageCta } from "@/components/PageCta";
 import { WhyChooseUsSection } from "@/components/sections/WhyChooseUsSection";
-import { TeamSection } from "@/components/sections/TeamTestimonialsSection";
 import { ProcessSection, IndustriesSection } from "@/components/sections/ProcessIndustriesFaq";
 import { MarqueeBanner } from "@/components/sections/MarqueeBanner";
 import shieldIcon from "@assets/shield.svg";
@@ -151,8 +150,6 @@ const About = () => {
       <WhyChooseUsSection showCta />
 
       <ProcessSection />
-
-      <TeamSection />
 
       <IndustriesSection />
 
