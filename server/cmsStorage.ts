@@ -17,6 +17,7 @@ import {
   defaultCmsSettings,
   defaultSeoFields,
   slugify,
+  normalizeDownloadCategory,
 } from "@shared/cms-schema";
 import { defaultDownloadDocuments } from "@shared/defaultDownloads";
 
@@ -48,7 +49,7 @@ function buildDefaultDownloads(): CmsDownload[] {
     id: randomUUID(),
     title: doc.title,
     description: doc.description ?? "",
-    category: doc.category ?? "Form",
+    category: doc.category ?? "Proposal Forms",
     fileSize: doc.fileSize ?? "",
     filePath: doc.filePath,
     icon: doc.icon ?? "file-text",
@@ -68,6 +69,24 @@ async function load(): Promise<CmsData> {
   let data = cmsDataSchema.parse(rawJson);
   if (needsDownloadSeed) {
     data = { ...data, downloads: buildDefaultDownloads() };
+  }
+
+  let categoriesChanged = false;
+  data = {
+    ...data,
+    downloads: data.downloads.map((download) => {
+      const category = normalizeDownloadCategory(
+        download.category,
+        download.title,
+        download.description,
+      );
+      if (category === download.category) return download;
+      categoriesChanged = true;
+      return { ...download, category };
+    }),
+  };
+
+  if (needsDownloadSeed || categoriesChanged) {
     await writeFile(DATA_FILE, JSON.stringify(data, null, 2), "utf-8");
   }
   cache = data;
@@ -322,7 +341,7 @@ export async function createDownload(input: InsertCmsDownload): Promise<CmsDownl
     id: randomUUID(),
     title: input.title,
     description: input.description ?? "",
-    category: input.category ?? "Form",
+    category: input.category ?? "Proposal Forms",
     fileSize: input.fileSize ?? "",
     filePath: input.filePath,
     icon: input.icon ?? "file-text",

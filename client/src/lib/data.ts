@@ -209,6 +209,10 @@ export const companyData = {
       title: "Brochures & Guides",
       description: "Product brochures and information sheets to help you understand coverage options before you buy.",
     },
+    {
+      title: "Others",
+      description: "Additional documents and resources that do not fall under the main form or brochure categories.",
+    },
   ],
 
   team: [

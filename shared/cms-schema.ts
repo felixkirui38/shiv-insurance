@@ -121,18 +121,47 @@ export const cmsDownloadIconValues = [
 ] as const;
 
 export const cmsDownloadCategoryValues = [
-  "Form",
-  "Insurance",
-  "Brochure",
-  "Guide",
-  "Other",
+  "Proposal Forms",
+  "Claim Forms",
+  "Brochures & Guides",
+  "Others",
 ] as const;
+
+export type CmsDownloadCategory = (typeof cmsDownloadCategoryValues)[number];
+
+const LEGACY_DOWNLOAD_CATEGORY_MAP: Record<string, CmsDownloadCategory> = {
+  Form: "Proposal Forms",
+  Insurance: "Proposal Forms",
+  Brochure: "Brochures & Guides",
+  Guide: "Brochures & Guides",
+  Other: "Others",
+};
+
+/** Normalize legacy CMS categories and infer Claim Forms from title when needed. */
+export function normalizeDownloadCategory(
+  category: string | undefined | null,
+  title = "",
+  description = "",
+): CmsDownloadCategory {
+  const raw = (category ?? "").trim();
+  if ((cmsDownloadCategoryValues as readonly string[]).includes(raw)) {
+    return raw as CmsDownloadCategory;
+  }
+
+  const haystack = `${title} ${description} ${raw}`.toLowerCase();
+  if (haystack.includes("claim")) return "Claim Forms";
+  if (haystack.includes("brochure") || haystack.includes("guide")) {
+    return "Brochures & Guides";
+  }
+
+  return LEGACY_DOWNLOAD_CATEGORY_MAP[raw] ?? "Others";
+}
 
 export const cmsDownloadSchema = z.object({
   id: z.string(),
   title: z.string().min(1, "Title is required"),
   description: z.string().default(""),
-  category: z.string().default("Form"),
+  category: z.string().default("Proposal Forms"),
   fileSize: z.string().default(""),
   filePath: z.string().min(1, "File path or URL is required"),
   icon: z.string().default("file-text"),

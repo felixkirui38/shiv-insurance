@@ -55,7 +55,7 @@ import {
 const empty = (): Omit<CmsDownload, "id" | "createdAt" | "updatedAt"> => ({
   title: "",
   description: "",
-  category: "Form",
+  category: "Proposal Forms",
   fileSize: "",
   filePath: "",
   icon: "file-text",

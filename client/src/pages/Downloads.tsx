@@ -40,29 +40,7 @@ async function fetchPublicDownloads(): Promise<PublicDownload[]> {
 
 function matchesCategoryFilter(item: PublicDownload, filter: CategoryFilter): boolean {
   if (!filter) return true;
-
-  const haystack = `${item.title} ${item.description} ${item.category}`.toLowerCase();
-  const category = item.category.toLowerCase();
-
-  switch (filter) {
-    case 'Proposal Forms':
-      return (
-        haystack.includes('proposal') ||
-        category === 'insurance' ||
-        (category === 'form' && !haystack.includes('claim'))
-      );
-    case 'Claim Forms':
-      return haystack.includes('claim');
-    case 'Brochures & Guides':
-      return (
-        category === 'brochure' ||
-        category === 'guide' ||
-        haystack.includes('brochure') ||
-        haystack.includes('guide')
-      );
-    default:
-      return true;
-  }
+  return item.category === filter;
 }
 
 const Downloads = () => {
@@ -104,7 +82,7 @@ const Downloads = () => {
 
       <section className="site-section bg-white">
         <div className="site-container">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-4">
             {companyData.downloadCategories.map((cat, index) => {
               const isActive = activeFilter === cat.title;
               return (
