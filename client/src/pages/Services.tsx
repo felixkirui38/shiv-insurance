@@ -22,6 +22,7 @@ import {
   ServicesTrustSection,
 } from "@/components/sections/ServicesShowcaseSections";
 import { PageCta } from "@/components/PageCta";
+import { InsuranceProductCard } from "@/components/InsuranceProductCard";
 import { useToast } from "@/hooks/use-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
@@ -117,87 +118,52 @@ const Services = () => {
 
       <section className="site-section site-section-cream-warm">
         <div className="site-container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="service-card-grid">
             {companyData.services.map((service, index) => (
-              <Card
-                key={index}
-                className={`${service.featured ? "bg-gradient-to-br from-shiv-gold to-shiv-gold-light text-shiv-navy-deep ring-4 ring-shiv-gold ring-opacity-50" : "service-card bg-white"} shadow-sm hover:shadow-lg transition-all border-l-4`}
-                style={{
-                  borderLeftColor: service.featured
-                    ? "transparent"
-                    : `var(--${service.color})`,
-                }}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex items-center">
-                      <div
-                        className={`${service.featured ? "text-white" : `text-${service.color}`} text-2xl mr-3`}
-                      >
-                        <i className={`fas fa-${service.icon}`}></i>
-                      </div>
-                      <h4
-                        className={`font-bold text-lg ${service.featured ? "text-white" : "text-shiv-text"}`}
-                      >
-                        {service.category}
-                      </h4>
-                    </div>
-                    {service.featured && (
-                      <span className="bg-white text-shiv-accent text-xs font-bold px-2 py-1 rounded">
-                        FEATURED
-                      </span>
-                    )}
-                  </div>
-                  <ul
-                    className={`text-sm ${service.featured ? "text-white text-opacity-95" : "text-shiv-text-muted"} space-y-1`}
-                  >
-                    {service.products.map((product, idx) => (
-                      <li key={idx}>• {product}</li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+              <InsuranceProductCard
+                key={service.category}
+                title={service.category}
+                products={service.products}
+                colorVar={service.color}
+                iconKey={service.icon}
+                iconIndex={index}
+                featured={Boolean(service.featured)}
+                href="/contact"
+                maxProducts={6}
+                ctaLabel="Get a Quote"
+              />
             ))}
 
-            {/* Additional Services */}
-            <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-l-4 border-purple-600">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="text-purple-600 text-2xl mr-3">
-                    <i className="fas fa-star"></i>
-                  </div>
-                  <h4 className="font-bold text-lg text-shiv-text">
-                    Specialty Lines
-                  </h4>
-                </div>
-                <ul className="text-sm text-shiv-text-muted space-y-1">
-                  <li>• Political & Terrorism</li>
-                  <li>• Contractors All Risks</li>
-                  <li>• Overseas Travel</li>
-                  <li>• Various Bonds</li>
-                </ul>
-              </CardContent>
-            </Card>
+            <InsuranceProductCard
+              title="Specialty Lines"
+              products={[
+                "Political & Terrorism",
+                "Contractors All Risks",
+                "Overseas Travel",
+                "Various Bonds",
+              ]}
+              colorVar="shiv-blue"
+              iconKey="star"
+              href="/contact"
+              maxProducts={6}
+              ctaLabel="Get a Quote"
+            />
 
-            <Card className="bg-white shadow-md hover:shadow-lg transition-shadow border-l-4 border-red-600">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  <div className="text-red-600 text-2xl mr-3">
-                    <i className="fas fa-industry"></i>
-                  </div>
-                  <h4 className="font-bold text-lg text-shiv-text">
-                    Industries Served
-                  </h4>
-                </div>
-                <ul className="text-sm text-shiv-text-muted space-y-1">
-                  <li>• Wood Manufacturing</li>
-                  <li>• Hospitality</li>
-                  <li>• Motor Industry</li>
-                  <li>• Horticulture</li>
-                  <li>• Real Estate & More</li>
-                </ul>
-              </CardContent>
-            </Card>
+            <InsuranceProductCard
+              title="Industries Served"
+              products={[
+                "Wood Manufacturing",
+                "Hospitality",
+                "Motor Industry",
+                "Horticulture",
+                "Real Estate & More",
+              ]}
+              colorVar="kenya-brown"
+              iconKey="industry"
+              href="/contact"
+              maxProducts={6}
+              ctaLabel="Get a Quote"
+            />
           </div>
 
           {/* Call to Action */}

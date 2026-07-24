@@ -92,7 +92,9 @@ export default function InquiriesPage() {
             Email to receive leads / contact form
           </p>
           <p className="text-sm text-muted-foreground">
-            All Contact and Services form submissions are saved here and emailed to this address (requires SMTP on the server).
+            Form submissions are always saved here. Lead notifications go to this address, and
+            submitters get a confirmation email — both require SMTP env vars on the server
+            (Coolify). Check <strong>Connections</strong> to verify SMTP.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <div className="flex-1 min-w-0">
@@ -104,7 +106,7 @@ export default function InquiriesPage() {
                 type="email"
                 value={leadEmail}
                 onChange={(e) => setLeadEmail(e.target.value)}
-                placeholder="info@shivinsurance.co.ke"
+                placeholder="info@shivinsbro.co.ke"
               />
             </div>
             <Button

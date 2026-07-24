@@ -98,11 +98,11 @@ const Footer = () => {
             </ul>
             <div className="mt-8">
               <a
-                href="mailto:info@shivinsurance.co.ke"
+                href="mailto:info@shivinsbro.co.ke"
                 className="footer-link inline-flex items-center gap-2"
               >
                 <Mail className="h-4 w-4 shrink-0 text-shiv-gold" />
-                info@shivinsurance.co.ke
+                info@shivinsbro.co.ke
               </a>
             </div>
           </div>

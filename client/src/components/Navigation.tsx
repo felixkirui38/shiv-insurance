@@ -9,7 +9,7 @@ import { BRAND_LOGO_ALT, BRAND_LOGO_SRC } from '@/lib/brand';
 const topBarItems = {
   left: [
     { icon: FileText, label: 'Get a quote', href: '/contact' },
-    { icon: Mail, label: 'info@shivinsurance.co.ke', href: 'mailto:info@shivinsurance.co.ke' },
+    { icon: Mail, label: 'info@shivinsbro.co.ke', href: 'mailto:info@shivinsbro.co.ke' },
   ],
   right: [
     { label: 'Licensed by IRA', href: '#' },

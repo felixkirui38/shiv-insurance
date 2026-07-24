@@ -200,7 +200,7 @@ export const cmsLayoutElements: CmsLayoutElement[] = [
     id: "contact-block",
     category: "components",
     label: "Contact Info Block",
-    html: `<div class="cms-contact-block">\n  <h4>Get in touch</h4>\n  <p><strong>Phone:</strong> <a href="tel:+254000000000">+254 000 000 000</a></p>\n  <p><strong>Email:</strong> <a href="mailto:info@shivinsurance.co.ke">info@shivinsurance.co.ke</a></p>\n  <p><strong>Office:</strong> Nairobi, Kenya</p>\n</div>`,
+    html: `<div class="cms-contact-block">\n  <h4>Get in touch</h4>\n  <p><strong>Phone:</strong> <a href="tel:+254000000000">+254 000 000 000</a></p>\n  <p><strong>Email:</strong> <a href="mailto:info@shivinsbro.co.ke">info@shivinsbro.co.ke</a></p>\n  <p><strong>Office:</strong> Nairobi, Kenya</p>\n</div>`,
   },
   {
     id: "alert",

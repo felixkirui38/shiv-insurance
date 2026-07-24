@@ -1,12 +1,13 @@
 import { Link } from "wouter";
 import { companyData } from "@/lib/data";
 import { ArrowRight } from "lucide-react";
+import { InsuranceImageCard } from "@/components/InsuranceProductCard";
 
 const coverImages = [
-  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
-  "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
-  "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
-  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400",
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=70",
+  "https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=70",
+  "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=70",
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=400&q=70",
 ];
 
 export function CoveragePreviewSection() {
@@ -28,25 +29,16 @@ export function CoveragePreviewSection() {
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="service-card-grid service-card-grid-4">
           {featured.map((service, index) => (
-            <Link key={service.category} href="/services">
-              <article className="service-card group cursor-pointer h-full">
-                <img
-                  src={coverImages[index]}
-                  alt={service.category}
-                  className="h-44 w-full object-cover"
-                />
-                <div className="p-5">
-                  <h3 className="font-bold text-shiv-text group-hover:text-shiv-gold transition-colors">
-                    {service.category}
-                  </h3>
-                  <p className="text-sm text-shiv-text-muted mt-2 line-clamp-2">
-                    {service.products.slice(0, 2).join(", ")} and more.
-                  </p>
-                </div>
-              </article>
-            </Link>
+            <InsuranceImageCard
+              key={service.category}
+              title={service.category}
+              description={`${service.products.slice(0, 2).join(", ")} and more.`}
+              imageSrc={coverImages[index]}
+              colorVar={service.color}
+              href="/services"
+            />
           ))}
         </div>
       </div>

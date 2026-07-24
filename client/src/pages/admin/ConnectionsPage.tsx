@@ -1,9 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import CmsLayout from "@/components/cms/CmsLayout";
 import { Badge } from "@/components/ui/badge";
-import { fetchInquiries, resetCmsDefaults } from "@/lib/cms-api";
-import { useQueryClient } from "@tanstack/react-query";
+import { Button } from "@/components/ui/button";
+import {
+  fetchEmailStatus,
+  fetchInquiries,
+  resetCmsDefaults,
+  verifyEmailSmtp,
+} from "@/lib/cms-api";
 import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -17,6 +23,7 @@ import {
 
 export default function ConnectionsPage() {
   const queryClient = useQueryClient();
+  const { toast } = useToast();
   const [showReset, setShowReset] = useState(false);
 
   const { data: inquiries = [] } = useQuery({
@@ -28,6 +35,37 @@ export default function ConnectionsPage() {
     queryKey: ["/api/cms/health"],
   });
 
+  const { data: emailStatus, isLoading: emailLoading } = useQuery({
+    queryKey: ["/api/cms/email-status"],
+    queryFn: fetchEmailStatus,
+  });
+
+  const verifyMutation = useMutation({
+    mutationFn: verifyEmailSmtp,
+    onSuccess: (data) => {
+      toast({
+        title: data.ok ? "SMTP connected" : "SMTP failed",
+        description: data.message,
+        variant: data.ok ? "default" : "destructive",
+      });
+      queryClient.invalidateQueries({ queryKey: ["/api/cms/email-status"] });
+    },
+    onError: () => {
+      toast({
+        title: "SMTP check failed",
+        description: "Could not reach the email verification endpoint.",
+        variant: "destructive",
+      });
+    },
+  });
+
+  const smtpConfigured = Boolean(emailStatus?.configured);
+  const smtpLabel = emailLoading
+    ? "checking…"
+    : smtpConfigured
+      ? "configured"
+      : "not configured";
+
   const connections = [
     {
       name: "CMS API",
@@ -36,13 +74,15 @@ export default function ConnectionsPage() {
     },
     {
       name: "SMTP Email",
-      status: process.env.NODE_ENV === "development" ? "check server env" : "configured via server",
-      description: "Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS on the server for email delivery",
+      status: smtpLabel,
+      description: smtpConfigured
+        ? `Sending via ${emailStatus?.host}:${emailStatus?.port} as ${emailStatus?.user}. Lead inbox: ${emailStatus?.leadEmail}`
+        : "Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS in Coolify (Runtime), then redeploy. Forms still save without SMTP.",
     },
     {
       name: "Contact Forms",
       status: "active",
-      description: "Contact and Services forms submit to /api/submit-form",
+      description: "Contact, Services, and Buy Now forms submit to /api/submit-form",
     },
   ];
 
@@ -57,7 +97,7 @@ export default function ConnectionsPage() {
           {connections.map((conn) => (
             <div
               key={conn.name}
-              className="flex items-start justify-between rounded-lg border p-4"
+              className="flex items-start justify-between gap-4 rounded-lg border p-4"
             >
               <div>
                 <h3 className="font-semibold text-gray-900">{conn.name}</h3>
@@ -65,7 +105,9 @@ export default function ConnectionsPage() {
               </div>
               <Badge
                 className={
-                  conn.status === "connected" || conn.status === "active"
+                  conn.status === "connected" ||
+                  conn.status === "active" ||
+                  conn.status === "configured"
                     ? "bg-emerald-500 hover:bg-emerald-500"
                     : "bg-gray-400 hover:bg-gray-400"
                 }
@@ -76,14 +118,30 @@ export default function ConnectionsPage() {
           ))}
         </div>
 
+        <div className="mt-6">
+          <Button
+            type="button"
+            variant="outline"
+            disabled={verifyMutation.isPending || !smtpConfigured}
+            onClick={() => verifyMutation.mutate()}
+          >
+            {verifyMutation.isPending ? "Verifying…" : "Verify SMTP connection"}
+          </Button>
+        </div>
+
         <div className="mt-8 rounded-lg bg-gray-50 p-4 text-sm text-muted-foreground">
-          <p className="font-medium text-gray-700">Environment variables</p>
-          <ul className="mt-2 list-inside list-disc space-y-1">
-            <li><code>CMS_USERNAME</code> — admin login username (required)</li>
-            <li><code>CMS_PASSWORD</code> — admin login password (required)</li>
-            <li><code>SESSION_SECRET</code> — session encryption key</li>
-            <li><code>SMTP_*</code> — email delivery settings</li>
+          <p className="font-medium text-gray-700">Coolify SMTP example (cPanel)</p>
+          <ul className="mt-2 list-inside list-disc space-y-1 font-mono text-xs">
+            <li>SMTP_HOST=mail.shivinsbro.co.ke</li>
+            <li>SMTP_PORT=465</li>
+            <li>SMTP_USER=info@shivinsbro.co.ke</li>
+            <li>SMTP_PASS=(mailbox password)</li>
+            <li>SMTP_FROM=info@shivinsbro.co.ke</li>
           </ul>
+          <p className="mt-3">
+            If verify fails with a certificate error, also set{" "}
+            <code>SMTP_TLS_REJECT_UNAUTHORIZED=false</code>.
+          </p>
         </div>
       </CmsLayout>
 
@@ -91,11 +149,20 @@ export default function ConnectionsPage() {
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Reset CMS to defaults?</AlertDialogTitle>
-            <AlertDialogDescription>This will delete all CMS content and restore default settings.</AlertDialogDescription>
+            <AlertDialogDescription>
+              This will delete all CMS content and restore default settings.
+            </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction className="bg-red-600 hover:bg-red-700" onClick={async () => { await resetCmsDefaults(); queryClient.invalidateQueries(); setShowReset(false); }}>
+            <AlertDialogAction
+              className="bg-red-600 hover:bg-red-700"
+              onClick={async () => {
+                await resetCmsDefaults();
+                queryClient.invalidateQueries();
+                setShowReset(false);
+              }}
+            >
               Reset
             </AlertDialogAction>
           </AlertDialogFooter>

@@ -20,6 +20,7 @@ import {
 import * as cms from "./cmsStorage";
 import { storage } from "./storage";
 import { downloadUpload, formatFileSizeLabel } from "./downloadUpload";
+import { getSmtpStatus, verifySmtpConnection } from "./emailService";
 
 function handleError(res: import("express").Response, error: unknown) {
   if (error instanceof z.ZodError) {
@@ -41,6 +42,32 @@ export function registerCmsRoutes(app: Express) {
   app.get("/api/cms/me", cmsMeHandler);
   app.get("/api/cms/health", (_req, res) => {
     res.json({ success: true, connected: true });
+  });
+
+  app.get("/api/cms/email-status", requireCmsAuth, async (_req, res) => {
+    try {
+      const status = getSmtpStatus();
+      const leadEmail = await cms.getLeadEmail();
+      res.json({
+        success: true,
+        ...status,
+        leadEmail,
+        note: status.configured
+          ? "SMTP env vars are present. Use Verify to test the connection."
+          : "Set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS in Coolify, then redeploy.",
+      });
+    } catch (error) {
+      handleError(res, error);
+    }
+  });
+
+  app.post("/api/cms/email-verify", requireCmsAuth, async (_req, res) => {
+    try {
+      const result = await verifySmtpConnection();
+      res.status(result.ok ? 200 : 400).json({ success: result.ok, ...result });
+    } catch (error) {
+      handleError(res, error);
+    }
   });
 
   // Inquiries (protected)

@@ -154,7 +154,7 @@ export type CmsDownload = z.infer<typeof cmsDownloadSchema>;
 export type InsertCmsDownload = z.infer<typeof insertCmsDownloadSchema>;
 
 export const cmsSettingsSchema = z.object({
-  leadEmail: z.string().email().default("info@shivinsurance.co.ke"),
+  leadEmail: z.string().email().default("info@shivinsbro.co.ke"),
   siteName: z.string().default("Shiv Insurance Brokers Ltd"),
   siteUrl: z.string().default(""),
   defaultMetaTitle: z.string().default("Shiv Insurance Brokers Ltd"),

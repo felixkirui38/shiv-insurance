@@ -67,9 +67,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       res.json({ 
         success: true, 
-        message: "Thank you! Your message has been received. We'll get back to you shortly.",
+        message: emailResult.success
+          ? "Thank you! Your message has been received. We'll get back to you shortly."
+          : "Thank you! Your message has been received. We'll get back to you shortly.",
         contact,
-        emailSent: emailResult.success
+        emailSent: emailResult.success,
+        emailConfigured: emailResult.configured,
+        emailDetail: emailResult.message,
       });
     } catch (error) {
       if (error instanceof z.ZodError) {

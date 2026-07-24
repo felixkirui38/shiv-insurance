@@ -39,6 +39,20 @@ export async function fetchInquiries(): Promise<Contact[]> {
   return data.inquiries;
 }
 
+export async function fetchEmailStatus() {
+  const res = await apiRequest("GET", "/api/cms/email-status");
+  return res.json();
+}
+
+export async function verifyEmailSmtp() {
+  const res = await fetch("/api/cms/email-verify", {
+    method: "POST",
+    credentials: "include",
+  });
+  const data = await res.json();
+  return data;
+}
+
 export async function fetchSettings(): Promise<CmsSettings> {
   const res = await apiRequest("GET", "/api/cms/settings");
   const data = await res.json();

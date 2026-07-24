@@ -19,7 +19,7 @@ export function DedicatedSection() {
               className="rounded-[var(--radius-card)] shadow-lg w-full object-cover min-h-[320px]"
             />
             <div className="absolute -bottom-4 -right-4 md:bottom-6 md:right-6 theme-card px-5 py-4 shadow-lg max-w-[220px]">
-              <p className="text-2xl font-bold text-shiv-gold">28+</p>
+              <p className="text-2xl font-bold text-shiv-gold">30+</p>
               <p className="text-sm font-semibold text-shiv-text">Years of Excellence</p>
             </div>
           </div>

@@ -58,7 +58,7 @@ export const companyData = {
     address: "Westpark Towers, Mpesi Lane, Westlands, Nairobi",
     phone: "+254 700 652 040",
     whatsapp: "0700652040",
-    email: "info@shivinsurance.co.ke",
+    email: "info@shivinsbro.co.ke",
     hours: {
       weekdays: "Monday – Friday: 8:00 AM – 5:00 PM",
       saturday: "Saturday: 9:00 AM – 1:00 PM",
@@ -73,10 +73,10 @@ export const companyData = {
     eyebrow: "Independent Insurance Brokers",
     title: "Beyond cover — we secure futures",
     description:
-      "For 28+ years, Shiv Insurance Brokers has matched individuals and businesses with the right policies from Kenya's leading insurers. No pushy sales — just honest advice, competitive premiums, and support when you need to claim.",
+      "For 30+ years, Shiv Insurance Brokers has matched individuals and businesses with the right policies from Kenya's leading insurers. No pushy sales — just honest advice, competitive premiums, and support when you need to claim.",
     highlights: [
       {
-        title: "28+ Years Placing Cover",
+        title: "30+ Years Placing Cover",
         description: "Trusted brokerage experience across motor, medical, property, liability, and specialty lines.",
       },
       {

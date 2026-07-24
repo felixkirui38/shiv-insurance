@@ -1,27 +1,58 @@
-import nodemailer from 'nodemailer';
-import type { FormSubmission } from '@shared/schema';
-import { getLeadEmail } from './cmsStorage';
+import nodemailer from "nodemailer";
+import type { Transporter } from "nodemailer";
+import type { FormSubmission } from "@shared/schema";
+import { getLeadEmail } from "./cmsStorage";
 
-const COMPANY_NAME = 'Shiv Insurance Brokers Ltd';
+const COMPANY_NAME = "Shiv Insurance Brokers Ltd";
 
-const createTransporter = () => {
-  const host = process.env.SMTP_HOST;
-  const port = parseInt(process.env.SMTP_PORT || '587');
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
+export function isSmtpConfigured(): boolean {
+  return Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
+}
 
-  if (!host || !user || !pass) {
-    console.warn('SMTP credentials not configured. Emails will be logged but not sent.');
+export function getSmtpStatus() {
+  const configured = isSmtpConfigured();
+  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  return {
+    configured,
+    host: process.env.SMTP_HOST || null,
+    port: configured ? port : null,
+    user: process.env.SMTP_USER || null,
+    secure: process.env.SMTP_SECURE
+      ? process.env.SMTP_SECURE === "true"
+      : port === 465,
+  };
+}
+
+function createTransporter(): Transporter | null {
+  if (!isSmtpConfigured()) {
+    console.warn("SMTP credentials not configured. Emails will not be sent.");
     return null;
   }
+
+  const host = process.env.SMTP_HOST!;
+  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  const user = process.env.SMTP_USER!;
+  const pass = process.env.SMTP_PASS!;
+  const secure =
+    process.env.SMTP_SECURE === "true" ||
+    (process.env.SMTP_SECURE !== "false" && port === 465);
 
   return nodemailer.createTransport({
     host,
     port,
-    secure: port === 465,
+    secure,
     auth: { user, pass },
+    connectionTimeout: 15000,
+    greetingTimeout: 15000,
+    socketTimeout: 20000,
+    tls: {
+      // Default false for shared cPanel hosts; set SMTP_TLS_REJECT_UNAUTHORIZED=true to enforce
+      rejectUnauthorized: process.env.SMTP_TLS_REJECT_UNAUTHORIZED === "true",
+      minVersion: "TLSv1.2",
+    },
+    requireTLS: !secure && port === 587,
   });
-};
+}
 
 const formatFormData = (data: FormSubmission): string => {
   return `
@@ -30,21 +61,28 @@ Form Name: ${data.formName}
 Name: ${data.firstName} ${data.lastName}
 Email: ${data.email}
 Phone: ${data.phone}
-${data.insuranceType ? `Insurance Type: ${data.insuranceType}` : ''}
+${data.insuranceType ? `Insurance Type: ${data.insuranceType}` : ""}
 -----------------------------------
 Message:
 ${data.message}
 -----------------------------------
-Submitted: ${new Date().toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })}
+Submitted: ${new Date().toLocaleString("en-KE", { timeZone: "Africa/Nairobi" })}
   `.trim();
 };
 
-export const sendFormNotification = async (data: FormSubmission): Promise<{ success: boolean; message: string }> => {
+function fromAddress() {
+  const fromEmail = process.env.SMTP_FROM || process.env.SMTP_USER || "noreply@shivinsbro.co.ke";
+  return `"${COMPANY_NAME} Website" <${fromEmail}>`;
+}
+
+export const sendFormNotification = async (
+  data: FormSubmission,
+): Promise<{ success: boolean; message: string; configured: boolean }> => {
   const transporter = createTransporter();
   const companyEmail = await getLeadEmail();
-  
+
   const adminEmailContent = {
-    from: `"${COMPANY_NAME} Website" <${process.env.SMTP_USER || 'noreply@shivinsurance.co.ke'}>`,
+    from: fromAddress(),
     to: companyEmail,
     replyTo: data.email,
     subject: `[${data.formName}] New Inquiry from ${data.firstName} ${data.lastName}`,
@@ -87,14 +125,14 @@ To respond, simply reply to this email.
       <div class="field">
         <span class="label">Phone:</span> ${data.phone}
       </div>
-      ${data.insuranceType ? `<div class="field"><span class="label">Insurance Type:</span> ${data.insuranceType}</div>` : ''}
+      ${data.insuranceType ? `<div class="field"><span class="label">Insurance Type:</span> ${data.insuranceType}</div>` : ""}
       <div class="field">
         <span class="label">Message:</span>
-        <div class="message-box">${data.message.replace(/\n/g, '<br>')}</div>
+        <div class="message-box">${data.message.replace(/\n/g, "<br>")}</div>
       </div>
     </div>
     <div class="footer">
-      <p>Submitted on ${new Date().toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })}</p>
+      <p>Submitted on ${new Date().toLocaleString("en-KE", { timeZone: "Africa/Nairobi" })}</p>
       <p>To respond, simply reply to this email.</p>
     </div>
   </div>
@@ -104,7 +142,7 @@ To respond, simply reply to this email.
   };
 
   const customerEmailContent = {
-    from: `"${COMPANY_NAME}" <${process.env.SMTP_USER || 'noreply@shivinsurance.co.ke'}>`,
+    from: fromAddress(),
     to: data.email,
     subject: `Thank you for contacting ${COMPANY_NAME}`,
     text: `
@@ -115,7 +153,7 @@ Thank you for reaching out to ${COMPANY_NAME}. We have received your inquiry and
 Here's a summary of your submission:
 -----------------------------------
 Form: ${data.formName}
-${data.insuranceType ? `Insurance Type: ${data.insuranceType}` : ''}
+${data.insuranceType ? `Insurance Type: ${data.insuranceType}` : ""}
 Message: ${data.message}
 -----------------------------------
 
@@ -158,7 +196,7 @@ This is an automated confirmation email. Please do not reply directly to this me
       <div class="summary">
         <h3 style="color: #292c8d; margin-top: 0;">Your Submission Summary</h3>
         <div class="summary-item"><strong>Form:</strong> ${data.formName}</div>
-        ${data.insuranceType ? `<div class="summary-item"><strong>Insurance Type:</strong> ${data.insuranceType}</div>` : ''}
+        ${data.insuranceType ? `<div class="summary-item"><strong>Insurance Type:</strong> ${data.insuranceType}</div>` : ""}
         <div class="summary-item"><strong>Message:</strong> ${data.message}</div>
       </div>
 
@@ -183,25 +221,94 @@ This is an automated confirmation email. Please do not reply directly to this me
   };
 
   if (!transporter) {
-    console.log('=== Form Submission (SMTP not configured) ===');
-    console.log('To:', companyEmail);
-    console.log('Subject:', adminEmailContent.subject);
-    console.log('Reply-To:', data.email);
-    console.log('Content:', formatFormData(data));
-    console.log('==============================================');
-    return { success: true, message: 'Form submitted successfully (email logging mode)' };
+    console.log("=== Form Submission (SMTP not configured) ===");
+    console.log("To (lead):", companyEmail);
+    console.log("Customer confirmation would go to:", data.email);
+    console.log("Subject:", adminEmailContent.subject);
+    console.log("==============================================");
+    return {
+      success: false,
+      configured: false,
+      message:
+        "Inquiry saved, but SMTP is not configured on the server — emails were not sent",
+    };
   }
 
   try {
-    await transporter.sendMail(adminEmailContent);
-    console.log(`Admin notification sent to ${companyEmail}`);
-    
-    await transporter.sendMail(customerEmailContent);
-    console.log(`Confirmation email sent to ${data.email}`);
-    
-    return { success: true, message: 'Form submitted and emails sent successfully' };
+    const [adminResult, customerResult] = await Promise.allSettled([
+      transporter.sendMail(adminEmailContent),
+      transporter.sendMail(customerEmailContent),
+    ]);
+
+    if (adminResult.status === "fulfilled") {
+      console.log(`Admin notification sent to ${companyEmail}`);
+    } else {
+      console.error("Admin notification failed:", adminResult.reason);
+    }
+
+    if (customerResult.status === "fulfilled") {
+      console.log(`Confirmation email sent to ${data.email}`);
+    } else {
+      console.error("Customer confirmation failed:", customerResult.reason);
+    }
+
+    if (adminResult.status === "rejected" && customerResult.status === "rejected") {
+      const reason =
+        adminResult.reason instanceof Error
+          ? adminResult.reason.message
+          : "SMTP send failed";
+      return {
+        success: false,
+        configured: true,
+        message: `Form saved but email sending failed: ${reason}`,
+      };
+    }
+
+    if (adminResult.status === "rejected" || customerResult.status === "rejected") {
+      return {
+        success: false,
+        configured: true,
+        message:
+          "Form saved, but one of the notification emails failed — check Coolify logs",
+      };
+    }
+
+    return {
+      success: true,
+      configured: true,
+      message: "Form submitted and emails sent successfully",
+    };
   } catch (error) {
-    console.error('Email sending failed:', error);
-    return { success: false, message: 'Form saved but email notification failed' };
+    console.error("Email sending failed:", error);
+    return {
+      success: false,
+      configured: true,
+      message:
+        error instanceof Error
+          ? `Form saved but email notification failed: ${error.message}`
+          : "Form saved but email notification failed",
+    };
   }
 };
+
+export async function verifySmtpConnection(): Promise<{
+  ok: boolean;
+  message: string;
+}> {
+  const transporter = createTransporter();
+  if (!transporter) {
+    return {
+      ok: false,
+      message: "SMTP_HOST, SMTP_USER, and SMTP_PASS are not all set",
+    };
+  }
+
+  try {
+    await transporter.verify();
+    return { ok: true, message: "SMTP connection verified" };
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "SMTP verify failed";
+    console.error("SMTP verify failed:", error);
+    return { ok: false, message };
+  }
+}
