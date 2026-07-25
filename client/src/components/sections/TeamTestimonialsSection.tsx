@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
@@ -26,42 +26,6 @@ function TestimonialQuote({
       </span>
       {after}
     </p>
-  );
-}
-
-function ProgressRing({ percent }: { percent: number }) {
-  const radius = 20;
-  const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (percent / 100) * circumference;
-
-  return (
-    <div className="relative h-14 w-14 shrink-0">
-      <svg className="h-14 w-14 -rotate-90" viewBox="0 0 48 48" aria-hidden>
-        <circle
-          cx="24"
-          cy="24"
-          r={radius}
-          fill="none"
-          stroke="rgba(255,255,255,0.12)"
-          strokeWidth="3.5"
-        />
-        <circle
-          cx="24"
-          cy="24"
-          r={radius}
-          fill="none"
-          stroke="var(--shiv-gold)"
-          strokeWidth="3.5"
-          strokeLinecap="round"
-          strokeDasharray={circumference}
-          strokeDashoffset={offset}
-          className="transition-all duration-500"
-        />
-      </svg>
-      <span className="absolute inset-0 flex items-center justify-center text-xs font-bold text-white">
-        {percent}%
-      </span>
-    </div>
   );
 }
 
@@ -104,24 +68,9 @@ export function TestimonialsSection() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" }, [
     Autoplay({ delay: 7000, stopOnInteraction: true }),
   ]);
-  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
-
-  const onSelect = useCallback(() => {
-    if (!emblaApi) return;
-    setSelectedIndex(emblaApi.selectedScrollSnap());
-  }, [emblaApi]);
-
-  useEffect(() => {
-    if (!emblaApi) return;
-    onSelect();
-    emblaApi.on("select", onSelect);
-    emblaApi.on("reInit", onSelect);
-  }, [emblaApi, onSelect]);
-
-  const slidePercent = Math.round(((selectedIndex + 1) / testimonials.length) * 100);
 
   return (
     <section className="site-section site-section-cream-warm">
@@ -187,7 +136,7 @@ export function TestimonialsSection() {
                         content={item.content}
                         highlight={"highlight" in item ? item.highlight : undefined}
                       />
-                      <footer className="mt-8 flex items-end justify-between gap-6 pr-16 sm:pr-20">
+                      <footer className="mt-8">
                         <div>
                           <p className="text-sm font-bold uppercase tracking-[0.12em] text-shiv-gold">
                             @{item.name}
@@ -198,13 +147,6 @@ export function TestimonialsSection() {
                     </blockquote>
                   ))}
                 </div>
-              </div>
-
-              <div
-                className="pointer-events-none absolute bottom-8 right-8 md:bottom-10 md:right-10"
-                aria-hidden
-              >
-                <ProgressRing percent={slidePercent} />
               </div>
             </div>
           </div>
