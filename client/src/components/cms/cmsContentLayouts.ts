@@ -182,7 +182,7 @@ export const cmsLayoutElements: CmsLayoutElement[] = [
     id: "stats",
     category: "components",
     label: "Stats Row",
-    html: `<div class="cms-stats">\n  <div class="cms-stat">\n    <span class="cms-stat-value">28+</span>\n    <span class="cms-stat-label">Years of experience</span>\n  </div>\n  <div class="cms-stat">\n    <span class="cms-stat-value">34+</span>\n    <span class="cms-stat-label">Insurance products</span>\n  </div>\n  <div class="cms-stat">\n    <span class="cms-stat-value">15+</span>\n    <span class="cms-stat-label">Partner insurers</span>\n  </div>\n</div>`,
+    html: `<div class="cms-stats">\n  <div class="cms-stat">\n    <span class="cms-stat-value">30+</span>\n    <span class="cms-stat-label">Years of experience</span>\n  </div>\n  <div class="cms-stat">\n    <span class="cms-stat-value">34+</span>\n    <span class="cms-stat-label">Insurance products</span>\n  </div>\n  <div class="cms-stat">\n    <span class="cms-stat-value">15+</span>\n    <span class="cms-stat-label">Partner insurers</span>\n  </div>\n</div>`,
   },
   {
     id: "testimonial",

@@ -103,7 +103,7 @@ const Home = () => {
             <div className="text-center group" data-testid="stat-experience">
               <div className="rounded-[var(--radius-card)] border border-white/10 bg-white/10 p-8 transition-colors group-hover:bg-white/15">
                 <AnimatedCounter
-                  target={28}
+                  target={30}
                   suffix="+"
                   className="text-4xl md:text-5xl font-bold mb-2 text-shiv-gold"
                 />
