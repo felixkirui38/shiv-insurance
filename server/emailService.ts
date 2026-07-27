@@ -1,3 +1,4 @@
+import net from "net";
 import nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
 import type { FormSubmission } from "@shared/schema";
@@ -9,49 +10,124 @@ export function isSmtpConfigured(): boolean {
   return Boolean(process.env.SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
 }
 
+function smtpPort(): number {
+  return parseInt(process.env.SMTP_PORT || "465", 10);
+}
+
+function smtpSecure(port = smtpPort()): boolean {
+  return process.env.SMTP_SECURE === "true" ||
+    (process.env.SMTP_SECURE !== "false" && port === 465);
+}
+
+/** Hosts to try when Docker cannot reach the public mail hostname / IP. */
+function smtpHostCandidates(): string[] {
+  const primary = (process.env.SMTP_HOST || "").trim();
+  const extras = (process.env.SMTP_HOST_FALLBACKS || "")
+    .split(",")
+    .map((h) => h.trim())
+    .filter(Boolean);
+
+  const defaults = [
+    "host.docker.internal",
+    "172.17.0.1",
+    "172.18.0.1",
+    "172.19.0.1",
+    "10.0.0.1",
+    "127.0.0.1",
+  ];
+
+  return [...new Set([primary, ...extras, ...defaults].filter(Boolean))];
+}
+
+function canConnect(host: string, port: number, timeoutMs = 2500): Promise<boolean> {
+  return new Promise((resolve) => {
+    const socket = net.connect({ host, port });
+    const done = (ok: boolean) => {
+      socket.removeAllListeners();
+      socket.destroy();
+      resolve(ok);
+    };
+    socket.setTimeout(timeoutMs);
+    socket.once("connect", () => done(true));
+    socket.once("timeout", () => done(false));
+    socket.once("error", () => done(false));
+  });
+}
+
+let resolvedSmtpHost: string | null = null;
+
+export async function resolveReachableSmtpHost(): Promise<string | null> {
+  if (resolvedSmtpHost) return resolvedSmtpHost;
+  if (!isSmtpConfigured()) return null;
+
+  const port = smtpPort();
+  const candidates = smtpHostCandidates();
+
+  for (const host of candidates) {
+    const ok = await canConnect(host, port);
+    if (ok) {
+      resolvedSmtpHost = host;
+      console.log(`[smtp] Using reachable host ${host}:${port}`);
+      return host;
+    }
+    console.warn(`[smtp] Unreachable ${host}:${port}`);
+  }
+
+  return null;
+}
+
 export function getSmtpStatus() {
   const configured = isSmtpConfigured();
-  const port = parseInt(process.env.SMTP_PORT || "587", 10);
+  const port = smtpPort();
   return {
     configured,
-    host: process.env.SMTP_HOST || null,
+    host: resolvedSmtpHost || process.env.SMTP_HOST || null,
     port: configured ? port : null,
     user: process.env.SMTP_USER || null,
-    secure: process.env.SMTP_SECURE
-      ? process.env.SMTP_SECURE === "true"
-      : port === 465,
+    secure: smtpSecure(port),
   };
 }
 
-function createTransporter(): Transporter | null {
-  if (!isSmtpConfigured()) {
-    console.warn("SMTP credentials not configured. Emails will not be sent.");
-    return null;
-  }
-
-  const host = process.env.SMTP_HOST!;
-  const port = parseInt(process.env.SMTP_PORT || "587", 10);
-  const user = process.env.SMTP_USER!;
-  const pass = process.env.SMTP_PASS!;
-  const secure =
-    process.env.SMTP_SECURE === "true" ||
-    (process.env.SMTP_SECURE !== "false" && port === 465);
+function buildTransporter(host: string): Transporter {
+  const port = smtpPort();
+  const secure = smtpSecure(port);
 
   return nodemailer.createTransport({
     host,
     port,
     secure,
-    auth: { user, pass },
+    auth: {
+      user: process.env.SMTP_USER!,
+      pass: process.env.SMTP_PASS!,
+    },
     connectionTimeout: 15000,
     greetingTimeout: 15000,
     socketTimeout: 20000,
     tls: {
-      // Default false for shared cPanel hosts; set SMTP_TLS_REJECT_UNAUTHORIZED=true to enforce
+      // cPanel certs often don't match Docker gateway IPs / host.docker.internal
       rejectUnauthorized: process.env.SMTP_TLS_REJECT_UNAUTHORIZED === "true",
       minVersion: "TLSv1.2",
+      servername: process.env.SMTP_TLS_SERVERNAME || process.env.SMTP_HOST || host,
     },
     requireTLS: !secure && port === 587,
   });
+}
+
+async function createTransporter(): Promise<Transporter | null> {
+  if (!isSmtpConfigured()) {
+    console.warn("SMTP credentials not configured. Emails will not be sent.");
+    return null;
+  }
+
+  const host = await resolveReachableSmtpHost();
+  if (!host) {
+    console.error(
+      "[smtp] No reachable SMTP host. From Coolify set Network Mode to Host and SMTP_HOST=127.0.0.1, or open CSF for Docker → Exim.",
+    );
+    return null;
+  }
+
+  return buildTransporter(host);
 }
 
 const formatFormData = (data: FormSubmission): string => {
@@ -78,7 +154,7 @@ function fromAddress() {
 export const sendFormNotification = async (
   data: FormSubmission,
 ): Promise<{ success: boolean; message: string; configured: boolean }> => {
-  const transporter = createTransporter();
+  const transporter = await createTransporter();
   const companyEmail = await getLeadEmail();
 
   const adminEmailContent = {
@@ -221,16 +297,17 @@ This is an automated confirmation email. Please do not reply directly to this me
   };
 
   if (!transporter) {
-    console.log("=== Form Submission (SMTP not configured) ===");
+    console.log("=== Form Submission (SMTP not reachable) ===");
     console.log("To (lead):", companyEmail);
     console.log("Customer confirmation would go to:", data.email);
     console.log("Subject:", adminEmailContent.subject);
     console.log("==============================================");
     return {
       success: false,
-      configured: false,
-      message:
-        "Inquiry saved, but SMTP is not configured on the server — emails were not sent",
+      configured: isSmtpConfigured(),
+      message: isSmtpConfigured()
+        ? "Inquiry saved, but SMTP host is unreachable from the app container (ECONNREFUSED). In Coolify set Network Mode to Host and SMTP_HOST=127.0.0.1, then redeploy."
+        : "Inquiry saved, but SMTP is not configured on the server — emails were not sent",
     };
   }
 
@@ -295,20 +372,34 @@ export async function verifySmtpConnection(): Promise<{
   ok: boolean;
   message: string;
 }> {
-  const transporter = createTransporter();
-  if (!transporter) {
+  if (!isSmtpConfigured()) {
     return {
       ok: false,
       message: "SMTP_HOST, SMTP_USER, and SMTP_PASS are not all set",
     };
   }
 
+  const host = await resolveReachableSmtpHost();
+  if (!host) {
+    return {
+      ok: false,
+      message:
+        `No SMTP listener reachable on port ${smtpPort()} from this container. ` +
+        "Coolify → Application → Network → set mode to Host, set SMTP_HOST=127.0.0.1, redeploy. " +
+        "Or on the VPS enable CSF Docker support so containers can reach Exim.",
+    };
+  }
+
   try {
+    const transporter = buildTransporter(host);
     await transporter.verify();
-    return { ok: true, message: "SMTP connection verified" };
+    return {
+      ok: true,
+      message: `SMTP connection verified via ${host}:${smtpPort()}`,
+    };
   } catch (error) {
     const message = error instanceof Error ? error.message : "SMTP verify failed";
     console.error("SMTP verify failed:", error);
-    return { ok: false, message };
+    return { ok: false, message: `${message} (host ${host}:${smtpPort()})` };
   }
 }

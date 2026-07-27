@@ -130,18 +130,26 @@ export default function ConnectionsPage() {
         </div>
 
         <div className="mt-8 rounded-lg bg-gray-50 p-4 text-sm text-muted-foreground">
-          <p className="font-medium text-gray-700">Coolify SMTP example (cPanel)</p>
-          <ul className="mt-2 list-inside list-disc space-y-1 font-mono text-xs">
-            <li>SMTP_HOST=mail.shivinsbro.co.ke</li>
-            <li>SMTP_PORT=465</li>
-            <li>SMTP_USER=info@shivinsbro.co.ke</li>
-            <li>SMTP_PASS=(mailbox password)</li>
-            <li>SMTP_FROM=info@shivinsbro.co.ke</li>
-          </ul>
-          <p className="mt-3">
-            If verify fails with a certificate error, also set{" "}
-            <code>SMTP_TLS_REJECT_UNAUTHORIZED=false</code>.
+          <p className="font-medium text-gray-700">cPanel mail on the same Coolify VPS</p>
+          <p className="mt-2">
+            If Verify shows <code>ECONNREFUSED</code>, the app container cannot reach Exim.
+            Fix in Coolify:
           </p>
+          <ol className="mt-2 list-decimal list-inside space-y-1">
+            <li>Application → Network → set <strong>Host</strong> network mode</li>
+            <li>
+              Set <code>SMTP_HOST=127.0.0.1</code>, <code>SMTP_PORT=465</code>,{" "}
+              <code>SMTP_SECURE=true</code>
+            </li>
+            <li>
+              <code>SMTP_USER</code> / <code>SMTP_PASS</code> / <code>SMTP_FROM</code> ={" "}
+              info@shivinsbro.co.ke (+ mailbox password)
+            </li>
+            <li>
+              <code>SMTP_TLS_REJECT_UNAUTHORIZED=false</code>
+            </li>
+            <li>Redeploy, then Verify again</li>
+          </ol>
         </div>
       </CmsLayout>
 
