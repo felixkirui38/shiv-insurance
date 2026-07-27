@@ -3,7 +3,7 @@ import { constants as fsConstants } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { randomUUID } from "crypto";
-import { count, eq } from "drizzle-orm";
+import { count } from "drizzle-orm";
 import { type AnyPgTable } from "drizzle-orm/pg-core";
 import {
   cmsBlogPosts,
@@ -38,6 +38,11 @@ async function isTableEmpty(table: AnyPgTable) {
   return Number(row.total) === 0;
 }
 
+/**
+ * One-time legacy JSON → PostgreSQL import.
+ * Each table is imported only when that table is empty, so live CMS/inquiry
+ * rows are never overwritten on later deploys or restarts.
+ */
 export async function bootstrapLegacyJsonData(): Promise<void> {
   const [pagesEmpty, blogEmpty, testimonialsEmpty, downloadsEmpty, settingsEmpty, contactsEmpty] =
     await Promise.all([
@@ -49,29 +54,34 @@ export async function bootstrapLegacyJsonData(): Promise<void> {
       isTableEmpty(contacts),
     ]);
 
+  const needsCmsImport =
+    pagesEmpty || blogEmpty || testimonialsEmpty || downloadsEmpty || settingsEmpty;
+  const cmsJsonAvailable = needsCmsImport && (await exists(cmsJsonPath));
+  const legacyCms = cmsJsonAvailable
+    ? cmsDataSchema.parse(JSON.parse(await readFile(cmsJsonPath, "utf-8")))
+    : null;
+
+  // Settings: insert once when empty. Prefer legacy JSON values; never update existing rows.
   if (settingsEmpty) {
-    await db.insert(cmsSettings).values({ id: "default", ...defaultCmsSettings() });
+    await db.insert(cmsSettings).values({
+      id: "default",
+      ...(legacyCms?.settings ?? defaultCmsSettings()),
+    });
   }
 
-  if (
-    (pagesEmpty || blogEmpty || testimonialsEmpty || downloadsEmpty || settingsEmpty) &&
-    (await exists(cmsJsonPath))
-  ) {
-    const raw = await readFile(cmsJsonPath, "utf-8");
-    const parsed = cmsDataSchema.parse(JSON.parse(raw));
-
-    if (pagesEmpty && parsed.pages.length) {
-      await db.insert(cmsPages).values(parsed.pages);
+  if (legacyCms) {
+    if (pagesEmpty && legacyCms.pages.length) {
+      await db.insert(cmsPages).values(legacyCms.pages);
     }
-    if (blogEmpty && parsed.blogPosts.length) {
-      await db.insert(cmsBlogPosts).values(parsed.blogPosts);
+    if (blogEmpty && legacyCms.blogPosts.length) {
+      await db.insert(cmsBlogPosts).values(legacyCms.blogPosts);
     }
-    if (testimonialsEmpty && parsed.testimonials.length) {
-      await db.insert(cmsTestimonials).values(parsed.testimonials);
+    if (testimonialsEmpty && legacyCms.testimonials.length) {
+      await db.insert(cmsTestimonials).values(legacyCms.testimonials);
     }
-    if (downloadsEmpty && parsed.downloads.length) {
+    if (downloadsEmpty && legacyCms.downloads.length) {
       await db.insert(cmsDownloads).values(
-        parsed.downloads.map((download) => ({
+        legacyCms.downloads.map((download) => ({
           ...download,
           category: normalizeDownloadCategory(
             download.category,
@@ -81,14 +91,9 @@ export async function bootstrapLegacyJsonData(): Promise<void> {
         })),
       );
     }
-    if (settingsEmpty && parsed.settings) {
-      await db
-        .update(cmsSettings)
-        .set(parsed.settings)
-        .where(eq(cmsSettings.id, "default"));
-    }
   }
 
+  // Contacts/inquiries: insert only when the contacts table has zero rows.
   if (contactsEmpty && (await exists(inquiriesJsonPath))) {
     const raw = await readFile(inquiriesJsonPath, "utf-8");
     const parsed = JSON.parse(raw) as Array<{
