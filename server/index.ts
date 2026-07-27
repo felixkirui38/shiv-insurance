@@ -3,6 +3,7 @@ import "dotenv/config";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { ensureCmsSchema } from "./ensureSchema";
 import { bootstrapLegacyJsonData } from "./bootstrapData";
 
 const serverFile = fileURLToPath(import.meta.url).replace(/\\/g, "/");
@@ -50,6 +51,7 @@ app.use((req, res, next) => {
 (async () => {
   try {
     validateRequiredEnv();
+    await ensureCmsSchema();
     await bootstrapLegacyJsonData();
   } catch (error) {
     console.error("[startup] Configuration error:", error instanceof Error ? error.message : error);
@@ -98,10 +100,14 @@ function validateRequiredEnv() {
   if (!process.env.SESSION_SECRET?.trim()) {
     missing.push("SESSION_SECRET");
   }
+  if (!process.env.DATABASE_URL?.trim()) {
+    missing.push("DATABASE_URL");
+  }
   if (missing.length > 0) {
     throw new Error(
       `Missing required environment variable(s): ${missing.join(", ")}. ` +
-        "Set them in Coolify → your app → Environment Variables, then redeploy.",
+        "Set them in Coolify → your app → Environment Variables, then redeploy. " +
+        "For Postgres use the internal Coolify URL, e.g. postgres://...@jght6ihq5l8w5jw7bpc89dik:5432/postgres",
     );
   }
 }

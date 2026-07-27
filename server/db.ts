@@ -8,7 +8,7 @@ if (!databaseUrl) {
   throw new Error("DATABASE_URL is required");
 }
 
-const pool = new pg.Pool({
+export const pool = new pg.Pool({
   connectionString: databaseUrl,
   // Local Coolify mapped ports often run without TLS.
   ssl: databaseUrl.includes("sslmode=require") ? { rejectUnauthorized: false } : false,

@@ -29,4 +29,6 @@ EXPOSE 5000
 HEALTHCHECK --interval=30s --timeout=5s --start-period=20s --retries=3 \
   CMD wget -qO- http://127.0.0.1:${PORT}/api/health || exit 1
 
+# Schema is created at runtime by server/ensureSchema.ts before listen().
+# Requires DATABASE_URL (Coolify internal Postgres URL) in environment variables.
 CMD ["node", "dist/index.js"]
