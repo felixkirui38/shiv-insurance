@@ -100,6 +100,10 @@ export async function getCmsData(): Promise<CmsData> {
 export async function getSettings(): Promise<CmsSettings> {
   const row = await ensureSettingsRow();
   const { id: _id, ...settings } = row;
+  // One-time correction for legacy mailbox domain from old cms.json seed.
+  if (settings.leadEmail === "info@shivinsurance.co.ke") {
+    return updateSettings({ leadEmail: "info@shivinsbro.co.ke" });
+  }
   return settings;
 }
 

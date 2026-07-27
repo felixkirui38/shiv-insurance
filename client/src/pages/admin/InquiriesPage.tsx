@@ -92,10 +92,18 @@ export default function InquiriesPage() {
             Email to receive leads / contact form
           </p>
           <p className="text-sm text-muted-foreground">
-            Form submissions are always saved here. Lead notifications go to this address, and
-            submitters get a confirmation email — both require SMTP env vars on the server
-            (Coolify). Check <strong>Connections</strong> to verify SMTP.
+            Form submissions are always saved in this list. To also send email alerts:
           </p>
+          <ol className="list-decimal list-inside text-sm text-muted-foreground space-y-1">
+            <li>Save the lead inbox address below (e.g. info@shivinsbro.co.ke).</li>
+            <li>
+              In Coolify → this app → Environment Variables, set SMTP_HOST, SMTP_PORT,
+              SMTP_USER, SMTP_PASS, SMTP_FROM (Runtime), then Redeploy.
+            </li>
+            <li>
+              Open <strong>Connections</strong> and click <strong>Verify SMTP connection</strong>.
+            </li>
+          </ol>
           <div className="flex flex-col gap-3 sm:flex-row">
             <div className="flex-1 min-w-0">
               <Label htmlFor="leadEmail" className="sr-only">
