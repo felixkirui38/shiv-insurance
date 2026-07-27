@@ -1,12 +1,7 @@
-import { type User, type InsertUser, type Contact, type InsertContact } from "@shared/schema";
+import { desc, eq } from "drizzle-orm";
+import { type User, type InsertUser, type Contact, type InsertContact, users, contacts } from "@shared/schema";
 import { randomUUID } from "crypto";
-import { readFile, writeFile, mkdir } from "fs/promises";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA_DIR = join(__dirname, "data");
-const INQUIRIES_FILE = join(DATA_DIR, "inquiries.json");
+import { db } from "./db";
 
 export interface IStorage {
   getUser(id: string): Promise<User | undefined>;
@@ -16,90 +11,56 @@ export interface IStorage {
   getContacts(): Promise<Contact[]>;
 }
 
-type StoredContact = Omit<Contact, "createdAt"> & { createdAt: string | Date | null };
-
-async function ensureInquiriesFile(): Promise<void> {
-  await mkdir(DATA_DIR, { recursive: true });
-  try {
-    await readFile(INQUIRIES_FILE, "utf-8");
-  } catch {
-    await writeFile(INQUIRIES_FILE, "[]", "utf-8");
-  }
-}
-
-async function loadInquiries(): Promise<Contact[]> {
-  await ensureInquiriesFile();
-  const raw = await readFile(INQUIRIES_FILE, "utf-8");
-  const parsed = JSON.parse(raw) as StoredContact[];
-  return parsed.map((c) => ({
-    ...c,
-    createdAt: c.createdAt ? new Date(c.createdAt) : new Date(),
-  }));
-}
-
-async function saveInquiries(contacts: Contact[]): Promise<void> {
-  await ensureInquiriesFile();
-  const serializable = contacts.map((c) => ({
-    ...c,
-    createdAt: c.createdAt ? new Date(c.createdAt).toISOString() : new Date().toISOString(),
-  }));
-  await writeFile(INQUIRIES_FILE, JSON.stringify(serializable, null, 2), "utf-8");
-}
-
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private contactsCache: Contact[] | null = null;
-
-  constructor() {
-    this.users = new Map();
-  }
-
-  private async getContactList(): Promise<Contact[]> {
-    if (!this.contactsCache) {
-      this.contactsCache = await loadInquiries();
-    }
-    return this.contactsCache;
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id)).limit(1);
+    return user;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db
+      .select()
+      .from(users)
+      .where(eq(users.username, username))
+      .limit(1);
+    return user;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
     const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values({ ...insertUser, id })
+      .returning();
     return user;
   }
 
   async createContact(insertContact: InsertContact): Promise<Contact> {
-    const contacts = await this.getContactList();
-    const contact: Contact = {
-      ...insertContact,
-      id: randomUUID(),
-      formName: insertContact.formName ?? "Contact Form",
-      createdAt: new Date(),
+    const id = randomUUID();
+    const [contact] = await db
+      .insert(contacts)
+      .values({
+        ...insertContact,
+        id,
+        formName: insertContact.formName ?? "Contact Form",
+      })
+      .returning();
+    return {
+      ...contact,
+      insuranceType: contact.insuranceType ?? "General Inquiry",
+      formName: contact.formName ?? "Contact Form",
     };
-    contacts.unshift(contact);
-    this.contactsCache = contacts;
-    await saveInquiries(contacts);
-    return contact;
   }
 
   async getContacts(): Promise<Contact[]> {
-    const contacts = await this.getContactList();
-    return [...contacts].sort(
-      (a, b) =>
-        new Date(b.createdAt ?? 0).getTime() -
-        new Date(a.createdAt ?? 0).getTime(),
-    );
+    const rows = await db.select().from(contacts).orderBy(desc(contacts.createdAt));
+
+    return rows.map((contact) => ({
+      ...contact,
+      insuranceType: contact.insuranceType ?? "General Inquiry",
+      formName: contact.formName ?? "Contact Form",
+    }));
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

@@ -2,6 +2,7 @@ import { fileURLToPath } from "url";
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { bootstrapLegacyJsonData } from "./bootstrapData";
 
 const serverFile = fileURLToPath(import.meta.url).replace(/\\/g, "/");
 
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
 
   try {
     validateRequiredEnv();
+    await bootstrapLegacyJsonData();
   } catch (error) {
     console.error("[startup] Configuration error:", error instanceof Error ? error.message : error);
     process.exit(1);
