@@ -76,6 +76,7 @@ export default function TestimonialsPage() {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/cms/testimonials"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/content/testimonials"] });
       toast({ title: "Saved", description: "Testimonial saved." });
       setEditorOpen(false);
     },
@@ -85,6 +86,7 @@ export default function TestimonialsPage() {
     mutationFn: (id: string) => deleteTestimonial(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/cms/testimonials"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/content/testimonials"] });
       setDeleteId(null);
     },
   });

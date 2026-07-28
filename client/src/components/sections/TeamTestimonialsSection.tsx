@@ -1,10 +1,39 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
+import { useQuery } from "@tanstack/react-query";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { companyData } from "@/lib/data";
 
-type Testimonial = (typeof companyData.testimonials)[number];
+type SliderTestimonial = {
+  id: string;
+  name: string;
+  company: string;
+  content: string;
+  rating: number;
+  highlight?: string;
+};
+
+async function fetchPublishedTestimonials(): Promise<SliderTestimonial[]> {
+  const res = await fetch("/api/content/testimonials");
+  if (!res.ok) throw new Error("Failed to load testimonials");
+  const data = await res.json();
+  const list = (data.testimonials ?? []) as Array<{
+    id: string;
+    name: string;
+    company: string;
+    content: string;
+    rating: number;
+    published: boolean;
+  }>;
+  return list.map((t) => ({
+    id: t.id,
+    name: t.name,
+    company: t.company,
+    content: t.content,
+    rating: t.rating ?? 5,
+  }));
+}
 
 function TestimonialQuote({
   content,
@@ -64,7 +93,34 @@ export function TeamSection() {
 }
 
 export function TestimonialsSection() {
-  const testimonials = companyData.testimonials;
+  const { data: cmsTestimonials = [], isLoading } = useQuery({
+    queryKey: ["/api/content/testimonials"],
+    queryFn: fetchPublishedTestimonials,
+  });
+
+  const fallbackTestimonials: SliderTestimonial[] = useMemo(
+    () =>
+      companyData.testimonials.map((t, index) => ({
+        id: `fallback-${index}`,
+        name: t.name,
+        company: t.company,
+        content: t.content,
+        rating: t.rating,
+        highlight: "highlight" in t ? t.highlight : undefined,
+      })),
+    [],
+  );
+
+  const testimonials =
+    cmsTestimonials.length > 0 ? cmsTestimonials : fallbackTestimonials;
+
+  const averageRating = useMemo(() => {
+    if (!testimonials.length) return "4.9";
+    const avg =
+      testimonials.reduce((sum, t) => sum + (t.rating || 5), 0) / testimonials.length;
+    return avg.toFixed(1);
+  }, [testimonials]);
+
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" }, [
     Autoplay({ delay: 7000, stopOnInteraction: true }),
   ]);
@@ -87,7 +143,7 @@ export function TestimonialsSection() {
             <div className="flex flex-col justify-between gap-10 border-b border-white/10 p-8 md:p-10 lg:border-b-0 lg:border-r">
               <div>
                 <div className="flex flex-wrap items-center gap-4">
-                  <span className="testimonial-rating-score">4.9</span>
+                  <span className="testimonial-rating-score">{averageRating}</span>
                   <div className="testimonial-satisfaction-badge">
                     <div className="flex gap-0.5">
                       {Array.from({ length: 5 }).map((_, i) => (
@@ -110,6 +166,7 @@ export function TestimonialsSection() {
                   onClick={scrollPrev}
                   className="testimonial-nav-btn"
                   aria-label="Previous testimonial"
+                  disabled={testimonials.length < 2}
                 >
                   <ChevronLeft className="h-5 w-5" />
                 </button>
@@ -118,6 +175,7 @@ export function TestimonialsSection() {
                   onClick={scrollNext}
                   className="testimonial-nav-btn"
                   aria-label="Next testimonial"
+                  disabled={testimonials.length < 2}
                 >
                   <ChevronRight className="h-5 w-5" />
                 </button>
@@ -125,29 +183,35 @@ export function TestimonialsSection() {
             </div>
 
             <div className="relative min-h-[280px] p-8 md:min-h-[320px] md:p-10">
-              <div className="overflow-hidden" ref={emblaRef}>
-                <div className="flex">
-                  {testimonials.map((item: Testimonial) => (
-                    <blockquote
-                      key={item.name}
-                      className="min-w-0 shrink-0 grow-0 basis-full"
-                    >
-                      <TestimonialQuote
-                        content={item.content}
-                        highlight={"highlight" in item ? item.highlight : undefined}
-                      />
-                      <footer className="mt-8">
-                        <div>
-                          <p className="text-sm font-bold uppercase tracking-[0.12em] text-shiv-gold">
-                            @{item.name}
-                          </p>
-                          <p className="mt-1 text-sm text-white/55">{item.company}</p>
-                        </div>
-                      </footer>
-                    </blockquote>
-                  ))}
+              {isLoading && cmsTestimonials.length === 0 ? (
+                <p className="text-white/60">Loading testimonials…</p>
+              ) : (
+                <div className="overflow-hidden" ref={emblaRef}>
+                  <div className="flex">
+                    {testimonials.map((item) => (
+                      <blockquote
+                        key={item.id}
+                        className="min-w-0 shrink-0 grow-0 basis-full"
+                      >
+                        <TestimonialQuote
+                          content={item.content}
+                          highlight={item.highlight}
+                        />
+                        <footer className="mt-8">
+                          <div>
+                            <p className="text-sm font-bold uppercase tracking-[0.12em] text-shiv-gold">
+                              @{item.name}
+                            </p>
+                            {item.company ? (
+                              <p className="mt-1 text-sm text-white/55">{item.company}</p>
+                            ) : null}
+                          </div>
+                        </footer>
+                      </blockquote>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
