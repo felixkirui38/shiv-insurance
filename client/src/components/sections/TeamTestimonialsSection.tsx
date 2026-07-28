@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useEmblaCarousel from "embla-carousel-react";
 import Autoplay from "embla-carousel-autoplay";
@@ -114,19 +114,38 @@ export function TestimonialsSection() {
   const testimonials =
     cmsTestimonials.length > 0 ? cmsTestimonials : fallbackTestimonials;
 
-  const averageRating = useMemo(() => {
-    if (!testimonials.length) return "4.9";
-    const avg =
-      testimonials.reduce((sum, t) => sum + (t.rating || 5), 0) / testimonials.length;
-    return avg.toFixed(1);
-  }, [testimonials]);
-
+  const [selectedIndex, setSelectedIndex] = useState(0);
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: "start" }, [
     Autoplay({ delay: 7000, stopOnInteraction: true }),
   ]);
 
   const scrollPrev = useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return;
+    setSelectedIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi) return;
+    onSelect();
+    emblaApi.on("select", onSelect);
+    emblaApi.on("reInit", onSelect);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onSelect);
+    };
+  }, [emblaApi, onSelect]);
+
+  useEffect(() => {
+    setSelectedIndex(0);
+    emblaApi?.reInit();
+  }, [testimonials.length, emblaApi]);
+
+  const active = testimonials[selectedIndex] ?? testimonials[0];
+  const activeRating = Math.min(5, Math.max(1, Math.round(active?.rating ?? 5)));
+  const ratingLabel = activeRating.toFixed(1);
 
   return (
     <section className="site-section site-section-cream-warm">
@@ -143,13 +162,17 @@ export function TestimonialsSection() {
             <div className="flex flex-col justify-between gap-10 border-b border-white/10 p-8 md:p-10 lg:border-b-0 lg:border-r">
               <div>
                 <div className="flex flex-wrap items-center gap-4">
-                  <span className="testimonial-rating-score">{averageRating}</span>
+                  <span className="testimonial-rating-score">{ratingLabel}</span>
                   <div className="testimonial-satisfaction-badge">
-                    <div className="flex gap-0.5">
+                    <div className="flex gap-0.5" aria-label={`${activeRating} out of 5 stars`}>
                       {Array.from({ length: 5 }).map((_, i) => (
                         <Star
                           key={i}
-                          className="h-3.5 w-3.5 fill-shiv-navy-deep text-shiv-navy-deep"
+                          className={`h-3.5 w-3.5 ${
+                            i < activeRating
+                              ? "fill-shiv-navy-deep text-shiv-navy-deep"
+                              : "fill-transparent text-shiv-navy-deep/35"
+                          }`}
                         />
                       ))}
                     </div>
